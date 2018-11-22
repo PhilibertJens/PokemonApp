@@ -19,5 +19,39 @@ namespace PE3.Pokemon.web.Data
         public DbSet<PokemonType> PokemonTypes { get; set; }
         public DbSet<PokemonUser> PokemonUsers { get; set; }
 
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            #region PokemonType
+            modelBuilder.Entity<PokemonType>()
+                .HasKey(pt => new { pt.PokemonId, pt.TypeId });
+
+            modelBuilder.Entity<PokemonType>()
+                .HasOne(pt => pt.Pokemon)
+                .WithMany(p => p.PokemonTypes)
+                .HasForeignKey(pt => pt.PokemonId);
+
+            modelBuilder.Entity<PokemonType>()
+                .HasOne(pt => pt.Type)
+                .WithMany(t => t.PokemonTypes)
+                .HasForeignKey(pt => pt.TypeId);
+
+            #endregion
+            #region PokemonUser
+            modelBuilder.Entity<PokemonUser>()
+                .HasKey(pu => new { pu.PokemonId, pu.UserId });
+
+            modelBuilder.Entity<PokemonUser>()
+                .HasOne(pu => pu.Pokemon)
+                .WithMany(p => p.PokemonUsers)
+                .HasForeignKey(pu => pu.PokemonId);
+
+            modelBuilder.Entity<PokemonUser>()
+                .HasOne(pu => pu.User)
+                .WithMany(u => u.PokemonUsers)
+                .HasForeignKey(pu => pu.UserId);
+
+            #endregion
+        }
     }
 }

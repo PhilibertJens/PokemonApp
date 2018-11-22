@@ -12,7 +12,6 @@ namespace PE3.Pokemon.web.Entities
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Username{ get; set; }
-        public ICollection<Pokemon> Pokemons { get; set; }
-
+        public ICollection<PokemonUser> PokemonUsers { get; set; }
     }
 }
