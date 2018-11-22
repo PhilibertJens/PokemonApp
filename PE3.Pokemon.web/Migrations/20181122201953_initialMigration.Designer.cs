@@ -10,8 +10,8 @@ using PE3.Pokemon.web.Data;
 namespace PE3.Pokemon.web.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20181122144339_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20181122201953_initialMigration")]
+    partial class initialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,10 @@ namespace PE3.Pokemon.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pokemons");
+
+                    b.HasData(
+                        new { Id = new Guid("7701a5d6-4061-462d-a58b-01d4525be9db"), Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. ", HasAllolanForm = false, ImgUrl = "Bulbasaur.png", Location = "Starter", Name = "Bulbasaur" }
+                    );
                 });
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.PokemonType", b =>
@@ -77,6 +81,27 @@ namespace PE3.Pokemon.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new { Id = new Guid("2da2aeb6-3594-45ae-b0d8-0bdc22a01201"), Name = "Normal" },
+                        new { Id = new Guid("3d0bb554-c111-4e1a-b9bd-e77b1181c17c"), Name = "Fighting" },
+                        new { Id = new Guid("f29503b4-f30f-4182-af2a-c157a48147f9"), Name = "Flying" },
+                        new { Id = new Guid("78be2b62-89de-4da7-81e8-c02b819e2396"), Name = "Poison" },
+                        new { Id = new Guid("ceea9f21-0b66-4ba3-82de-c777372ab9b6"), Name = "Ground" },
+                        new { Id = new Guid("3a237e62-b579-405a-a3e4-de23314b3f64"), Name = "Rock" },
+                        new { Id = new Guid("631bbd2b-4761-4eaf-85ae-87b3663a41d3"), Name = "Bug" },
+                        new { Id = new Guid("3f72c904-1abb-4fe8-8991-a7af3100455c"), Name = "Ghost" },
+                        new { Id = new Guid("0cfebb47-72ec-43b9-982b-d6bb2ce280c9"), Name = "Steel" },
+                        new { Id = new Guid("66464263-90ac-46d7-865d-eb9f1e421a94"), Name = "Fire" },
+                        new { Id = new Guid("ae36aef2-d2c6-481a-8a01-59bc706ea6b7"), Name = "Water" },
+                        new { Id = new Guid("9634ab72-d1af-40a3-a2d6-402d022ece4a"), Name = "Grass" },
+                        new { Id = new Guid("e85e1859-e6e4-4164-9621-d5eaae2cbc81"), Name = "Electric" },
+                        new { Id = new Guid("f0627b7c-7762-4a59-9c2b-9c410d644704"), Name = "Psychic" },
+                        new { Id = new Guid("a9171c57-6fcd-47a1-9218-abd0463bb708"), Name = "Ice" },
+                        new { Id = new Guid("efabba4e-8370-4b82-8182-5adc1a4ef425"), Name = "Dragon" },
+                        new { Id = new Guid("dceac1d0-33a3-4b9f-9600-8ed194860182"), Name = "Dark" },
+                        new { Id = new Guid("ba4df992-4327-4e39-a8f5-0238f724f456"), Name = "Fairy" }
+                    );
                 });
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.User", b =>

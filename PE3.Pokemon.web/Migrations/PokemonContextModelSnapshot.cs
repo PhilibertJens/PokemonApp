@@ -37,6 +37,10 @@ namespace PE3.Pokemon.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pokemons");
+
+                    b.HasData(
+                        new { Id = new Guid("7701a5d6-4061-462d-a58b-01d4525be9db"), Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. ", HasAllolanForm = false, ImgUrl = "Bulbasaur.png", Location = "Starter", Name = "Bulbasaur" }
+                    );
                 });
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.PokemonType", b =>
@@ -77,24 +81,24 @@ namespace PE3.Pokemon.web.Migrations
                     b.ToTable("Types");
 
                     b.HasData(
-                        new { Id = new Guid("0430a2a0-efe5-41ac-8564-b04876f08728"), Name = "Normal" },
-                        new { Id = new Guid("c56cd56d-3642-4961-a8c6-8582e9676e1f"), Name = "Fighting" },
-                        new { Id = new Guid("b6ae7c2a-c7b3-4a19-a1d2-4183195cc56c"), Name = "Flying" },
-                        new { Id = new Guid("30899c17-15be-45ef-9730-511b6ce2ec16"), Name = "Poison" },
-                        new { Id = new Guid("60c95187-9605-46b4-b214-8b4663bc8a2c"), Name = "Ground" },
-                        new { Id = new Guid("f3e915dd-4be9-4211-b62e-d7b79ffd26c7"), Name = "Rock" },
-                        new { Id = new Guid("6003ed6c-dad3-4f0a-905a-b4d9c4898dab"), Name = "Bug" },
-                        new { Id = new Guid("e9970647-e3c4-40ae-98ad-aa752a4f6e22"), Name = "Ghost" },
-                        new { Id = new Guid("850f62d6-6907-44a3-8a95-455063adcfc4"), Name = "Steel" },
-                        new { Id = new Guid("11b6dcbb-14d2-4de8-9519-415dee8e3b6f"), Name = "Fire" },
-                        new { Id = new Guid("ece96743-d4c6-4775-8b0a-7649f7cb9491"), Name = "Water" },
-                        new { Id = new Guid("6e2fe5f7-7665-44a3-a137-576d209965ad"), Name = "Grass" },
-                        new { Id = new Guid("7ce365ac-9862-4c36-ad44-c80be50c1beb"), Name = "Electric" },
-                        new { Id = new Guid("af547cd3-1ddf-4e04-9f34-76bfe2e725ec"), Name = "Psychic" },
-                        new { Id = new Guid("a8e26784-056c-4720-a412-f6de0f2ab3db"), Name = "Ice" },
-                        new { Id = new Guid("ff3e6c5c-d2d4-470f-bf0b-0811240acdb0"), Name = "Dragon" },
-                        new { Id = new Guid("e056d750-fbbd-435b-b3f2-7a9a12314030"), Name = "Dark" },
-                        new { Id = new Guid("9993daeb-790c-4a28-be9e-28d96b53b68e"), Name = "Fairy" }
+                        new { Id = new Guid("2da2aeb6-3594-45ae-b0d8-0bdc22a01201"), Name = "Normal" },
+                        new { Id = new Guid("3d0bb554-c111-4e1a-b9bd-e77b1181c17c"), Name = "Fighting" },
+                        new { Id = new Guid("f29503b4-f30f-4182-af2a-c157a48147f9"), Name = "Flying" },
+                        new { Id = new Guid("78be2b62-89de-4da7-81e8-c02b819e2396"), Name = "Poison" },
+                        new { Id = new Guid("ceea9f21-0b66-4ba3-82de-c777372ab9b6"), Name = "Ground" },
+                        new { Id = new Guid("3a237e62-b579-405a-a3e4-de23314b3f64"), Name = "Rock" },
+                        new { Id = new Guid("631bbd2b-4761-4eaf-85ae-87b3663a41d3"), Name = "Bug" },
+                        new { Id = new Guid("3f72c904-1abb-4fe8-8991-a7af3100455c"), Name = "Ghost" },
+                        new { Id = new Guid("0cfebb47-72ec-43b9-982b-d6bb2ce280c9"), Name = "Steel" },
+                        new { Id = new Guid("66464263-90ac-46d7-865d-eb9f1e421a94"), Name = "Fire" },
+                        new { Id = new Guid("ae36aef2-d2c6-481a-8a01-59bc706ea6b7"), Name = "Water" },
+                        new { Id = new Guid("9634ab72-d1af-40a3-a2d6-402d022ece4a"), Name = "Grass" },
+                        new { Id = new Guid("e85e1859-e6e4-4164-9621-d5eaae2cbc81"), Name = "Electric" },
+                        new { Id = new Guid("f0627b7c-7762-4a59-9c2b-9c410d644704"), Name = "Psychic" },
+                        new { Id = new Guid("a9171c57-6fcd-47a1-9218-abd0463bb708"), Name = "Ice" },
+                        new { Id = new Guid("efabba4e-8370-4b82-8182-5adc1a4ef425"), Name = "Dragon" },
+                        new { Id = new Guid("dceac1d0-33a3-4b9f-9600-8ed194860182"), Name = "Dark" },
+                        new { Id = new Guid("ba4df992-4327-4e39-a8f5-0238f724f456"), Name = "Fairy" }
                     );
                 });
 
