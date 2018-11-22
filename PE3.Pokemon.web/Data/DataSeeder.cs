@@ -32,6 +32,19 @@ namespace PE3.Pokemon.web.Data
                 new Entities.Type { Id = 18, Name = "Fairy" }
 
                 );
+
+            modelBuilder.Entity<Entities.Pokemon>().HasData(
+                new Entities.Pokemon
+                {
+                    Id = 1,
+                    Name = "Bulbasaur",
+                    HasAllolanForm = false,
+                    ImgUrl = "Bulbasaur.png",
+                    Location = "Starter",
+                    Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. "
+                }
+
+                );
         }
     }
 }
