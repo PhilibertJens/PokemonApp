@@ -10,7 +10,7 @@ using PE3.Pokemon.web.Data;
 namespace PE3.Pokemon.web.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20181122155443_TypeMigration")]
+    [Migration("20181122160704_TypeMigration")]
     partial class TypeMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -77,6 +77,27 @@ namespace PE3.Pokemon.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Types");
+
+                    b.HasData(
+                        new { Id = new Guid("37cdfff1-0bd3-4d6e-b386-c7ad255898b1"), Name = "Normal" },
+                        new { Id = new Guid("14aa4702-c5ac-4a70-95fb-d314ae8ce386"), Name = "Fighting" },
+                        new { Id = new Guid("e85e0823-befe-4f8c-9b86-976f53db4100"), Name = "Flying" },
+                        new { Id = new Guid("67d3af1a-1207-492e-b676-f982d2f32df3"), Name = "Poison" },
+                        new { Id = new Guid("a797de2a-a2c7-4a1b-8f5a-e035651a09c4"), Name = "Ground" },
+                        new { Id = new Guid("90bb4532-6a14-4a1c-be97-e180596f24a3"), Name = "Rock" },
+                        new { Id = new Guid("9bb0d318-db9c-44c4-b33f-0855cd95a6e4"), Name = "Bug" },
+                        new { Id = new Guid("a44005d3-b8f2-43ac-8da5-eb15ebdfa7c3"), Name = "Ghost" },
+                        new { Id = new Guid("aa54dbd8-7644-448e-92d1-dc0c4896751f"), Name = "Steel" },
+                        new { Id = new Guid("7d7c1fa4-b40b-435d-938c-f38653dfd933"), Name = "Fire" },
+                        new { Id = new Guid("d68ee470-97b6-49b5-a7e2-090f9742604a"), Name = "Water" },
+                        new { Id = new Guid("f1ac803d-7b9d-45bd-95bd-bcee9e01a09e"), Name = "Grass" },
+                        new { Id = new Guid("e458a0f5-11af-4555-806a-f31c6a0221c3"), Name = "Electric" },
+                        new { Id = new Guid("5dc048e0-a3b8-48e3-863e-ecc0a0569453"), Name = "Psychic" },
+                        new { Id = new Guid("59da137b-5f9c-4bb5-bf64-f86a8b40753f"), Name = "Ice" },
+                        new { Id = new Guid("a396c59f-23d2-4778-ae99-d44513a2a0db"), Name = "Dragon" },
+                        new { Id = new Guid("330890c6-aa7f-4568-8b30-dac8b4376fda"), Name = "Dark" },
+                        new { Id = new Guid("01ab37a1-bfe9-4f28-91fa-d2d5d7167710"), Name = "Fairy" }
+                    );
                 });
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.User", b =>
