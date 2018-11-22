@@ -7,7 +7,7 @@ namespace PE3.Pokemon.web.Entities
 {
     public class Pokemon
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public bool HasAllolanForm { get; set; }
         public string ImgUrl { get; set; }

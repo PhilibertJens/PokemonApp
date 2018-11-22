@@ -7,7 +7,7 @@ namespace PE3.Pokemon.web.Entities
 {
     public class PokemonType
     {
-        public long PokemonId { get; set; }
+        public Guid PokemonId { get; set; }
         public Guid TypeId { get; set; }
         public Pokemon Pokemon { get; set; }
         public Type Type { get; set; }
