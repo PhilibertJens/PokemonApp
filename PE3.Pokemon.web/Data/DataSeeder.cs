@@ -12,31 +12,31 @@ namespace PE3.Pokemon.web.Data
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entities.Type>().HasData(
-                new Entities.Type { Id = 1, Name = "Normal" },
-                new Entities.Type { Id = 2, Name = "Fighting" },
-                new Entities.Type { Id = 3, Name = "Flying" },
-                new Entities.Type { Id = 4, Name = "Poison" },
-                new Entities.Type { Id = 5, Name = "Ground" },
-                new Entities.Type { Id = 6, Name = "Rock" },
-                new Entities.Type { Id = 7, Name = "Bug" },
-                new Entities.Type { Id = 8, Name = "Ghost" },
-                new Entities.Type { Id = 9, Name = "Steel" },
-                new Entities.Type { Id = 10, Name = "Fire" },
-                new Entities.Type { Id = 11, Name = "Water" },
-                new Entities.Type { Id = 12, Name = "Grass" },
-                new Entities.Type { Id = 13, Name = "Electric" },
-                new Entities.Type { Id = 14, Name = "Psychic" },
-                new Entities.Type { Id = 15, Name = "Ice" },
-                new Entities.Type { Id = 16, Name = "Dragon" },
-                new Entities.Type { Id = 17, Name = "Dark" },
-                new Entities.Type { Id = 18, Name = "Fairy" }
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Normal" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Fighting" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Flying" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Poison" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Ground" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Rock" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Bug" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Ghost" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Steel" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Fire" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Water" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Grass" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Electric" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Psychic" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Ice" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Dragon" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Dark" },
+                new Entities.Type { Id = Guid.NewGuid(), Name = "Fairy" }
 
                 );
 
             modelBuilder.Entity<Entities.Pokemon>().HasData(
                 new Entities.Pokemon
                 {
-                    Id = 1,
+                    Id = Guid.NewGuid(),
                     Name = "Bulbasaur",
                     HasAllolanForm = false,
                     ImgUrl = "Bulbasaur.png",
