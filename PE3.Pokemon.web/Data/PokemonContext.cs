@@ -52,6 +52,10 @@ namespace PE3.Pokemon.web.Data
                 .HasForeignKey(pu => pu.UserId);
 
             #endregion
+
+            DataSeeder.Seed(modelBuilder);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
