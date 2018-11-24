@@ -33,8 +33,8 @@ namespace PE3.Pokemon.web.Data
 
                 );
 
-            modelBuilder.Entity<Entities.Pokemon>().HasData(
-                new Entities.Pokemon
+            modelBuilder.Entity<Entities.MyPokemon>().HasData(
+                new Entities.MyPokemon
                 {
                     Id = Guid.NewGuid(),
                     Name = "Bulbasaur",
@@ -43,7 +43,7 @@ namespace PE3.Pokemon.web.Data
                     Location = "Starter",
                     Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. "
                 },
-                new Entities.Pokemon
+                new Entities.MyPokemon
                 {
                     Id= Guid.NewGuid(),
                     Name="Ivysaur",
@@ -53,7 +53,7 @@ namespace PE3.Pokemon.web.Data
                     Description= "When the bulb on its back grows large, it appears to lose the ability to stand on its hind leg"
 
                 },
-                 new Entities.Pokemon
+                 new Entities.MyPokemon
                  {
                      Id = Guid.NewGuid(),
                      Name = "Venusaur",
@@ -63,7 +63,7 @@ namespace PE3.Pokemon.web.Data
                      Description = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight."
 
                  },
-                 new Entities.Pokemon
+                 new Entities.MyPokemon
                  {
                      Id = Guid.NewGuid(),
                      Name = "Charmander",
@@ -73,7 +73,7 @@ namespace PE3.Pokemon.web.Data
                      Description = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
 
                  },
-                 new Entities.Pokemon
+                 new Entities.MyPokemon
                  {
                      Id = Guid.NewGuid(),
                      Name = "Charmeleon",
@@ -83,7 +83,7 @@ namespace PE3.Pokemon.web.Data
                      Description = "When it swings its burning tail, it elevates the temperature to unbearably high levels."
 
                  },
-                 new Entities.Pokemon
+                 new Entities.MyPokemon
                  {
                      Id = Guid.NewGuid(),
                      Name = "Charizard",
@@ -93,7 +93,7 @@ namespace PE3.Pokemon.web.Data
                      Description = "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally."
 
                  },
-                 new Entities.Pokemon
+                 new Entities.MyPokemon
                  {
                      Id = Guid.NewGuid(),
                      Name = "Squirtle",
@@ -103,7 +103,7 @@ namespace PE3.Pokemon.web.Data
                      Description = "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth."
 
                  },
-                  new Entities.Pokemon
+                  new Entities.MyPokemon
                   {
                       Id = Guid.NewGuid(),
                       Name = "Wartortle",
@@ -113,7 +113,7 @@ namespace PE3.Pokemon.web.Data
                       Description = "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance"
 
                   },
-                   new Entities.Pokemon
+                   new Entities.MyPokemon
                    {
                        Id = Guid.NewGuid(),
                        Name = "Blastoise",
@@ -123,7 +123,7 @@ namespace PE3.Pokemon.web.Data
                        Description = "A brutal Pokémon with pressurized water jets on its shell. They are used for high speed tackles."
 
                    },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Caterpie",
@@ -133,7 +133,7 @@ namespace PE3.Pokemon.web.Data
                         Description = "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls."
 
                     },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Metapod",
@@ -143,7 +143,7 @@ namespace PE3.Pokemon.web.Data
                         Description = "This Pokémon is vulnerable to attack while its shell is soft, exposing its weak and tender body"
 
                     },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Butterfree",
@@ -153,7 +153,7 @@ namespace PE3.Pokemon.web.Data
                         Description = "In battle, it flaps its wings at high speed to release highly toxic dust into the air."
 
                     },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Weedle",
@@ -163,7 +163,7 @@ namespace PE3.Pokemon.web.Data
                         Description = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head."
 
                     },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Kakuna",
@@ -173,7 +173,7 @@ namespace PE3.Pokemon.web.Data
                         Description = "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators."
 
                     },
-                    new Entities.Pokemon
+                    new Entities.MyPokemon
                     {
                         Id = Guid.NewGuid(),
                         Name = "Beedrill",

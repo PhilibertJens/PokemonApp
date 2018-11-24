@@ -13,7 +13,7 @@ namespace PE3.Pokemon.web.Data
         {
         }
 
-        public DbSet<Entities.Pokemon> Pokemons { get; set; }
+        public DbSet<Entities.MyPokemon> Pokemons { get; set; }
         public DbSet<Entities.Type> Types { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
