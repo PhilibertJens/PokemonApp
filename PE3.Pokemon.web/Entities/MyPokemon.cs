@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PE3.Pokemon.web.Entities
 {
-    public class Pokemon
+    public class MyPokemon
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
