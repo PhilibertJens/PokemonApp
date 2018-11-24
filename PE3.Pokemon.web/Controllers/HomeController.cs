@@ -22,13 +22,17 @@ namespace PE3.Pokemon.web.Controllers
         public async Task<IActionResult> Index()
         {
             HomeIndexVm vm = new HomeIndexVm();
-            //var allPokemonTypes = await pokemonContext.Set<PokemonType>()
-            //                                .Include(pt => pt.Pokemon)
-            //                                .Include(pt => pt.Type)
-            //                                .ToListAsync();
+            //enkel Bulbasaur en Charmander worden getoond omdat er maar 2 PokemonType queries zijn.
+            //De andere moeten automatisch toegevoegd worden.
+            var allPokemonWithTypes = await pokemonContext.Set<PokemonType>()
+                                            .Include(pt => pt.Pokemon)//join
+                                            .ThenInclude(p => p.PokemonTypes)
+                                            .Include(pt => pt.Type)//join
+                                            .ThenInclude(t => t.PokemonTypes)
+                                            .ToListAsync();
 
-            //vm.AllPokemonWithTypeInfo = allPokemonTypes.Select(pt => pt.Pokemon);
-            vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
+            vm.AllPokemonWithTypeInfo = allPokemonWithTypes.Select(pt => pt.Pokemon);
+            //vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
             return View(vm);
         }
     }
