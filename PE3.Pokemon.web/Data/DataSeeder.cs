@@ -12,31 +12,45 @@ namespace PE3.Pokemon.web.Data
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Entities.Type>().HasData(
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Normal" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Fighting" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Flying" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Poison" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Ground" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Rock" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Bug" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Ghost" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Steel" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Fire" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Water" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Grass" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Electric" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Psychic" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Ice" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Dragon" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Dark" },
-                new Entities.Type { Id = Guid.NewGuid(), Name = "Fairy" }
+                //Guid: Id = Guid.Parse("11111111-1111-1111-1111-111111111111") --> 128 bits getal (32 hexa's, 1 hexa = 4bits)
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000001"), Name = "Normal" },//mag niet volledig 0 zijn
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000002"), Name = "Fighting" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000003"), Name = "Flying" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000004"), Name = "Poison" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000005"), Name = "Ground" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000006"), Name = "Rock" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000007"), Name = "Bug" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000008"), Name = "Ghost" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000009"), Name = "Steel" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000A"), Name = "Fire" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000B"), Name = "Water" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000C"), Name = "Grass" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000D"), Name = "Electric" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000E"), Name = "Psychic" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000F"), Name = "Ice" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000010"), Name = "Dragon" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000011"), Name = "Dark" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000012"), Name = "Fairy" }
 
                 );
+
+            modelBuilder.Entity<PokemonType>().HasData(//enkele koppelingen toegevoegd om de join te testen.
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000C")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000A")
+                }
+            );
 
             modelBuilder.Entity<Entities.MyPokemon>().HasData(
                 new Entities.MyPokemon
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("00000000-0000-0000-0000-000000000001"),
                     Name = "Bulbasaur",
                     HasAllolanForm = false,
                     ImgUrl = "Bulbasaur.png",
@@ -45,17 +59,17 @@ namespace PE3.Pokemon.web.Data
                 },
                 new Entities.MyPokemon
                 {
-                    Id= Guid.NewGuid(),
-                    Name="Ivysaur",
-                    HasAllolanForm=false,
-                    ImgUrl="Ivysaur.png",
-                    Location="Evolve Bulbasaur",
-                    Description= "When the bulb on its back grows large, it appears to lose the ability to stand on its hind leg"
+                    Id = new Guid("00000000-0000-0000-0000-000000000002"),
+                    Name = "Ivysaur",
+                    HasAllolanForm = false,
+                    ImgUrl = "Ivysaur.png",
+                    Location = "Evolve Bulbasaur",
+                    Description = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind leg"
 
                 },
                  new Entities.MyPokemon
                  {
-                     Id = Guid.NewGuid(),
+                     Id = new Guid("00000000-0000-0000-0000-000000000003"),
                      Name = "Venusaur",
                      HasAllolanForm = false,
                      ImgUrl = "Venusaur.png",
@@ -65,7 +79,7 @@ namespace PE3.Pokemon.web.Data
                  },
                  new Entities.MyPokemon
                  {
-                     Id = Guid.NewGuid(),
+                     Id = new Guid("00000000-0000-0000-0000-000000000004"),
                      Name = "Charmander",
                      HasAllolanForm = false,
                      ImgUrl = "Charmander.png",
@@ -75,7 +89,7 @@ namespace PE3.Pokemon.web.Data
                  },
                  new Entities.MyPokemon
                  {
-                     Id = Guid.NewGuid(),
+                     Id = new Guid("00000000-0000-0000-0000-000000000005"),
                      Name = "Charmeleon",
                      HasAllolanForm = false,
                      ImgUrl = "Charmeleon.png",
@@ -85,7 +99,7 @@ namespace PE3.Pokemon.web.Data
                  },
                  new Entities.MyPokemon
                  {
-                     Id = Guid.NewGuid(),
+                     Id = new Guid("00000000-0000-0000-0000-000000000006"),
                      Name = "Charizard",
                      HasAllolanForm = false,
                      ImgUrl = "Charizard.png",
@@ -95,7 +109,7 @@ namespace PE3.Pokemon.web.Data
                  },
                  new Entities.MyPokemon
                  {
-                     Id = Guid.NewGuid(),
+                     Id = new Guid("00000000-0000-0000-0000-000000000007"),
                      Name = "Squirtle",
                      HasAllolanForm = false,
                      ImgUrl = "Squirtle.png",
@@ -105,7 +119,7 @@ namespace PE3.Pokemon.web.Data
                  },
                   new Entities.MyPokemon
                   {
-                      Id = Guid.NewGuid(),
+                      Id = new Guid("00000000-0000-0000-0000-000000000008"),
                       Name = "Wartortle",
                       HasAllolanForm = false,
                       ImgUrl = "Wartortle.png",
@@ -115,7 +129,7 @@ namespace PE3.Pokemon.web.Data
                   },
                    new Entities.MyPokemon
                    {
-                       Id = Guid.NewGuid(),
+                       Id = new Guid("00000000-0000-0000-0000-000000000009"),
                        Name = "Blastoise",
                        HasAllolanForm = false,
                        ImgUrl = "Blastoise.png",
@@ -125,7 +139,7 @@ namespace PE3.Pokemon.web.Data
                    },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000010"),
                         Name = "Caterpie",
                         HasAllolanForm = false,
                         ImgUrl = "Caterpie.png",
@@ -135,7 +149,7 @@ namespace PE3.Pokemon.web.Data
                     },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000011"),
                         Name = "Metapod",
                         HasAllolanForm = false,
                         ImgUrl = "Metapod.png",
@@ -145,7 +159,7 @@ namespace PE3.Pokemon.web.Data
                     },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000012"),
                         Name = "Butterfree",
                         HasAllolanForm = false,
                         ImgUrl = "Butterfree.png",
@@ -155,7 +169,7 @@ namespace PE3.Pokemon.web.Data
                     },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000013"),
                         Name = "Weedle",
                         HasAllolanForm = false,
                         ImgUrl = "Weedle.png",
@@ -165,7 +179,7 @@ namespace PE3.Pokemon.web.Data
                     },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000014"),
                         Name = "Kakuna",
                         HasAllolanForm = false,
                         ImgUrl = "Kakuna.png",
@@ -175,7 +189,7 @@ namespace PE3.Pokemon.web.Data
                     },
                     new Entities.MyPokemon
                     {
-                        Id = Guid.NewGuid(),
+                        Id = new Guid("00000000-0000-0000-0000-000000000015"),
                         Name = "Beedrill",
                         HasAllolanForm = false,
                         ImgUrl = "Beedrill.png",
@@ -183,7 +197,6 @@ namespace PE3.Pokemon.web.Data
                         Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail."
 
                     }
-
                 );
         }
     }

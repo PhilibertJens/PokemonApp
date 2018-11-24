@@ -22,14 +22,14 @@ namespace PE3.Pokemon.web.Controllers
         public async Task<IActionResult> Index()
         {
             HomeIndexVm vm = new HomeIndexVm();
-            var allPokemonTypes = await pokemonContext.Set<PokemonType>()
-                                            .Include(pt => pt.Pokemon)
-                                            .Include(pt => pt.Type)
-                                            .ToListAsync();
+            //var allPokemonTypes = await pokemonContext.Set<PokemonType>()
+            //                                .Include(pt => pt.Pokemon)
+            //                                .Include(pt => pt.Type)
+            //                                .ToListAsync();
 
-            vm.AllPokemonWithTypeInfo = allPokemonTypes.Select(pt => pt.Pokemon);
-            //vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
-            return View();
+            //vm.AllPokemonWithTypeInfo = allPokemonTypes.Select(pt => pt.Pokemon);
+            vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
+            return View(vm);
         }
     }
 }
