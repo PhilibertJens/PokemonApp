@@ -14,7 +14,16 @@ namespace PE3.Pokemon.web.Controllers
             return View();
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Login(AccountLoginVm userData)
+        {
+            if (ModelState.IsValid)
+            {
+                return new RedirectToActionResult("Index", "Home", null);
+            }
+            else return View(userData);
+        }
 
         public IActionResult Registration()
         {
@@ -28,9 +37,14 @@ namespace PE3.Pokemon.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                return new RedirectToActionResult("Index", "Home", null);
+                return new RedirectToActionResult("RegisterSuccess", "Account", null);
             }
             else return View(userData);
+        }
+
+        public IActionResult RegisterSuccess()
+        {
+            return View();
         }
     }
 }
