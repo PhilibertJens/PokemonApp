@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PE3.Pokemon.web.Data;
+using PE3.Pokemon.web.Entities;
 using PE3.Pokemon.web.Models;
 
 namespace PE3.Pokemon.web.Controllers
 {
     public class AccountController : Controller
     {
+        private PokemonContext pokemonContext;
+
+        public AccountController(PokemonContext context)
+        {
+            pokemonContext = context;
+        }
+
         public IActionResult Login()
         {
             return View();
@@ -20,7 +30,19 @@ namespace PE3.Pokemon.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                return new RedirectToActionResult("Index", "Home", null);
+                //var getUser = await pokemonContext.Users.FindAsync(userData.Username);
+
+                var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
+                if (getUser != null && getUser?.Password == userData.Password)
+                {
+                    return new RedirectToActionResult("Index", "Home", null);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Username or password is incorrect. Professor Oak can't remember you.");
+                    return View(userData);
+                }
+                
             }
             else return View(userData);
         }
@@ -33,11 +55,32 @@ namespace PE3.Pokemon.web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Registration(AccountRegistrationVm userData)
+        public async Task<IActionResult> Registration(AccountRegistrationVm userData)
         {
             if (ModelState.IsValid)
             {
-                return new RedirectToActionResult("RegisterSuccess", "Account", null);
+                var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
+                if (getUser == null)
+                {
+                    User newUser = new User()
+                    {
+                        FirstName = userData.FirstName,
+                        LastName = userData.LastName,
+                        Username = userData.Username,
+                        Password = userData.Password //moet eigenlijk een hashwaarde zijn.
+                    };
+                    //PasswordHasher passwordHasher = new PasswordHasher();
+                    //passwordHasher.HashPassword(newUser, newUser.Password);
+                    pokemonContext.Users.Add(newUser);
+                    await pokemonContext.SaveChangesAsync();
+                    return new RedirectToActionResult("RegisterSuccess", "Account", null);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "A trainer with that username already exists");
+                    return View(userData);
+                }
+
             }
             else return View(userData);
         }
