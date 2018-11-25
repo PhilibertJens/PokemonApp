@@ -13,7 +13,7 @@
                 <p><b>@pokemon.Name</b></p>
                 @foreach (var type in pokemon.PokemonTypes)
                 {
-                    <p>Type: @type.Type</p>
+                    <p>Type: @type.Type.Name</p>
                 }
             </li>
         }
