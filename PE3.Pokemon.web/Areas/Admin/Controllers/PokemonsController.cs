@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PE3.Pokemon.web.Areas.Admin.Models;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
@@ -48,7 +49,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
             
         }
 
-        // GET: Pokemons/Details/5
+        // GET: Pokemons/Details
         public ActionResult Details(Guid? id)
         {
             if (id==null)
@@ -127,27 +128,86 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
         #endregion
 
         #region edit
-        // GET: Pokemons/Edit/5
-        public ActionResult Edit(int id)
+        // GET: Pokemons/Edit
+        public ActionResult Edit(Guid? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var pokemon = _pokemonContext.Pokemons
+                                        .Include(p => p.PokemonTypes)
+                                        .SingleOrDefault(p => p.Id == id);
+            PopulateAssignedTypeData(pokemon);
+
+            if (pokemon == null)
+            {
+                return NotFound();
+            }
+            var pokemonEditVm = new PokemonEditVm
+            {
+                Id = pokemon.Id,
+                HasAllolanForm = pokemon.HasAllolanForm,
+                ImgUrl = pokemon.ImgUrl,
+                Description = pokemon.Description,
+                location = pokemon.Location,
+                Name = pokemon.Name,
+
+            };
+            return View(pokemonEditVm);
         }
 
-        // POST: Pokemons/Edit/5
+        // POST: Pokemons/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Guid id,PokemonEditVm pokemonEditVm, string[] selectedTypes)
         {
-            try
+            if (id != pokemonEditVm.Id)
             {
-                // TODO: Add update logic here
+                return NotFound();
+            }
+            var pokemonToUpdate = _pokemonContext.Pokemons
+                    .Include(p => p.PokemonTypes)
+                    .ThenInclude(pt => pt.Type)
+                    .Where(p => p.Id == id)
+                    .Single();
 
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    pokemonToUpdate.Name = pokemonEditVm.Name;
+                    pokemonToUpdate.Location = pokemonEditVm.location;
+                    pokemonToUpdate.Description = pokemonEditVm.Description;
+                    pokemonToUpdate.HasAllolanForm = pokemonEditVm.HasAllolanForm;
+
+                    if (pokemonEditVm.UploadedImage !=null)
+                    {
+                        DeletePokeImage(pokemonToUpdate);
+                        pokemonToUpdate.ImgUrl = SavePokeImg(pokemonEditVm.UploadedImage);
+                    }
+
+                    UpdatePokemonTypes(selectedTypes, pokemonToUpdate);
+                    _pokemonContext.Update(pokemonToUpdate);
+                    _pokemonContext.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!PokemonExists(pokemonEditVm.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            PopulateAssignedTypeData(pokemonToUpdate);
+            return View(pokemonEditVm);
         }
         #endregion
 
@@ -231,6 +291,58 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
                 });
             }
             ViewBag.Types = vm;
+        }
+
+        private bool PokemonExists(Guid id)
+        {
+            return _pokemonContext.Pokemons.Any(p => p.Id == id);
+        }
+
+        private void UpdatePokemonTypes(string[] selectedTypes,MyPokemon pokemonToUpdate)
+        {
+            if (selectedTypes == null)
+            {
+                pokemonToUpdate.PokemonTypes = new List<PokemonType>();
+                return;
+            }
+            var selectedPokemonHS = new HashSet<string>(selectedTypes);
+
+            IEnumerable<Guid> pokemonTypes = pokemonToUpdate.PokemonTypes.Select(pt => pt.TypeId);
+
+            List<PokemonType> newLink = new List<PokemonType>();
+
+            foreach (var type in _pokemonContext.Types)
+            {
+                if (selectedPokemonHS.Contains(type.Id.ToString()))
+                {
+                    if (!pokemonTypes.Contains(type.Id))
+                    {
+                        var foo = new PokemonType { TypeId = type.Id, PokemonId = pokemonToUpdate.Id, Pokemon = pokemonToUpdate, Type = type };
+                        newLink.Add(foo);
+                    }
+                }
+
+                else
+                {
+                    if (pokemonTypes.Contains(type.Id))
+                    {
+                        foreach (var pokemonType in _pokemonContext.PokemonTypes)
+                        {
+                            if (pokemonType.TypeId == type.Id)
+                            {
+                                pokemonToUpdate.PokemonTypes.Remove(pokemonType);
+                            }
+                        }
+                    }
+                }
+            }
+
+            foreach (var pokemonType in newLink)
+            {
+                _pokemonContext.Add(pokemonType);
+            }
+            _pokemonContext.SaveChanges();
+
         }
         #endregion
     }
