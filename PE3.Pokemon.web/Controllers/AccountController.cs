@@ -34,8 +34,13 @@ namespace PE3.Pokemon.web.Controllers
                 //var getUser = await pokemonContext.Users.FindAsync(userData.Username);
 
                 var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
+                
                 if (getUser != null && getUser?.Password == userData.Password)
                 {
+                    if (userData.Username=="admin" && getUser?.Password ==userData.Password)
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
                     HttpContext.Session.SetString("Username", getUser.Username);
                     return new RedirectToActionResult("Index", "Home", null);
                 }
