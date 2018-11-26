@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
 using PE3.Pokemon.web.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace PE3.Pokemon.web.Controllers
 {
@@ -33,8 +34,15 @@ namespace PE3.Pokemon.web.Controllers
                 //var getUser = await pokemonContext.Users.FindAsync(userData.Username);
 
                 var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
+                
                 if (getUser != null && getUser?.Password == userData.Password)
                 {
+                    HttpContext.Session.SetString("Username", getUser.Username);
+                    if (userData.Username == "admin" && getUser?.Password == userData.Password)
+                    {
+                        return RedirectToAction("Index", "Home", new { area = "Admin" });
+                    }
+                    
                     return new RedirectToActionResult("Index", "Home", null);
                 }
                 else

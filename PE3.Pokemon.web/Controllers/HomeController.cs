@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PE3.Pokemon.web.Data;
@@ -21,7 +22,12 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            HomeIndexVm vm = new HomeIndexVm();
+            string userName = HttpContext.Session.GetString("Username");
+            var vm = new HomeIndexVm
+            {
+                Username = userName
+        };
+            
             //enkel Bulbasaur en Charmander worden getoond omdat er maar 2 PokemonType queries zijn.
             //De andere moeten automatisch toegevoegd worden.
             var allPokemonWithTypes = await pokemonContext.Set<PokemonType>()
