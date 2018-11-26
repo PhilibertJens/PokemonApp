@@ -15,7 +15,7 @@ namespace PE3.Pokemon.web.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -137,6 +137,11 @@ namespace PE3.Pokemon.web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new { Id = new Guid("10000000-0000-0000-0000-000000000000"), FirstName = "ad", LastName = "min", Password = "pokemon1234", Username = "admin" },
+                        new { Id = new Guid("00000000-1000-0000-0000-000000000000"), FirstName = "jan", LastName = "lul", Password = "azert1234", Username = "jan" }
+                    );
                 });
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.PokemonType", b =>

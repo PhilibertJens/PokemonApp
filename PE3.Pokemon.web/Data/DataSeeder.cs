@@ -47,11 +47,24 @@ namespace PE3.Pokemon.web.Data
                 }
             );
 
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = new Guid("10000000-0000-0000-0000-000000000000"),
+                    FirstName = "ad",
+                    LastName = "min",
+                    Username = "admin",
+                    Password = "pokemon1234"
+                                
+                }
+                );
+
             modelBuilder.Entity<Entities.MyPokemon>().HasData(
                 new Entities.MyPokemon
                 {
                     Id = new Guid("00000000-0000-0000-0000-000000000001"),
                     Name = "Bulbasaur",
+                    
                     HasAllolanForm = false,
                     ImgUrl = "Bulbasaur.png",
                     Location = "Starter",
