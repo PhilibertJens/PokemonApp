@@ -1,0 +1,15 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/Admin.css" rel="stylesheet" />
+
+<div class="UlForAdmin">
+    <ul>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index"><li>Home</li></a>
+        <a asp-area="Admin" asp-controller="Pokemon" asp-action="Index"><li>Pokemon</li></a>
+    </ul>
+</div>
+
+@RenderBody()
