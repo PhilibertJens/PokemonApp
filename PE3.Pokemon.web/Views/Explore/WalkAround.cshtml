@@ -1,0 +1,30 @@
+﻿@model PE3.Pokemon.web.Models.ExploreWalkAroundVm
+@{
+    ViewData["Title"] = "WalkAround";
+}
+
+<h2>Welcome to the world of Pokemon!</h2>
+
+<p>These mysterious creatures are everywhere. Stay alert of your surroundings. <br/>
+If you're lucky, you could catch some.
+</p>
+<div class="row">
+    <div class="col-md-12">
+        <h3>In what kind of area are you situated?</h3>
+        <p>This could be important for the type of pokemon you run into.</p>
+        <div asp-validation-summary="ModelOnly"></div>
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="SelectedEnvironmentId"></label><br />
+                <select asp-for="SelectedEnvironmentId"
+                        asp-items="Model.Environments"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SelectedDayTimeId"></label><br />
+                <select asp-for="SelectedDayTimeId"
+                        asp-items="Model.DayTime"></select>
+            </div>
+            <button type="submit" class="btn btn-default">Start discovery tour!</button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+﻿@model PE3.Pokemon.web.Models.ExploreGeneratePokemonVm
+@{
+    ViewData["Title"] = "GeneratePokemon";
+}
+
+<h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2>
+
+<img src="~/images/@(Model.AppearedPokemon.ImgUrl)"/>
