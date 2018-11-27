@@ -117,7 +117,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 createdPokemon.ImgUrl = SavePokeImg(pokemonCreateVm.UploadedImage);
-                _pokemonContext.Add(createdPokemon);
+                _pokemonContext.Pokemons.Add(createdPokemon);
                 _pokemonContext.SaveChanges();
                 return (RedirectToAction("Index"));
             }
