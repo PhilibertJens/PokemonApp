@@ -16,7 +16,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         [Required]
         public bool HasAllolanForm { get; set; }
 
-        [Required]
+       
         public string ImgUrl { get; set; }
 
         [Required]
@@ -28,7 +28,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         [Required]
         public string location { get; set; }
 
-        [Required]
+        
         public IFormFile UploadedImage { get; set; }
     }
 }
