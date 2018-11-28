@@ -1,0 +1,49 @@
+﻿body {
+    color: white;
+}
+
+body .UlForAdmin li {
+        margin: 0 auto;
+    }
+
+.UlForAdmin {
+    height: 10px;
+    margin-top: 10px;
+    margin-left: 400px;
+}
+
+    .UlForAdmin li {
+        display: inline-block;
+        width: 100px;
+        text-align: center;
+        background: linear-gradient(blue, black);
+        font-size: 25px;
+        font-family: Avengeance;
+        border: 1px solid white;
+        color: white;
+        margin: 0 1% 0 1%;
+        position: relative;
+        height: 60px;
+        padding-top: 1%;
+        overflow: hidden;
+    }
+
+li:hover {
+    color: black;
+    background: linear-gradient(black, blue);
+}
+
+.myCssTd {
+    display: block;
+}
+
+td a {
+    margin-right: 20px;
+}
+
+.adminBack {
+    background-image: url('../images/Backgrounds/adminback.jpg');
+    height: 750px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
