@@ -16,10 +16,10 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         [Required]
         public bool HasAllolanForm { get; set; }
 
-       
+        [Required]
         public string ImgUrl { get; set; }
 
-        [Required]
+        
         public string Type { get; set; }
 
         [Required]

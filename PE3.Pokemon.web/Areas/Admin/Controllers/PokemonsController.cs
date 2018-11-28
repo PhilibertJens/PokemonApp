@@ -99,7 +99,9 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
                 HasAllolanForm = pokemonCreateVm.HasAllolanForm,
                 ImgUrl = pokemonCreateVm.ImgUrl,
                 Description = pokemonCreateVm.Description,
-                Location = pokemonCreateVm.location
+                Location = pokemonCreateVm.location,
+                Id = Guid.NewGuid()
+                
 
             };
 
@@ -117,7 +119,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 createdPokemon.ImgUrl = SavePokeImg(pokemonCreateVm.UploadedImage);
-                _pokemonContext.Add(createdPokemon);
+                _pokemonContext.Pokemons.Add(createdPokemon);
                 _pokemonContext.SaveChanges();
                 return (RedirectToAction("Index"));
             }
