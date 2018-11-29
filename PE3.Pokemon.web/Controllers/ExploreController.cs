@@ -16,10 +16,19 @@ namespace PE3.Pokemon.web.Controllers
     public class ExploreController : Controller
     {
         private PokemonContext pokemonContext;
+        private Random random;
+        /*
+         Nog te fixen:
+         - opslaan van ExploreGeneratePokemonVm viewModel in session i.p.v. string value
+         - type bepalen a.d.h.v. omgeving en tijdstip via een switch statement.
+         - er komt een error als de pokemon een tweede keer wordt gevangen (duplicate PK). 
+           Het databasemodel moet gewijzigd worden.
+        */
 
         public ExploreController(PokemonContext context)
         {
             pokemonContext = context;
+            random = new Random();
         }
 
         public IActionResult WalkAround()
@@ -54,8 +63,8 @@ namespace PE3.Pokemon.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //query om type te selecteren en typenaam mee te geven met de session.
-                HttpContext.Session.SetString("ChosenType", "fire");//opslaan van omgeving en tijdstip
+                //switch statement dat bepaald welk type is gekoppeld aan omgeving en tijdstip
+                HttpContext.Session.SetString("ChosenType", "Fire");//opslaan van Type
                 return new RedirectToActionResult("GeneratePokemon", "Explore", null);
             }
             else return View(userData);
@@ -63,19 +72,59 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task <IActionResult> GeneratePokemon()
         {
-            string type = HttpContext.Session.GetString("ChosenType");//opvangen van omgeving en tijdstip
-            Type myType = new Type()//query om type te selecteren a.d.h.v. typenaam uit session.
-            {
-                Name = "Fire"
-            };
-            var appearedPokemon = await LetPokemonAppear(myType);//random pokemon met dit type
+            string type = HttpContext.Session.GetString("ChosenType");
+            var getType = pokemonContext.Types
+                .Where(t => t.Name == type).FirstOrDefault();
+            var appearedPokemon = await LetPokemonAppear(getType);//random pokemon met dit type
 
             ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
             vm.AppearedPokemon = appearedPokemon;
             vm.HP = 50; //random bepaald
             vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
+            return View(vm);
+        }
 
-            return View(vm);//file met javascript om pokemon te vangen (vb. klikken op image, pokebal drag/drop,...)
+        public async Task<IActionResult> CatchProcesser()
+        {
+            int luckyNumber = random.Next(0, 2);
+            if (luckyNumber == 1)//50% dat de pokemon is gevangen.
+            {
+                //data ophalen uit sessions
+                string userName = HttpContext.Session.GetString("Username");
+                string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+
+                userName = "jensph";//vervang dit door gebruiker uit eigen database.
+                                    //Dit staat er om niet elke keer te moeten inloggen
+
+                //data ophalen uit database a.d.h.v. session data
+                var getPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+                var me = pokemonContext.Users
+                    .Where(u => u.Username == userName).FirstOrDefault();
+
+                PokemonUser pokemonUser = new PokemonUser()
+                {
+                    Pokemon = getPokemon,
+                    PokemonId = getPokemon.Id,
+                    User = me,
+                    UserId = me.Id
+                };
+
+                pokemonContext.PokemonUsers.Add(pokemonUser);
+                await pokemonContext.SaveChangesAsync();
+                return new RedirectToActionResult("Gotcha", "Explore", null);
+            }
+            else
+            {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
+                ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
+                string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+                var getPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+                vm.AppearedPokemon = getPokemon;
+                vm.HP = 50; //random bepaald
+                vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
+                return View(vm);
+            }
         }
 
 
@@ -88,20 +137,30 @@ namespace PE3.Pokemon.web.Controllers
                                             .Include(pt => pt.Type)
                                             .ThenInclude(t => t.PokemonTypes)
                                             .ToListAsync();
-            Random random = new Random();
             int max = givePokemonType.Count();
             int listItem = random.Next(0, max);
             var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
 
             MyPokemon getPokemon = new MyPokemon()
             {
+                Id = new Guid("00000000-0000-0000-0000-000000000004"),
                 Name = "Charmander",
                 ImgUrl = "Charmander.png"
-            };//moet een query zijn om Pokemon te selecteren 
-
-            HttpContext.Session.SetString("AppearedPokemon", getPokemon.Name);//naam wordt opgeslaan. Kun je een object opslaan?
-
+            };//moet een query zijn om Pokemon te selecteren
+            HttpContext.Session.SetString("AppearedPokemon", getPokemon.Name);
             return getPokemon;
+        }
+
+        public IActionResult Gotcha()
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+            var getPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+            ExploreGotchaVm vm = new ExploreGotchaVm();
+            vm.Username = userName;
+            vm.CaughtPokemon = getPokemon;
+            return View(vm);
         }
     }
 }
