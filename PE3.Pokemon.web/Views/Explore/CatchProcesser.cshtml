@@ -1,0 +1,17 @@
+﻿@model PE3.Pokemon.web.Models.ExploreGeneratePokemonVm
+@{
+    ViewData["Title"] = "CatchProcesser";
+}
+
+<h2>Try again</h2>
+
+<img src="~/images/@(Model.AppearedPokemon.ImgUrl)" />
+
+<div class="row">
+    <div class="col-md-12">
+        <div asp-validation-summary="ModelOnly"></div>
+        <form method="post" asp-action="CatchProcesser">
+            <button type="submit" class="btn btn-default">Throw Pokeball!</button>
+        </form>
+    </div>
+</div>

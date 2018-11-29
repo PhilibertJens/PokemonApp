@@ -1,0 +1,12 @@
+﻿@model PE3.Pokemon.web.Models.ExploreGotchaVm
+@{
+    ViewData["Title"] = "Gotcha";
+}
+
+<h2>Gotcha</h2>
+
+<div>Congratulations @Model.Username</div>
+
+<p>You caught @Model.CaughtPokemon.Name</p>
+
+<img src="~/images/@(Model.CaughtPokemon.ImgUrl)" />
