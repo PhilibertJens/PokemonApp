@@ -20,8 +20,6 @@ namespace PE3.Pokemon.web.Controllers
         /*
          Nog te fixen:
          - opslaan van ExploreGeneratePokemonVm viewModel in session i.p.v. string value
-         - er komt een error als de pokemon een tweede keer wordt gevangen (duplicate PK). 
-           Het databasemodel moet gewijzigd worden.
          - redirect naar GeneratePokemon staat in commentaar tot er extra geseed wordt.
         */
 

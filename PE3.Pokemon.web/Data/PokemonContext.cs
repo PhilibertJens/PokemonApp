@@ -41,16 +41,6 @@ namespace PE3.Pokemon.web.Data
             modelBuilder.Entity<PokemonUser>()
                 .HasKey(pu => new { pu.PokemonId, pu.UserId });
 
-            //modelBuilder.Entity<PokemonUser>()
-            //    .HasOne(pu => pu.Pokemon)
-            //    .WithMany(p => p.PokemonUsers)
-            //    .HasForeignKey(pu => pu.PokemonId);
-
-            //modelBuilder.Entity<PokemonUser>()
-            //    .HasOne(pu => pu.User)
-            //    .WithMany(u => u.PokemonUsers)
-            //    .HasForeignKey(pu => pu.UserId);
-
             #endregion
 
             DataSeeder.Seed(modelBuilder);

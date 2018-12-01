@@ -9,8 +9,6 @@ namespace PE3.Pokemon.web.Entities
     {
         public Guid UserId { get; set; }
         public Guid PokemonId { get; set; }
-        //public User User { get; set; }
-        //public MyPokemon Pokemon { get; set; }
         public byte Catches { get; set; }
     }
 }
