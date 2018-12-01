@@ -97,7 +97,7 @@ namespace PE3.Pokemon.web.Controllers
                 
                 string userName = HttpContext.Session.GetString("Username");
 
-                userName = "admin";//vervang dit door gebruiker uit eigen database.
+                userName = "admin";//only seeded (or registered) users
                                     //Dit staat er om niet elke keer te moeten inloggen
 
                 var me = pokemonContext.Users
@@ -105,11 +105,11 @@ namespace PE3.Pokemon.web.Controllers
                 try
                 {
                     var alreadyCaught = pokemonContext.PokemonUsers
-                                   .Where(pu => pu.UserId == me.Id && pu.PokemonId == getPokemon.Id).FirstOrDefault();
+                                   .Where(pu => pu.UserId == me.Id && pu.PokemonId == getPokemon.Id).FirstOrDefault(); //user heeft resp pokemon al gevangen
                     alreadyCaught.Catches++;
                 }
-                catch (Exception)
-                {
+                catch (NullReferenceException)
+                {//als de user nog geen pokemon van dit type heeft
                     PokemonUser pokemonUser = new PokemonUser()
                     {
                         PokemonId = getPokemon.Id,
@@ -120,7 +120,6 @@ namespace PE3.Pokemon.web.Controllers
                 }
                 await pokemonContext.SaveChangesAsync();
                 return new RedirectToActionResult("Gotcha", "Explore", null);
-
             }
             else
             {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
