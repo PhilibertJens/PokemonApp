@@ -25,3 +25,4 @@ $ git clone https://github.com/1819-B01-4/pe3-team-rocket.git
 * Google
 * StackOverflow
 * Satoshi Tajiri
+* Any articles used
