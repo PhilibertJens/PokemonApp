@@ -64,14 +64,14 @@ namespace PE3.Pokemon.web.Controllers
             if (ModelState.IsValid)
             {
                 Type foundType = FindType(userData.SelectedEnvironmentId, userData.SelectedDayTimeId);
-                HttpContext.Session.SetString("ChosenType", foundType.Name);
-                return Content($"Found type: {foundType.Name}","text/html");//staat zo tot er nog extra PokemonTypes zijn toegevoegd
-                //return new RedirectToActionResult("GeneratePokemon", "Explore", null);
+                HttpContext.Session.SetString("ChosenType", "Fire");
+                //return Content($"Found type: {foundType.Name}","text/html");//staat zo tot er nog extra PokemonTypes zijn toegevoegd
+                return new RedirectToActionResult("GeneratePokemon", "Explore", null);
             }
             else return View(userData);
         }
 
-        public async Task <IActionResult> GeneratePokemon()
+        public async Task<IActionResult> GeneratePokemon()
         {
             string type = HttpContext.Session.GetString("ChosenType");
             var getType = pokemonContext.Types
@@ -91,25 +91,24 @@ namespace PE3.Pokemon.web.Controllers
             var getPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == appearedPokemon).FirstOrDefault();
 
-            int luckyNumber = random.Next(0, 2);
+            int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
+                
                 string userName = HttpContext.Session.GetString("Username");
 
-                userName = "jensph";//vervang dit door gebruiker uit eigen database.
+                userName = "admin";//vervang dit door gebruiker uit eigen database.
                                     //Dit staat er om niet elke keer te moeten inloggen
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
-
-                var alreadyCaught = pokemonContext.PokemonUsers
-                    .Where(pu => pu.UserId == me.Id && pu.PokemonId == getPokemon.Id).First();
-
-                if(alreadyCaught != null)
+                try
                 {
+                    var alreadyCaught = pokemonContext.PokemonUsers
+                                   .Where(pu => pu.UserId == me.Id && pu.PokemonId == getPokemon.Id).FirstOrDefault();
                     alreadyCaught.Catches++;
                 }
-                else
+                catch (Exception)
                 {
                     PokemonUser pokemonUser = new PokemonUser()
                     {
@@ -118,9 +117,10 @@ namespace PE3.Pokemon.web.Controllers
                         Catches = 1
                     };
                     pokemonContext.PokemonUsers.Add(pokemonUser);
-                }            
+                }
                 await pokemonContext.SaveChangesAsync();
                 return new RedirectToActionResult("Gotcha", "Explore", null);
+
             }
             else
             {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
@@ -164,7 +164,7 @@ namespace PE3.Pokemon.web.Controllers
         {
             List<List<string>> environments = new List<List<string>>()
             {
-                new List<string>(){ "Grass", "Bug", "normal", "Poison" },//default
+                new List<string>(){ "Grass", "Bug", "Normal", "Poison" },//default
                 new List<string>(){ "Grass", "Bug", "Psychic" },//forest
                 new List<string>(){ "Water", "Fairy", "Normal" },//sea
                 new List<string>(){ "Normal", "Fighting", "Electric", "Fire" },//city
@@ -174,7 +174,7 @@ namespace PE3.Pokemon.web.Controllers
             };
             List<List<string>> daytimes = new List<List<string>>()
             {
-                new List<string>(){ "Grass", "Bug", "normal", "Poison"},//default
+                new List<string>(){ "Grass", "Bug", "Normal", "Poison"},//default
                 new List<string>(){ "Normal", "Bug", "Psychic" },//morning
                 new List<string>(){ "Water", "Grass", "Fire"},//midday
                 new List<string>(){ "Normal", "Ghost" },//evening
