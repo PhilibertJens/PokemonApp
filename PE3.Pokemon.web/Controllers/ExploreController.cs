@@ -20,9 +20,9 @@ namespace PE3.Pokemon.web.Controllers
         /*
          Nog te fixen:
          - opslaan van ExploreGeneratePokemonVm viewModel in session i.p.v. string value
-         - type bepalen a.d.h.v. omgeving en tijdstip via een switch statement.
          - er komt een error als de pokemon een tweede keer wordt gevangen (duplicate PK). 
            Het databasemodel moet gewijzigd worden.
+         - redirect naar GeneratePokemon staat in commentaar tot er extra geseed wordt.
         */
 
         public ExploreController(PokemonContext context)
@@ -63,9 +63,10 @@ namespace PE3.Pokemon.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //switch statement dat bepaald welk type is gekoppeld aan omgeving en tijdstip
-                HttpContext.Session.SetString("ChosenType", "Fire");//opslaan van Type
-                return new RedirectToActionResult("GeneratePokemon", "Explore", null);
+                Type foundType = FindType(userData.SelectedEnvironmentId, userData.SelectedDayTimeId);
+                HttpContext.Session.SetString("ChosenType", foundType.Name);
+                return Content($"Found type: {foundType.Name}","text/html");//staat zo tot er nog extra PokemonTypes zijn toegevoegd
+                //return new RedirectToActionResult("GeneratePokemon", "Explore", null);
             }
             else return View(userData);
         }
@@ -86,19 +87,18 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> CatchProcesser()
         {
+            string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+            var getPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+
             int luckyNumber = random.Next(0, 2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
-                //data ophalen uit sessions
                 string userName = HttpContext.Session.GetString("Username");
-                string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
 
                 userName = "jensph";//vervang dit door gebruiker uit eigen database.
                                     //Dit staat er om niet elke keer te moeten inloggen
 
-                //data ophalen uit database a.d.h.v. session data
-                var getPokemon = pokemonContext.Pokemons
-                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
 
@@ -117,38 +117,11 @@ namespace PE3.Pokemon.web.Controllers
             else
             {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
                 ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
-                string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
-                var getPokemon = pokemonContext.Pokemons
-                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
                 vm.AppearedPokemon = getPokemon;
                 vm.HP = 50; //random bepaald
                 vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
                 return View(vm);
             }
-        }
-
-
-        private async Task<MyPokemon> LetPokemonAppear(Type type)
-        {
-            var givePokemonType = await pokemonContext.Set<PokemonType>()//een join van Pokemon, PokemonType en Type
-                                            .Include(pt => pt.Pokemon)
-                                            .ThenInclude(p => p.PokemonTypes)
-                                            .Where(p => p.Type.Name.ToLower() == "fire")//zal tot nu toe altijd Charmander teruggeven.
-                                            .Include(pt => pt.Type)
-                                            .ThenInclude(t => t.PokemonTypes)
-                                            .ToListAsync();
-            int max = givePokemonType.Count();
-            int listItem = random.Next(0, max);
-            var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
-
-            MyPokemon getPokemon = new MyPokemon()
-            {
-                Id = new Guid("00000000-0000-0000-0000-000000000004"),
-                Name = "Charmander",
-                ImgUrl = "Charmander.png"
-            };//moet een query zijn om Pokemon te selecteren
-            HttpContext.Session.SetString("AppearedPokemon", getPokemon.Name);
-            return getPokemon;
         }
 
         public IActionResult Gotcha()
@@ -162,5 +135,54 @@ namespace PE3.Pokemon.web.Controllers
             vm.CaughtPokemon = getPokemon;
             return View(vm);
         }
+
+        private async Task<MyPokemon> LetPokemonAppear(Type type)
+        {
+            var givePokemonType = await pokemonContext.Set<PokemonType>()//een join van Pokemon, PokemonType en Type
+                                            .Include(pt => pt.Pokemon)
+                                            .ThenInclude(p => p.PokemonTypes)
+                                            .Where(p => p.Type.Name.ToLower() == type.Name)//zal tot nu toe altijd Charmander teruggeven.
+                                            .Include(pt => pt.Type)
+                                            .ThenInclude(t => t.PokemonTypes)
+                                            .ToListAsync();
+            int max = givePokemonType.Count();
+            int listItem = random.Next(0, max);
+            var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
+            HttpContext.Session.SetString("AppearedPokemon", appearedPokemon.Pokemon.Name);
+            return appearedPokemon.Pokemon;
+        }
+
+        private Type FindType(int environmentId, int timeId)
+        {
+            List<List<string>> environments = new List<List<string>>()
+            {
+                new List<string>(){ "Grass", "Bug", "normal", "Poison" },//default
+                new List<string>(){ "Grass", "Bug", "Psychic" },//forest
+                new List<string>(){ "Water", "Fairy", "Normal" },//sea
+                new List<string>(){ "Normal", "Fighting", "Electric", "Fire" },//city
+                new List<string>(){ "Flying", "Dragon"},//sky
+                new List<string>(){ "Grass", "Ground", "Rock", "Steel", "Ice" },//mountain
+                new List<string>(){ "Poison", "Bug", "Dark", "Dragon", "Ghost" }//cave
+            };
+            List<List<string>> daytimes = new List<List<string>>()
+            {
+                new List<string>(){ "Grass", "Bug", "normal", "Poison"},//default
+                new List<string>(){ "Normal", "Bug", "Psychic" },//morning
+                new List<string>(){ "Water", "Grass", "Fire"},//midday
+                new List<string>(){ "Normal", "Ghost" },//evening
+                new List<string>(){ "Normal", "Ghost" },//midnight
+            };
+            List<string> typesPerEnvironment = environments[environmentId];
+            List<string> typesPerDaytime = daytimes[timeId];
+            List<string> summary = new List<string>();
+            foreach (string type in typesPerEnvironment) summary.Add(type);
+            foreach (string type in typesPerDaytime) summary.Add(type);
+
+            string selectedType = summary[random.Next(0, summary.Count())];
+            var getType = pokemonContext.Types
+                .Where(t => t.Name == selectedType).FirstOrDefault();
+            return getType;
+        }
+
     }
 }
