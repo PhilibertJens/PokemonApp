@@ -102,15 +102,23 @@ namespace PE3.Pokemon.web.Controllers
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
 
-                PokemonUser pokemonUser = new PokemonUser()
-                {
-                    Pokemon = getPokemon,
-                    PokemonId = getPokemon.Id,
-                    User = me,
-                    UserId = me.Id
-                };
+                var alreadyCaught = pokemonContext.PokemonUsers
+                    .Where(pu => pu.UserId == me.Id && pu.PokemonId == getPokemon.Id).First();
 
-                pokemonContext.PokemonUsers.Add(pokemonUser);
+                if(alreadyCaught != null)
+                {
+                    alreadyCaught.Catches++;
+                }
+                else
+                {
+                    PokemonUser pokemonUser = new PokemonUser()
+                    {
+                        PokemonId = getPokemon.Id,
+                        UserId = me.Id,
+                        Catches = 1
+                    };
+                    pokemonContext.PokemonUsers.Add(pokemonUser);
+                }            
                 await pokemonContext.SaveChangesAsync();
                 return new RedirectToActionResult("Gotcha", "Explore", null);
             }
@@ -183,6 +191,5 @@ namespace PE3.Pokemon.web.Controllers
                 .Where(t => t.Name == selectedType).FirstOrDefault();
             return getType;
         }
-
     }
 }
