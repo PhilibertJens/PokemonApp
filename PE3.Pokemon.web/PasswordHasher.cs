@@ -30,9 +30,9 @@ namespace PE3.Pokemon.web
 
         }
 
-        public PasswordVerificationResult VerifyHashedPassword(User user, string hashedPassword, string providedPassword)
+        public PasswordVerificationResult VerifyHashedPassword(User user,string hashedPassword, string providedPassword)
         {
-            byte[] hashedBytes = Convert.FromBase64String(hashedPassword);
+            byte[] hashedBytes = Convert.FromBase64String(user.Password);
             byte[] salt = new byte[16];
             Array.Copy(hashedBytes, 0, salt, 0, 16);
             //hash input with same algorithm as encrypted

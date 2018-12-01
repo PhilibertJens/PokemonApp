@@ -35,7 +35,7 @@ namespace PE3.Pokemon.web.Controllers
 
                 var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
                 
-                if (getUser != null && getUser?.Password == userData.Password)
+                if (getUser != null && verifyPassword(getUser, userData.Password))
                 {
                     HttpContext.Session.SetString("Username", getUser.Username);
                     if (userData.Username == "admin" && getUser?.Password == userData.Password)
@@ -77,8 +77,8 @@ namespace PE3.Pokemon.web.Controllers
                         Username = userData.Username,
                         Password = userData.Password //moet eigenlijk een hashwaarde zijn.
                     };
-                    //PasswordHasher passwordHasher = new PasswordHasher();
-                    //passwordHasher.HashPassword(newUser, newUser.Password);
+                    PasswordHasher passwordHasher = new PasswordHasher();
+                    passwordHasher.HashPassword(newUser, newUser.Password);
                     pokemonContext.Users.Add(newUser);
                     await pokemonContext.SaveChangesAsync();
                     return new RedirectToActionResult("RegisterSuccess", "Account", null);
@@ -96,6 +96,12 @@ namespace PE3.Pokemon.web.Controllers
         public IActionResult RegisterSuccess()
         {
             return View();
+        }
+
+        private bool verifyPassword(User user, string providedPW)
+        {
+            PasswordHasher pH = new PasswordHasher();
+            return (pH.VerifyHashedPassword(user,user.Password,providedPW) == PasswordVerificationResult.Success);
         }
     }
 }
