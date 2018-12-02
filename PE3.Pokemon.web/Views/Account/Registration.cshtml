@@ -1,51 +1,49 @@
 ﻿@model PE3.Pokemon.web.Models.AccountRegistrationVm
 @{
     ViewData["Title"] = "Registration";
+    Layout = "_AccountLayout";
 }
 
-<h2>Registration</h2>
-
-<div class="row">
-    <div class="col-md-12">
-        <h3>Hey trainer. Sign up here to start your journey!</h3>
-        <div asp-validation-summary="ModelOnly"></div>
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" class="form-control">
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" class="form-control">
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control">
-                <span asp-validation-for="Username" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control">
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control">
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RepeatPassword"></label>
-                <input asp-for="RepeatPassword" class="form-control">
-                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group form-inline">
-                <span class="checkbox">
-                    <input asp-for="RememberMe"> <label asp-for="RememberMe"></label>
-                </span>
-            </div>
-            <button type="submit" class="btn btn-default">Register me!</button>
-        </form>
+<h2>Sign up here</h2>
+<h3>Hey trainer. You're about to start your journey!</h3>
+<div asp-validation-summary="ModelOnly"></div>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" class="form-control">
+        <span asp-validation-for="FirstName" class="text-danger"></span>
     </div>
-</div>
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" class="form-control">
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Username"></label>
+        <input asp-for="Username" class="form-control">
+        <span asp-validation-for="Username" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control">
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control">
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepeatPassword"></label>
+        <input asp-for="RepeatPassword" class="form-control">
+        <span asp-validation-for="RepeatPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group form-inline">
+        <span class="checkbox">
+            <input asp-for="RememberMe"> <label asp-for="RememberMe"></label>
+        </span>
+    </div>
+    <button type="submit" class="noLayout" title="Sign me up">
+        <div class="box"></div>
+    </button>
+</form>
