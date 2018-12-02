@@ -37,6 +37,8 @@ namespace PE3.Pokemon.web.Models
         [Required(ErrorMessage = "Please provide a valid e-mail address")]
         [EmailAddress]
         public string Email { get; set; }
+
+        [Display(Name = "Remember me")]
         public bool RememberMe { get; set; }
     }
 }
