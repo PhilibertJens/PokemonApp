@@ -15,7 +15,7 @@ namespace PE3.Pokemon.web.Models
         public List<SelectListItem> Environments { get; set; }
 
         [Required]
-        [Display(Name = "Select your environment")]
+        [Display(Name = "Select your time of the day")]
         public int SelectedDayTimeId { get; set; }
         public List<SelectListItem> DayTime { get; set; }
     }

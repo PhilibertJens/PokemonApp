@@ -62,7 +62,7 @@ namespace PE3.Pokemon.web.Controllers
             if (ModelState.IsValid)
             {
                 Type foundType = FindType(userData.SelectedEnvironmentId, userData.SelectedDayTimeId);
-                HttpContext.Session.SetString("ChosenType", "Fire");
+                HttpContext.Session.SetString("ChosenType", foundType.Name);
                 //return Content($"Found type: {foundType.Name}","text/html");//staat zo tot er nog extra PokemonTypes zijn toegevoegd
                 return new RedirectToActionResult("GeneratePokemon", "Explore", null);
             }
@@ -75,12 +75,16 @@ namespace PE3.Pokemon.web.Controllers
             var getType = pokemonContext.Types
                 .Where(t => t.Name == type).FirstOrDefault();
             var appearedPokemon = await LetPokemonAppear(getType);//random pokemon met dit type
-
-            ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
-            vm.AppearedPokemon = appearedPokemon;
-            vm.HP = 50; //random bepaald
-            vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
-            return View(vm);
+            if (appearedPokemon != null)
+            {
+                ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
+                vm.AppearedPokemon = appearedPokemon;
+                vm.HP = 50; //random bepaald
+                vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
+                return View(vm);
+            }
+            else return Content($"No pokemon was found with type {type}","text/html");
+            //dit moet uiteindelijk verdwijnen. Dit kan pas wanneer er van elk type een pokemon is.
         }
 
         public async Task<IActionResult> CatchProcesser()
@@ -95,7 +99,7 @@ namespace PE3.Pokemon.web.Controllers
                 
                 string userName = HttpContext.Session.GetString("Username");
 
-                userName = "admin";//only seeded (or registered) users
+                //userName = "admin";//only seeded (or registered) users
                                     //Dit staat er om niet elke keer te moeten inloggen
 
                 var me = pokemonContext.Users
@@ -146,15 +150,19 @@ namespace PE3.Pokemon.web.Controllers
             var givePokemonType = await pokemonContext.Set<PokemonType>()//een join van Pokemon, PokemonType en Type
                                             .Include(pt => pt.Pokemon)
                                             .ThenInclude(p => p.PokemonTypes)
-                                            .Where(p => p.Type.Name.ToLower() == type.Name)//zal tot nu toe altijd Charmander teruggeven.
+                                            .Where(p => p.Type.Name.ToLower() == type.Name.ToLower())//zal tot nu toe altijd Charmander teruggeven.
                                             .Include(pt => pt.Type)
                                             .ThenInclude(t => t.PokemonTypes)
                                             .ToListAsync();
             int max = givePokemonType.Count();
-            int listItem = random.Next(0, max);
-            var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
-            HttpContext.Session.SetString("AppearedPokemon", appearedPokemon.Pokemon.Name);
-            return appearedPokemon.Pokemon;
+            if (max != 0)
+            {
+                int listItem = random.Next(0, max);
+                var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
+                HttpContext.Session.SetString("AppearedPokemon", appearedPokemon.Pokemon.Name);
+                return appearedPokemon.Pokemon;
+            }
+            else return null;
         }
 
         private Type FindType(int environmentId, int timeId)
