@@ -30,6 +30,7 @@ namespace PE3.Pokemon.web.Models
         public string Password { get; set; }
 
         [Compare(nameof(Password), ErrorMessage = "The passwords you provided do not match")]
+        [Display(Name = "Repeat password")]
         [DataType(DataType.Password)]
         public string RepeatPassword { get; set; }
 
