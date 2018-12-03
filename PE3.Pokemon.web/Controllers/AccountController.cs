@@ -13,6 +13,7 @@ namespace PE3.Pokemon.web.Controllers
 {
     public class AccountController : Controller
     {
+        private PasswordHasher passwordHasher = new PasswordHasher();
         private PokemonContext pokemonContext;
 
         public AccountController(PokemonContext context)
@@ -77,7 +78,6 @@ namespace PE3.Pokemon.web.Controllers
                         Username = userData.Username,
                         Password = userData.Password //moet eigenlijk een hashwaarde zijn.
                     };
-                    PasswordHasher passwordHasher = new PasswordHasher();
                     passwordHasher.HashPassword(newUser, newUser.Password);
                     pokemonContext.Users.Add(newUser);
                     await pokemonContext.SaveChangesAsync();
