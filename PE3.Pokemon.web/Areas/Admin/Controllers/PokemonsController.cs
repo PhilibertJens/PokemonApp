@@ -99,7 +99,9 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
                 HasAllolanForm = pokemonCreateVm.HasAllolanForm,
                 ImgUrl = pokemonCreateVm.ImgUrl,
                 Description = pokemonCreateVm.Description,
-                Location = pokemonCreateVm.location
+                Location = pokemonCreateVm.location,
+                Id = Guid.NewGuid()
+                
 
             };
 
