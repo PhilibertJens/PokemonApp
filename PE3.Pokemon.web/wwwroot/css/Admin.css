@@ -1,5 +1,5 @@
 ﻿body {
-    color: white;
+    background-color:black;
 }
 
 body .UlForAdmin li {
@@ -46,4 +46,6 @@ td a {
     height: 750px;
     background-repeat: no-repeat;
     background-size: contain;
+    background-attachment: fixed;
+    background-position: center;
 }
