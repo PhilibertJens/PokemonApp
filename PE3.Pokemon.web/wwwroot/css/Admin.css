@@ -12,6 +12,7 @@ body .UlForAdmin li {
     margin-left: 400px;
 }
 
+
     .UlForAdmin li {
         display: inline-block;
         width: 100px;
@@ -48,4 +49,8 @@ td a {
     background-size: contain;
     background-attachment: fixed;
     background-position: center;
+}
+
+div{
+    color:white
 }
