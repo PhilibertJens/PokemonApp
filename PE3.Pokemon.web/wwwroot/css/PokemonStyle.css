@@ -1,2 +1,39 @@
 ﻿body {
 }
+
+/*header {
+    background-color: ghostwhite;
+    border-radius: 20px;
+    padding: 1em;
+    margin: 1em 0 1em 0;
+}*/
+
+
+
+/*RegisterSuccess page*/
+.welcome {
+    background-color: ghostwhite;
+    padding-bottom: 1em;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.welcome a {
+    font-family: PokemonGB;
+    font-size: 2em;
+    text-decoration: none;
+    color: black;
+}
+
+.welcome img {
+    width: 50%;
+}
+
+@font-face {
+    font-family: PokemonGB;
+    src: url('/fonts/Pokemon_GB.ttf');
+}

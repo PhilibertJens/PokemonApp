@@ -96,11 +96,7 @@ namespace PE3.Pokemon.web.Controllers
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
-                
                 string userName = HttpContext.Session.GetString("Username");
-
-                //userName = "admin";//only seeded (or registered) users
-                                    //Dit staat er om niet elke keer te moeten inloggen
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
