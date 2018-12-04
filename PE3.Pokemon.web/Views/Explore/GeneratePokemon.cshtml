@@ -3,15 +3,17 @@
     ViewData["Title"] = "GeneratePokemon";
 }
 
-<h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2>
-
-<img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)"/>
-
-<div class="row">
+<div class="row generatePokemon">
     <div class="col-md-12">
-        <div asp-validation-summary="ModelOnly"></div>
-        <form method="post" asp-action="CatchProcesser">
-            <button type="submit" class="btn btn-default">Throw Pokeball!</button>
+        <h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
+
+        <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="pokemon"/>
+        <div asp-validation-summary="ModelOnly"></div><br />
+        <form method="post" asp-action="CatchProcesser" class="catchPokemon">
+            @*<button type="submit" class="btn btn-default">Throw Pokeball!</button>*@
+            <button type="submit" class="pokeball" title="Go Pokeball!">
+                <img src="~/images/Backgrounds/Pokeball.png"/>
+            </button>
         </form>
     </div>
 </div>

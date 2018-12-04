@@ -4,8 +4,15 @@
 
 $(document).ready(function () {
     $('select').niceSelect();
+    //$('.pokeball').on('click', catchPokemon);
+    $('.catchPokemon').on('submit', catchPokemon);
 });
 
+
+function catchPokemon() {
+    $('.pokeball').addClass("pokeballMove");
+    $(".pokemon").fadeOut("slow");
+}
 
 (function($) {
 

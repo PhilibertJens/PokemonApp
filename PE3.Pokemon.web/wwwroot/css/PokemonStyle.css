@@ -1,14 +1,4 @@
-﻿body {
-    /*position: relative;*/
-}
-
-/*header {
-    background-color: ghostwhite;
-    border-radius: 20px;
-    padding: 1em;
-    margin: 1em 0 1em 0;
-}*/
-
+﻿/*Walkaround page*/
 header, .walkAround {
     text-align: center;
 }
@@ -45,36 +35,64 @@ header, .walkAround {
     font-size: 1.5em;
 }
 
-.walkAround h3, .walkAround p, form{
+.walkAround h3, .walkAround p, .walkAround form {
     display: inline-block;
 }
 
-/****Media screens****/
 @media screen and (max-width: 1000px) {
     .walkAround .col-md-12 {
         width: 60%;
         font-size: 1em;
         left: 20%;
-        /*left: 15%;*/
-        /*position: absolute;*/
     }
-
-    /*.carousel {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-    }*/
 }
 
 @media screen and (max-width: 650px) {
     .walkAround .col-md-12 {
         width: 70%;
-        font-size: 1em;
         left: 15%;
         position: absolute;
     }
 }
 
+
+
+/*GeneratePokemon page*/
+.generatePokemon {
+    background-image: url("/images/Backgrounds/catching.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1em;
+    /*margin-left: 25%;*/
+}
+
+.generatePokemon img {
+    width: 25em;
+    display: block;
+    margin: 0 auto;
+}
+
+.generatePokemon h2, .generatePokemon form {
+    text-align: center;
+}
+
+.pokeball {
+    background: none;
+    border: none;
+}
+
+.pokeball img {
+    width: 7em;
+}
+
+.pokeballMove {
+    position: absolute;
+    left: 25%;
+    top: 20%;
+    transition: top 2s ease-in;
+}
 
 /*RegisterSuccess page*/
 .welcome {
