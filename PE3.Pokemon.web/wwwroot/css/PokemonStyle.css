@@ -1,2 +1,123 @@
-﻿body {
+﻿/*Walkaround page*/
+header, .walkAround {
+    text-align: center;
+}
+
+.carousel {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.walkAround {
+    /*background-color: ghostwhite;*/
+    border-radius: 20px;
+    padding: 0.5em;
+    /*display: inline-block;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.walkAround .form-group {
+    display: inline-block;
+}
+
+.walkAround .col-md-12 {
+    position: fixed; /* of absolute */
+    top: 30%;
+    left: 25%;
+    background-color: ghostwhite;
+    border-radius: 35px;
+    display: inline-block;
+    width: 50%;
+    opacity: 0.9;
+    padding-bottom: 0.5em;
+    font-size: 1.5em;
+}
+
+.walkAround h3, .walkAround p, .walkAround form {
+    display: inline-block;
+}
+
+@media screen and (max-width: 1000px) {
+    .walkAround .col-md-12 {
+        width: 60%;
+        font-size: 1em;
+        left: 20%;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .walkAround .col-md-12 {
+        width: 70%;
+        left: 15%;
+        position: absolute;
+    }
+}
+
+
+
+/*GeneratePokemon page*/
+.generatePokemon {
+    background-image: url("/images/Backgrounds/catching.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: inline-block;
+    width: 100%;
+    margin-top: 1em;
+    /*margin-left: 25%;*/
+}
+
+.generatePokemon img {
+    width: 25em;
+    display: block;
+    margin: 0 auto;
+}
+
+.generatePokemon h2, .generatePokemon form {
+    text-align: center;
+}
+
+.pokeball {
+    background: none;
+    border: none;
+}
+
+.pokeball img {
+    width: 7em;
+}
+
+.pokeballMove {
+    position: absolute;
+    left: 25%;
+    top: 20%;
+    transition: top 2s ease-in;
+}
+
+/*RegisterSuccess page*/
+.welcome {
+    background-color: ghostwhite;
+    padding-bottom: 1em;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.welcome a {
+    font-family: PokemonGB;
+    font-size: 2em;
+    text-decoration: none;
+    color: black;
+}
+
+.welcome img {
+    width: 50%;
+}
+
+@font-face {
+    font-family: PokemonGB;
+    src: url('/fonts/Pokemon_GB.ttf');
 }

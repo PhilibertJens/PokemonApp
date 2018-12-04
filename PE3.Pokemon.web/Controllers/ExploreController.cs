@@ -71,10 +71,21 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> GeneratePokemon()
         {
+            MyPokemon appearedPokemon;
             string type = HttpContext.Session.GetString("ChosenType");
             var getType = pokemonContext.Types
                 .Where(t => t.Name == type).FirstOrDefault();
-            var appearedPokemon = await LetPokemonAppear(getType);//random pokemon met dit type
+            if (HttpContext.Session.GetString("AppearedPokemon") == null)//er is nog geen pokemon gegenereerd
+            {
+                appearedPokemon = await LetPokemonAppear(getType);
+            }
+            else
+            {//vermijden dat de gebruiker de pagina refresht en een nieuwe pokemon krijgt
+                string pokemonExists = HttpContext.Session.GetString("AppearedPokemon");
+                appearedPokemon = pokemonContext.Pokemons
+                        .Where(p => p.Name == pokemonExists).FirstOrDefault();
+            }
+
             if (appearedPokemon != null)
             {
                 ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
@@ -96,11 +107,7 @@ namespace PE3.Pokemon.web.Controllers
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
-                
                 string userName = HttpContext.Session.GetString("Username");
-
-                //userName = "admin";//only seeded (or registered) users
-                                    //Dit staat er om niet elke keer te moeten inloggen
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
@@ -142,6 +149,7 @@ namespace PE3.Pokemon.web.Controllers
             ExploreGotchaVm vm = new ExploreGotchaVm();
             vm.Username = userName;
             vm.CaughtPokemon = getPokemon;
+            HttpContext.Session.Remove("AppearedPokemon");//verwijder session bij vangen van pokemon
             return View(vm);
         }
 
