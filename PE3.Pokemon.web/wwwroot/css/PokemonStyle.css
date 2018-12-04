@@ -1,4 +1,5 @@
 ﻿body {
+    /*position: relative;*/
 }
 
 /*header {
@@ -8,6 +9,71 @@
     margin: 1em 0 1em 0;
 }*/
 
+header, .walkAround {
+    text-align: center;
+}
+
+.carousel {
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.walkAround {
+    /*background-color: ghostwhite;*/
+    border-radius: 20px;
+    padding: 0.5em;
+    /*display: inline-block;*/
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.walkAround .form-group {
+    display: inline-block;
+}
+
+.walkAround .col-md-12 {
+    position: fixed; /* of absolute */
+    top: 30%;
+    left: 25%;
+    background-color: ghostwhite;
+    border-radius: 35px;
+    display: inline-block;
+    width: 50%;
+    opacity: 0.9;
+    padding-bottom: 0.5em;
+    font-size: 1.5em;
+}
+
+.walkAround h3, .walkAround p, form{
+    display: inline-block;
+}
+
+/****Media screens****/
+@media screen and (max-width: 1000px) {
+    .walkAround .col-md-12 {
+        width: 60%;
+        font-size: 1em;
+        left: 20%;
+        /*left: 15%;*/
+        /*position: absolute;*/
+    }
+
+    /*.carousel {
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }*/
+}
+
+@media screen and (max-width: 650px) {
+    .walkAround .col-md-12 {
+        width: 70%;
+        font-size: 1em;
+        left: 15%;
+        position: absolute;
+    }
+}
 
 
 /*RegisterSuccess page*/
