@@ -1,5 +1,5 @@
 # PE3 Team Rocket
-ASP.NET Pokémon simulation app. Represents a the initial 151 Pokémon in a Pokédex per user.
+ASP.NET Pokémon simulation app. Represents the initial 151 Pokémon in a Pokédex per user.
 Users can explore the world and try catching Pokémon in various locations.
 
 ## Getting started
