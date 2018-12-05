@@ -3,13 +3,6 @@
     ViewData["Title"] = "GeneratePokemon";
 }
 
-<div class="row generatePokemon">
-    <div class="col-md-12">
-        <h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
+<h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
 
-        <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="pokemon" />
-            <button type="submit" class="pokeball" title="Go Pokeball!">
-                <img src="~/images/Backgrounds/Pokeball.png" />
-            </button>
-    </div>
-</div>
+<partial name="Partial/PokemonToCatchPartial" model="@Model" />
