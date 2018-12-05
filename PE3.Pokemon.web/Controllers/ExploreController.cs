@@ -158,7 +158,7 @@ namespace PE3.Pokemon.web.Controllers
             var givePokemonType = await pokemonContext.Set<PokemonType>()//een join van Pokemon, PokemonType en Type
                                             .Include(pt => pt.Pokemon)
                                             .ThenInclude(p => p.PokemonTypes)
-                                            .Where(p => p.Type.Name.ToLower() == type.Name.ToLower())//zal tot nu toe altijd Charmander teruggeven.
+                                            .Where(p => p.Type.Name.ToLower() == type.Name.ToLower())
                                             .Include(pt => pt.Type)
                                             .ThenInclude(t => t.PokemonTypes)
                                             .ToListAsync();
