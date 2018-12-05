@@ -14,4 +14,10 @@
     <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Areas\Admin\Views\_ViewStart.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

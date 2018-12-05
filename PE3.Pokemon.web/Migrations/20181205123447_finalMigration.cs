@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PE3.Pokemon.web.Migrations
 {
-    public partial class SeedingMigration : Migration
+    public partial class finalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,17 +79,19 @@ namespace PE3.Pokemon.web.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<Guid>(nullable: false),
-                    PokemonId = table.Column<Guid>(nullable: false)
+                    PokemonId = table.Column<Guid>(nullable: false),
+                    Catches = table.Column<byte>(nullable: false),
+                    MyPokemonId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PokemonUsers", x => new { x.PokemonId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_PokemonUsers_Pokemons_PokemonId",
-                        column: x => x.PokemonId,
+                        name: "FK_PokemonUsers_Pokemons_MyPokemonId",
+                        column: x => x.MyPokemonId,
                         principalTable: "Pokemons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_PokemonUsers_Users_UserId",
                         column: x => x.UserId,
@@ -126,7 +128,6 @@ namespace PE3.Pokemon.web.Migrations
                 values: new object[,]
                 {
                     { new Guid("00000000-0000-0000-0000-00000000000b"), "Water" },
-                    { new Guid("00000000-0000-0000-0000-000000000012"), "Fairy" },
                     { new Guid("00000000-0000-0000-0000-000000000011"), "Dark" },
                     { new Guid("00000000-0000-0000-0000-000000000010"), "Dragon" },
                     { new Guid("00000000-0000-0000-0000-00000000000f"), "Ice" },
@@ -134,13 +135,14 @@ namespace PE3.Pokemon.web.Migrations
                     { new Guid("00000000-0000-0000-0000-00000000000d"), "Electric" },
                     { new Guid("00000000-0000-0000-0000-00000000000c"), "Grass" },
                     { new Guid("00000000-0000-0000-0000-00000000000a"), "Fire" },
-                    { new Guid("00000000-0000-0000-0000-000000000003"), "Flying" },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "Fighting" },
                     { new Guid("00000000-0000-0000-0000-000000000008"), "Ghost" },
                     { new Guid("00000000-0000-0000-0000-000000000007"), "Bug" },
                     { new Guid("00000000-0000-0000-0000-000000000006"), "Rock" },
                     { new Guid("00000000-0000-0000-0000-000000000005"), "Ground" },
                     { new Guid("00000000-0000-0000-0000-000000000004"), "Poison" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), "Fighting" },
+                    { new Guid("00000000-0000-0000-0000-000000000003"), "Flying" },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), "Fairy" },
                     { new Guid("00000000-0000-0000-0000-000000000001"), "Normal" },
                     { new Guid("00000000-0000-0000-0000-000000000009"), "Steel" }
                 });
@@ -148,26 +150,39 @@ namespace PE3.Pokemon.web.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "FirstName", "LastName", "Password", "Username" },
+                values: new object[] { new Guid("10000000-0000-0000-0000-000000000000"), "ad", "min", "+Y7d6ZfLIwrzW3xaWPSYYtJogSApg+ANJPTQs/j1YpmAm72t", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "PokemonTypes",
+                columns: new[] { "PokemonId", "TypeId" },
                 values: new object[,]
                 {
-                    { new Guid("10000000-0000-0000-0000-000000000000"), "ad", "min", "pokemon1234", "admin" },
-                    { new Guid("00000000-1000-0000-0000-000000000000"), "jan", "lul", "azert1234", "jan" }
+                    { new Guid("00000000-0000-0000-0000-000000000010"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000011"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000013"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000014"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000015"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000004"), new Guid("00000000-0000-0000-0000-00000000000a") },
+                    { new Guid("00000000-0000-0000-0000-000000000005"), new Guid("00000000-0000-0000-0000-00000000000a") },
+                    { new Guid("00000000-0000-0000-0000-000000000006"), new Guid("00000000-0000-0000-0000-00000000000a") },
+                    { new Guid("00000000-0000-0000-0000-000000000007"), new Guid("00000000-0000-0000-0000-00000000000b") },
+                    { new Guid("00000000-0000-0000-0000-000000000008"), new Guid("00000000-0000-0000-0000-00000000000b") },
+                    { new Guid("00000000-0000-0000-0000-000000000009"), new Guid("00000000-0000-0000-0000-00000000000b") },
+                    { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-00000000000c") },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0000-00000000000c") },
+                    { new Guid("00000000-0000-0000-0000-000000000003"), new Guid("00000000-0000-0000-0000-00000000000c") }
                 });
-
-            migrationBuilder.InsertData(
-                table: "PokemonTypes",
-                columns: new[] { "PokemonId", "TypeId" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000004"), new Guid("00000000-0000-0000-0000-00000000000a") });
-
-            migrationBuilder.InsertData(
-                table: "PokemonTypes",
-                columns: new[] { "PokemonId", "TypeId" },
-                values: new object[] { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-00000000000c") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonTypes_TypeId",
                 table: "PokemonTypes",
                 column: "TypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PokemonUsers_MyPokemonId",
+                table: "PokemonUsers",
+                column: "MyPokemonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonUsers_UserId",

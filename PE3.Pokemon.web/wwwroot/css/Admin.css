@@ -1,5 +1,5 @@
 ﻿body {
-    color: white;
+    background-color:black;
 }
 
 body .UlForAdmin li {
@@ -11,6 +11,7 @@ body .UlForAdmin li {
     margin-top: 10px;
     margin-left: 400px;
 }
+
 
     .UlForAdmin li {
         display: inline-block;
@@ -46,4 +47,10 @@ td a {
     height: 750px;
     background-repeat: no-repeat;
     background-size: contain;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+div{
+    color:white
 }

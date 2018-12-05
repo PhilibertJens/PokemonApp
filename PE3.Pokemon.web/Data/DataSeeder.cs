@@ -119,7 +119,7 @@ namespace PE3.Pokemon.web.Data
                     FirstName = "ad",
                     LastName = "min",
                     Username = "admin",
-                    Password = "pokemon1234"
+                    Password = "+Y7d6ZfLIwrzW3xaWPSYYtJogSApg+ANJPTQs/j1YpmAm72t" // hashwaarde voor pokemon1234(paswoord voor admin)
                                 
                 }
                 );
