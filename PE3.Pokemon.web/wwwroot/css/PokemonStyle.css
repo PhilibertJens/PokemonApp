@@ -74,11 +74,14 @@ header, .walkAround {
     margin: 0 auto;
 }
 
-.generatePokemon h2, .generatePokemon form {
+.generatePokemon h2 {
     text-align: center;
 }
 
 .pokeball {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     background: none;
     border: none;
 }
@@ -89,9 +92,14 @@ header, .walkAround {
 
 .pokeballMove {
     position: absolute;
-    left: 25%;
-    top: 20%;
-    transition: top 2s ease-in;
+    top: 250px;
+    left: 400px;
+    transition: position 2s;/*werkt nog niet*/
+}
+
+.backgroundAfterThrow {
+    width: 1110px;
+    height: 532px;
 }
 
 /*RegisterSuccess page*/

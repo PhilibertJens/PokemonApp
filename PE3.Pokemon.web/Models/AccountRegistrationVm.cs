@@ -24,8 +24,8 @@ namespace PE3.Pokemon.web.Models
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please provide a Password")]
-        [MinLength(8, ErrorMessage = "Your password should contain atleast {0} characters")]
-        [MaxLength(30, ErrorMessage = "Your password should not be longer {0} characters")]
+        [MinLength(8, ErrorMessage = "Your password should contain atleast 8 characters")]
+        [MaxLength(30, ErrorMessage = "Your password should not be longer 30 characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
