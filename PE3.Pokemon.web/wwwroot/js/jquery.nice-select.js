@@ -4,16 +4,41 @@
 
 $(document).ready(function () {
     $('select').niceSelect();
-    //$('.pokeball').on('click', catchPokemon);
-    $('.catchPokemon').on('submit', catchPokemon);
+    $('.pokeball').on('click', AnimateAndCatchPokemon);
 });
 
 
-function catchPokemon() {
+/*Timer to delay the get request to CatchProcesser*/
+var counter = 0;
+var timer = null;
+
+function AnimateAndCatchPokemon() {
     $('.pokeball').addClass("pokeballMove");
     $(".pokemon").fadeOut("slow");
+    $(".generatePokemon").addClass("backgroundAfterThrow");
+    StartTimer();
 }
 
+function StartTimer() {
+    timer = window.setInterval(IncreaseTime, 1000);
+}
+
+function IncreaseTime() {
+    counter++;
+    if (counter === 2) {//pas na 2 seconden is dit het geval
+        window.clearInterval(timer);
+        counter = 0;
+        var protocol, hostname, port, goToCatchProcesser;
+        protocol = window.location.protocol;
+        hostname = window.location.hostname;
+        port = window.location.port;
+        goToCatchProcesser = protocol + "//" + hostname + ":" + port + "/Explore/CatchProcesser";
+        window.location = goToCatchProcesser;
+    }
+}
+
+
+/*Jquery code to show animation select tag in Walkaround page*/
 (function($) {
 
   $.fn.niceSelect = function(method) {

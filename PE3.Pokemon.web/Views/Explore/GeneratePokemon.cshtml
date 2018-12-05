@@ -7,13 +7,9 @@
     <div class="col-md-12">
         <h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
 
-        <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="pokemon"/>
-        <div asp-validation-summary="ModelOnly"></div><br />
-        <form method="post" asp-action="CatchProcesser" class="catchPokemon">
-            @*<button type="submit" class="btn btn-default">Throw Pokeball!</button>*@
+        <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="pokemon" />
             <button type="submit" class="pokeball" title="Go Pokeball!">
-                <img src="~/images/Backgrounds/Pokeball.png"/>
+                <img src="~/images/Backgrounds/Pokeball.png" />
             </button>
-        </form>
     </div>
 </div>
