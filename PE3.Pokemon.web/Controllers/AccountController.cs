@@ -13,7 +13,7 @@ namespace PE3.Pokemon.web.Controllers
 {
     public class AccountController : Controller
     {
-        private PasswordHasher passwordHasher = new PasswordHasher();
+        private PasswordHasher pH = new PasswordHasher();
         private PokemonContext pokemonContext;
 
         public AccountController(PokemonContext context)
@@ -76,9 +76,9 @@ namespace PE3.Pokemon.web.Controllers
                         FirstName = userData.FirstName,
                         LastName = userData.LastName,
                         Username = userData.Username,
-                        Password = userData.Password //moet eigenlijk een hashwaarde zijn.
+                        Password = userData.Password
                     };
-                    passwordHasher.HashPassword(newUser, newUser.Password);
+                    pH.HashPassword(newUser, newUser.Password);
                     pokemonContext.Users.Add(newUser);
                     await pokemonContext.SaveChangesAsync();
                     return new RedirectToActionResult("RegisterSuccess", "Account", null);
@@ -98,10 +98,7 @@ namespace PE3.Pokemon.web.Controllers
             return View();
         }
 
-        private bool verifyPassword(User user, string providedPW)
-        {
-            PasswordHasher pH = new PasswordHasher();
-            return (pH.VerifyHashedPassword(user,user.Password,providedPW) == PasswordVerificationResult.Success);
-        }
+        private bool verifyPassword(User user, string providedPW) => (pH.VerifyHashedPassword(user, user.Password, providedPW) == PasswordVerificationResult.Success);
+
     }
 }
