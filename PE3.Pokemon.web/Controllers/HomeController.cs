@@ -41,5 +41,18 @@ namespace PE3.Pokemon.web.Controllers
             //vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
             return View(vm);
         }
+
+        public IActionResult Error(int? statusCode)
+        {
+            if (statusCode.HasValue)
+            {
+                if(statusCode == 404)
+                {
+                    string vn = $"Page{statusCode.ToString()}";
+                    return View(vn);
+                }
+            }
+            return View();
+        }
     }
 }
