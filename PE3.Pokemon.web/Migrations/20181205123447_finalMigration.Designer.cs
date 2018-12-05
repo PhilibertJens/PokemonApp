@@ -10,8 +10,8 @@ using PE3.Pokemon.web.Data;
 namespace PE3.Pokemon.web.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20181201133227_PokUsLinkMigration")]
-    partial class PokUsLinkMigration
+    [Migration("20181205123447_finalMigration")]
+    partial class finalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,7 +73,20 @@ namespace PE3.Pokemon.web.Migrations
 
                     b.HasData(
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000001"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
-                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000004"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") }
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000002"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000003"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000004"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000005"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000006"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000007"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000008"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000009"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000010"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000011"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000012"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000013"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000014"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000015"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") }
                     );
                 });
 
@@ -147,7 +160,7 @@ namespace PE3.Pokemon.web.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = new Guid("10000000-0000-0000-0000-000000000000"), FirstName = "ad", LastName = "min", Password = "pokemon1234", Username = "admin" }
+                        new { Id = new Guid("10000000-0000-0000-0000-000000000000"), FirstName = "ad", LastName = "min", Password = "+Y7d6ZfLIwrzW3xaWPSYYtJogSApg+ANJPTQs/j1YpmAm72t", Username = "admin" }
                     );
                 });
 

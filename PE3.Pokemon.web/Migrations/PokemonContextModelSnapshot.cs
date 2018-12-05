@@ -158,7 +158,7 @@ namespace PE3.Pokemon.web.Migrations
                     b.ToTable("Users");
 
                     b.HasData(
-                        new { Id = new Guid("10000000-0000-0000-0000-000000000000"), FirstName = "ad", LastName = "min", Password = "pokemon1234", Username = "admin" }
+                        new { Id = new Guid("10000000-0000-0000-0000-000000000000"), FirstName = "ad", LastName = "min", Password = "+Y7d6ZfLIwrzW3xaWPSYYtJogSApg+ANJPTQs/j1YpmAm72t", Username = "admin" }
                     );
                 });
 
