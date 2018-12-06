@@ -5,7 +5,7 @@ body {
     padding-bottom: 20px;
     background-color: aquamarine;
 }
-
+/* 404 Page */
 h2.notFoundHead {
     position: relative;
     text-align: center;
@@ -36,6 +36,36 @@ img.notFoundImg {
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
+
+/* View Component */
+@media only screen and (min-width: 768px) {
+
+    .dropdown .dropdown-menu{
+        -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+
+    max-height: 0;
+    display: block;
+    overflow: hidden;
+    opacity: 0;
+    }
+    .dropdown .dropdown-menu > li{
+        padding: 0px;
+        margin: 0px;
+        text-align: center;
+        background-color: #CCC;
+        font-size: 1.5em;
+    }
+    .dropdown:hover .dropdown-menu {
+        max-height: 200px;
+        opacity: 1;
+        background-color: #CCC;
+    }
+}
+
 
 /* QR code generator */
 #qrCode {

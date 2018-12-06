@@ -1,0 +1,19 @@
+﻿@using PE3.Pokemon.web.Entities
+@model IDictionary<MyPokemon,PokemonUser>
+
+<ul class="dropdown-menu">
+    @{
+        if (Model.Any())
+        {
+
+            foreach (var pok in Model)
+            {
+                <li>@pok.Key.Name : @pok.Value.Catches</li>
+            }
+        }
+        else
+        {
+            <li>No data here</li>
+        }
+    }
+</ul>
