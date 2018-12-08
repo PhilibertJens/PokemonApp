@@ -98,9 +98,78 @@ header, .walkAround {
 }
 
 .backgroundAfterThrow {
-    width: 1110px;
-    height: 532px;
+    width: 1140px;
+    height: 450px;
 }
+
+@media screen and (max-width: 650px) {
+
+    .generatePokemon{
+        margin-left: 1%;
+    }
+
+    .generatePokemon img{
+        width: 10em;
+    }
+
+    .pokeball img {
+        width: 4em;
+    }
+
+    .backgroundAfterThrow {
+        width: 330px;
+        height: 198px;
+    }
+
+    .pokeballMove {
+        position: absolute;
+        top: 30px;
+        left: 50px;
+        transition: position 2s; /*werkt nog niet*/
+    }
+}
+
+
+/*Gotcha page*/
+.gotcha {
+    background-image: url("/images/Backgrounds/ProfessorOakHome.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1em;
+    border-radius: 50px;
+    text-align: center;
+}
+
+.congrats {
+    background-color: ghostwhite;
+    border-radius: 35px;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.9;
+}
+
+.gotcha span {
+    font-size: 1.4em;
+}
+
+@media screen and (max-width: 650px) { /* voor gsm in breedte*/
+
+    .gotcha img {
+        width: 8em;
+    }
+
+    .congrats {
+        width: 50%;
+    }
+
+    .gotcha .congrats {
+        font-size: 0.8em;
+    }
+}
+
 
 /*RegisterSuccess page*/
 .welcome {

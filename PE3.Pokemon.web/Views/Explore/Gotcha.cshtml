@@ -3,10 +3,14 @@
     ViewData["Title"] = "Gotcha";
 }
 
-<h2>Gotcha</h2>
 
-<div>Congratulations @Model.Username</div>
+<div class="row gotcha">
+    <div class="congrats">
+        <h2>Gotcha</h2>
 
-<p>You caught @Model.CaughtPokemon.Name</p>
+        <div>Congratulations <span>@Model.Username!</span></div>
 
-<img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)"/>
+        <p>You caught @Model.CaughtPokemon.Name</p>
+    </div>
+    <img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" />
+</div>
