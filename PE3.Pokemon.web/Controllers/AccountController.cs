@@ -23,6 +23,7 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult Login()
         {
+            HttpContext.Session.Remove("Username");
             return View();
         }
 
@@ -32,8 +33,6 @@ namespace PE3.Pokemon.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                //var getUser = await pokemonContext.Users.FindAsync(userData.Username);
-
                 var getUser = pokemonContext.Users.FirstOrDefault(u => u.Username == userData.Username);
                 
                 if (getUser != null && verifyPassword(getUser, userData.Password))
@@ -58,6 +57,7 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult Registration()
         {
+            HttpContext.Session.Remove("Username");
             AccountRegistrationVm vm = new AccountRegistrationVm();
             return View(vm);
         }
@@ -81,6 +81,7 @@ namespace PE3.Pokemon.web.Controllers
                     pH.HashPassword(newUser, newUser.Password);
                     pokemonContext.Users.Add(newUser);
                     await pokemonContext.SaveChangesAsync();
+                    HttpContext.Session.SetString("Username", newUser.Username);
                     return new RedirectToActionResult("RegisterSuccess", "Account", null);
                 }
                 else
