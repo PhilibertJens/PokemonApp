@@ -98,9 +98,12 @@ header, .walkAround {
 }
 
 .backgroundAfterThrow {
-    width: 1110px;
-    height: 532px;
+    width: 1140px; /*1110*/
+    height: 450px; /*532*/
 }
+
+
+
 
 /*RegisterSuccess page*/
 .welcome {

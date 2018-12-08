@@ -31,6 +31,8 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult WalkAround()
         {
+            HttpContext.Session.Remove("AppearedPokemon"); //bestaande Sessions worden verwijderd
+            HttpContext.Session.Remove("ChosenType");
             var listEnvironments = new List<SelectListItem> {
                 new SelectListItem { Value = "0", Text = "== Where are you? ==" },
                 new SelectListItem { Value = "1", Text = "In a forest" },
@@ -149,7 +151,6 @@ namespace PE3.Pokemon.web.Controllers
             ExploreGotchaVm vm = new ExploreGotchaVm();
             vm.Username = userName;
             vm.CaughtPokemon = getPokemon;
-            HttpContext.Session.Remove("AppearedPokemon");//verwijder session bij vangen van pokemon
             return View(vm);
         }
 

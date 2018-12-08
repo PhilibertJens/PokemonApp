@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PE3.Pokemon.web.Migrations
 {
-    public partial class finalMigration : Migration
+    public partial class FinalMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -80,18 +80,17 @@ namespace PE3.Pokemon.web.Migrations
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     PokemonId = table.Column<Guid>(nullable: false),
-                    Catches = table.Column<byte>(nullable: false),
-                    MyPokemonId = table.Column<Guid>(nullable: true)
+                    Catches = table.Column<byte>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PokemonUsers", x => new { x.PokemonId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_PokemonUsers_Pokemons_MyPokemonId",
-                        column: x => x.MyPokemonId,
+                        name: "FK_PokemonUsers_Pokemons_PokemonId",
+                        column: x => x.PokemonId,
                         principalTable: "Pokemons",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_PokemonUsers_Users_UserId",
                         column: x => x.UserId,
@@ -178,11 +177,6 @@ namespace PE3.Pokemon.web.Migrations
                 name: "IX_PokemonTypes_TypeId",
                 table: "PokemonTypes",
                 column: "TypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PokemonUsers_MyPokemonId",
-                table: "PokemonUsers",
-                column: "MyPokemonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_PokemonUsers_UserId",

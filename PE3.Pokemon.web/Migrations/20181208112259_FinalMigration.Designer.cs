@@ -10,8 +10,8 @@ using PE3.Pokemon.web.Data;
 namespace PE3.Pokemon.web.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20181205123447_finalMigration")]
-    partial class finalMigration
+    [Migration("20181208112259_FinalMigration")]
+    partial class FinalMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -98,11 +98,7 @@ namespace PE3.Pokemon.web.Migrations
 
                     b.Property<byte>("Catches");
 
-                    b.Property<Guid?>("MyPokemonId");
-
                     b.HasKey("PokemonId", "UserId");
-
-                    b.HasIndex("MyPokemonId");
 
                     b.HasIndex("UserId");
 
@@ -179,11 +175,12 @@ namespace PE3.Pokemon.web.Migrations
 
             modelBuilder.Entity("PE3.Pokemon.web.Entities.PokemonUser", b =>
                 {
-                    b.HasOne("PE3.Pokemon.web.Entities.MyPokemon")
+                    b.HasOne("PE3.Pokemon.web.Entities.MyPokemon", "Pokemon")
                         .WithMany("PokemonUsers")
-                        .HasForeignKey("MyPokemonId");
+                        .HasForeignKey("PokemonId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PE3.Pokemon.web.Entities.User")
+                    b.HasOne("PE3.Pokemon.web.Entities.User", "User")
                         .WithMany("PokemonUsers")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
