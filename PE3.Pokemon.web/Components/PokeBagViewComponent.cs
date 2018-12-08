@@ -29,33 +29,37 @@ namespace PE3.Pokemon.web.Components
             //order by pu.Catches desc
 
             string userName = HttpContext.Session.GetString("Username");
-            var currentUser = _pokemonContext.Users
+            if (userName != null)
+            {
+                var currentUser = _pokemonContext.Users
                 .Where(u => u.Username == userName).FirstOrDefault();
 
-            var numberOfPokemon = await _pokemonContext.Set<PokemonUser>()
-                .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
-                .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
-                .Where(u => u.UserId == currentUser.Id)
-                .CountAsync();
+                var numberOfPokemon = await _pokemonContext.Set<PokemonUser>()
+                    .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
+                    .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
+                    .Where(u => u.UserId == currentUser.Id)
+                    .CountAsync();
 
-            IDictionary<MyPokemon, PokemonUser> myPokemons;
-            if (numberOfPokemon != 0)//als deze check niet gedaan wordt komt er een error wanneer je bag leeg is.
-            {
-                var top3PokemonUser = await _pokemonContext.Set<PokemonUser>()
-                .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
-                .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
-                .Where(u => u.UserId == currentUser.Id)
-                .OrderByDescending(pu => pu.Catches)
-                .Take(3).ToListAsync();
-
-                myPokemons = new Dictionary<MyPokemon, PokemonUser>();
-                foreach (var o in top3PokemonUser)
+                IDictionary<MyPokemon, PokemonUser> myPokemons;
+                if (numberOfPokemon != 0)//als deze check niet gedaan wordt komt er een error wanneer je bag leeg is.
                 {
-                    myPokemons.Add(o.Pokemon, o);
+                    var top3PokemonUser = await _pokemonContext.Set<PokemonUser>()
+                    .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
+                    .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
+                    .Where(u => u.UserId == currentUser.Id)
+                    .OrderByDescending(pu => pu.Catches)
+                    .Take(3).ToListAsync();
+
+                    myPokemons = new Dictionary<MyPokemon, PokemonUser>();
+                    foreach (var o in top3PokemonUser)
+                    {
+                        myPokemons.Add(o.Pokemon, o);
+                    }
                 }
+                else myPokemons = new Dictionary<MyPokemon, PokemonUser>();
+                return View(myPokemons);
             }
-            else myPokemons = new Dictionary<MyPokemon, PokemonUser>();
-            return View(myPokemons);
+            else return View(new Dictionary<MyPokemon, PokemonUser>());
         }
     }
 }
