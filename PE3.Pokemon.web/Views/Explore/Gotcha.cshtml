@@ -4,10 +4,13 @@
 }
 
 
+<div class="row gotcha">
+    <div class="congrats">
+        <h2>Gotcha</h2>
 
-<h2>Gotcha</h2>
+        <div>Congratulations <span>@Model.Username!</span></div>
 
-<div>Congratulations @Model.Username!</div>
-
-<p>You caught @Model.CaughtPokemon.Name</p>
-<img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" />
+        <p>You caught @Model.CaughtPokemon.Name</p>
+    </div>
+    <img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" />
+</div>
