@@ -8,11 +8,11 @@
 <div>Hello @Model.Username</div>
 <ul>
     @{
-        foreach (var pokemon in Model.AllPokemonWithTypeInfo)
+        foreach (var pokemon in Model.AllCaughtPokemon)
         {
             <li>
-                <p><b>@pokemon.Name</b></p>
-                @foreach (var type in pokemon.PokemonTypes)
+                <p><b>@pokemon.Key.Name</b></p>
+                @foreach (var type in pokemon.Key.PokemonTypes)
                 {
                     <p>Type: @type.Type.Name</p>
                 }
