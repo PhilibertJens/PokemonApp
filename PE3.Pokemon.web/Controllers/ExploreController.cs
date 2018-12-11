@@ -178,11 +178,11 @@ namespace PE3.Pokemon.web.Controllers
         {
             List<List<string>> environments = new List<List<string>>()
             {
-                new List<string>(){ "Grass", "Bug" },//default
+                new List<string>(){ "Grass", "Bug", "Normal" },//default
                 new List<string>(){ "Grass", "Bug", "Psychic" },//forest
                 new List<string>(){ "Water"},//sea
                 new List<string>(){ "Normal", "Fighting", "Electric", "Fire" },//city
-                new List<string>(){ "Flying", "Dragon"},//sky
+                new List<string>(){ "Flying", "Dragon" },//sky
                 new List<string>(){ "Grass", "Ground", "Rock", "Ice" },//mountain
                 new List<string>(){ "Poison", "Bug", "Dragon", "Ghost" }//cave
             };
@@ -190,7 +190,7 @@ namespace PE3.Pokemon.web.Controllers
             {
                 new List<string>(){ "Grass", "Bug" },//default
                 new List<string>(){ "Normal", "Bug", "Psychic" },//morning
-                new List<string>(){ "Water", "Grass", "Fire"},//midday
+                new List<string>(){ "Water", "Grass", "Fire" },//midday
                 new List<string>(){ "Normal", "Ghost" },//evening
                 new List<string>(){ "Normal", "Ghost" },//midnight
             };

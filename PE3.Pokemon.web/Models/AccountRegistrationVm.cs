@@ -18,14 +18,14 @@ namespace PE3.Pokemon.web.Models
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please provide a Username")]
-        [StringLength(20, MinimumLength = 5, ErrorMessage = "Your Username must be between {1} and 20 characters")]
+        [StringLength(20, MinimumLength = 5, ErrorMessage = "Your Username must be between {2} and {1} characters")]
         [RegularExpression(@"^[\w\d.]{5,}$", ErrorMessage = "Username cannot contain whitespaces or special characters")]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
         [Required(ErrorMessage = "Please provide a Password")]
-        [MinLength(8, ErrorMessage = "Your password should contain atleast 8 characters")]
-        [MaxLength(30, ErrorMessage = "Your password should not be longer 30 characters")]
+        [MinLength(8, ErrorMessage = "Your password should contain atleast {1} characters")]
+        [MaxLength(30, ErrorMessage = "Your password should not be longer {1} characters")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

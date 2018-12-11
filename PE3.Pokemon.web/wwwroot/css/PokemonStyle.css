@@ -94,7 +94,35 @@ header, .walkAround {
     position: absolute;
     top: 250px;
     left: 400px;
-    transition: position 2s;/*werkt nog niet*/
+    /*transition: position 2s;*/ /*werkt nog niet*/
+    /*transform: translate(50%, 10%) rotate(60deg) scale(0.75);*/
+}
+
+        /* Pokeball throw Animation */
+@keyframes shake {
+    0% {
+        transform: translate(0, 0) rotate(0);
+    }
+
+    20% {
+        transform: translate(-10px, 0) rotate(-20deg);
+    }
+
+    30% {
+        transform: translate(10px, 0) rotate(20deg);
+    }
+
+    50% {
+        transform: translate(-10px, 0) rotate(-10deg);
+    }
+
+    60% {
+        transform: translate(10px, 0) rotate(10deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0);
+    }
 }
 
 .backgroundAfterThrow {
@@ -102,7 +130,13 @@ header, .walkAround {
     height: 450px;
 }
 
-@media screen and (max-width: 650px) {
+.backgroundAfterThrow button img {
+    animation: shake 1.25s 3;/*de shake animatie wordt opgeroepen en wordt 3 keer uitgevoerd. 
+                               Doordat jquery na 2 seconden de CatchProcesser oproept 
+                               zal de shake maar 2 keer gebeuren*/
+}
+
+@media screen and (max-width: 650px) {/*gsm niet gekanteld*/
 
     .generatePokemon{
         margin-left: 1%;
@@ -117,18 +151,29 @@ header, .walkAround {
     }
 
     .backgroundAfterThrow {
-        width: 330px;
+        width: 610px;
         height: 198px;
+        max-width: 100%;
     }
 
     .pokeballMove {
         position: absolute;
-        top: 30px;
-        left: 50px;
+        top: 50px;
+        left: 250px;
         transition: position 2s; /*werkt nog niet*/
     }
 }
 
+@media screen and (max-width: 370px) {/*gsm gekanteld*/
+
+    .backgroundAfterThrow {
+        width: 330px;
+    }
+
+    .pokeballMove {
+        left: 100px;
+    }
+}
 
 /*Gotcha page*/
 .gotcha {

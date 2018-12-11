@@ -10,8 +10,8 @@ using PE3.Pokemon.web.Data;
 namespace PE3.Pokemon.web.Migrations
 {
     [DbContext(typeof(PokemonContext))]
-    [Migration("20181208112259_FinalMigration")]
-    partial class FinalMigration
+    [Migration("20181211191753_SeedData")]
+    partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -55,7 +55,18 @@ namespace PE3.Pokemon.web.Migrations
                         new { Id = new Guid("00000000-0000-0000-0000-000000000012"), Description = "In battle, it flaps its wings at high speed to release highly toxic dust into the air.", HasAllolanForm = false, ImgUrl = "Butterfree.png", Location = "Evolve Metapod", Name = "Butterfree" },
                         new { Id = new Guid("00000000-0000-0000-0000-000000000013"), Description = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head.", HasAllolanForm = false, ImgUrl = "Weedle.png", Location = "Routes 2, 24, and 25, Viridian Forest", Name = "Weedle" },
                         new { Id = new Guid("00000000-0000-0000-0000-000000000014"), Description = "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators.", HasAllolanForm = false, ImgUrl = "Kakuna.png", Location = "Routes 24 and 25, Viridian Forest", Name = "Kakuna" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000015"), Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.", HasAllolanForm = false, ImgUrl = "Beedrill.png", Location = "Evolve Kakuna", Name = "Beedrill" }
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000015"), Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.", HasAllolanForm = false, ImgUrl = "Beedrill.png", Location = "Evolve Kakuna", Name = "Beedrill" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000024"), Description = "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth.", HasAllolanForm = true, ImgUrl = "Rattata.png", Location = "Somewhere", Name = "Rattata" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000106"), Description = "Is a humanoid Pokémon with an ovoid body. Hitmonlee's legs freely contract and stretch similar to a coiled spring.", HasAllolanForm = false, ImgUrl = "Hitmonlee.png", Location = "Somewhere", Name = "Hitmonlee" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000016"), Description = "Has an extremely sharp sense of direction and homing instincts.", HasAllolanForm = false, ImgUrl = "Pidgey.png", Location = "Somewhere", Name = "Pidgey" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000109"), Description = "Creates gases within its body by mixing toxins with garbage, and produces more gas in higher temperatures.", HasAllolanForm = false, ImgUrl = "Koffing.png", Location = "Somewhere", Name = "Koffing" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000050"), Description = "Is a tiny, brown Pokémon that seems to be perpetually buried within the earth, leaving only its head visible.", HasAllolanForm = true, ImgUrl = "Diglett.png", Location = "Somewhere", Name = "Diglett" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000095"), Description = "Resembles a giant chain of gray boulders that become smaller towards the tail.", HasAllolanForm = false, ImgUrl = "Onix.png", Location = "Somewhere", Name = "Onix" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000092"), Description = "Has no true form, due to 95% of its body being poisonous gas.", HasAllolanForm = false, ImgUrl = "Gastly.png", Location = "Somewhere", Name = "Gastly" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000025"), Description = "Is covered in yellow fur with two horizontal brown stripes on its back.", HasAllolanForm = true, ImgUrl = "Pikachu.png", Location = "Somewhere", Name = "Pikachu" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000150"), Description = "Is a Pokémon created by science. It is a bipedal, humanoid creature with some feline features.", HasAllolanForm = false, ImgUrl = "Mewtwo.png", Location = "Somewhere", Name = "Mewtwo" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000087"), Description = "Has a snowy white, furry body, which renders it virtually invisible in snowy conditions.", HasAllolanForm = false, ImgUrl = "Dewgong.png", Location = "Somewhere", Name = "Dewgong" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000147"), Description = "is filled with life energy. Dratini is constantly growing, and can thus reach lengths of over six feet.", HasAllolanForm = false, ImgUrl = "Dratini.png", Location = "Somewhere", Name = "Dratini" }
                     );
                 });
 
