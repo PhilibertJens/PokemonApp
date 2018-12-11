@@ -6,19 +6,20 @@
 <h2>Index</h2>
 
 <div>Hello @Model.Username</div>
-<ul>
-    @{
-        foreach (var pokemon in Model.AllCaughtPokemon)
-        {
-            <li>
-                <p><b>@pokemon.Key.Name</b></p>
-                @foreach (var type in pokemon.Key.PokemonTypes)
-                {
-                    <p>Type: @type.Type.Name</p>
-                }
-            </li>
+<div class="pokeview">
+    <div class="pokelist">
+        @{ 
+            foreach(var pokemon in Model.AllCaughtPokemon)
+            {
+                <div class="pokecell">
+                    <button>@pokemon.Key.Id.ToString().TrimStart(new char[] { '0', '-' }).PadLeft(3,'0')</button>
+                </div>
+            }
         }
-    }
-</ul>
+    </div>
+    <div class="pokedetail">
+
+    </div>
+</div>
 
 
