@@ -13,24 +13,24 @@ namespace PE3.Pokemon.web.Data
         {
             modelBuilder.Entity<Entities.Type>().HasData(
                 //Guid: Id = Guid.Parse("11111111-1111-1111-1111-111111111111") --> 128 bits getal (32 hexa's, 1 hexa = 4bits)
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000001"), Name = "Normal" },//mag niet volledig 0 zijn
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000002"), Name = "Fighting" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000003"), Name = "Flying" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000004"), Name = "Poison" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000005"), Name = "Ground" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000006"), Name = "Rock" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000007"), Name = "Bug" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000008"), Name = "Ghost" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000009"), Name = "Steel" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000A"), Name = "Fire" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000B"), Name = "Water" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000C"), Name = "Grass" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000D"), Name = "Electric" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000E"), Name = "Psychic" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000F"), Name = "Ice" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000010"), Name = "Dragon" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000011"), Name = "Dark" },
-                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000012"), Name = "Fairy" }
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000001"), Name = "Normal", Colour = "#A8A878" },//mag niet volledig 0 zijn
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000002"), Name = "Fighting", Colour = "#C03028" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000003"), Name = "Flying", Colour = "#A890F0" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000004"), Name = "Poison", Colour = "#A040A0" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000005"), Name = "Ground", Colour = "#E0C068" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000006"), Name = "Rock", Colour = "#B8A038" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000007"), Name = "Bug", Colour = "#A8B820" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000008"), Name = "Ghost", Colour = "#705898" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000009"), Name = "Steel", Colour = "#B8B8D0" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000A"), Name = "Fire", Colour = "#F08030" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000B"), Name = "Water", Colour = "#6890F0" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000C"), Name = "Grass", Colour = "#78C850" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000D"), Name = "Electric", Colour = "#F8D030" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000E"), Name = "Psychic", Colour = "#F85888" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-00000000000F"), Name = "Ice", Colour = "#98D8D8" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000010"), Name = "Dragon", Colour = "#7038F8" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000011"), Name = "Dark", Colour = "#705848" },
+                new Entities.Type { Id = new Guid("00000000-0000-0000-0000-000000000012"), Name = "Fairy", Colour = "#EE99AC" }
 
                 );
 

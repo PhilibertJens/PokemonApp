@@ -12,13 +12,36 @@
             foreach(var pokemon in Model.AllCaughtPokemon)
             {
                 <div class="pokecell">
-                    <button>@pokemon.Key.Id.ToString().TrimStart(new char[] { '0', '-' }).PadLeft(3,'0')</button>
+                    <button>@pokemon.Key.Id.ToString().TrimStart(new char[] { '0', '-' }).PadLeft(3, '0')</button> <!-- shows last 3 digits of ID-->
                 </div>
             }
+            
         }
     </div>
     <div class="pokedetail">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script>
+            $("button").click(function () {
+                $.ajax({
+                    type: "POST",
+                    url:"Home/GetDetails", //input MyPokemon parameter somehow?
+                    dataType: "json",
 
+                    success: function (data) {
+                        console.log(data);
+                        console.log(data.id);
+                        console.log(data.description);
+                        $.each(data.PokemonTypes, function (obj) {
+                            console.log(obj.Name + ":" + obj.Colour);
+                        });
+                    },
+
+                    error: function (response) {
+                        console.error("error!");
+                    }
+                });
+            })
+        </script>
     </div>
 </div>
 

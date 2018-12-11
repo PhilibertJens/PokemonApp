@@ -40,6 +40,12 @@ namespace PE3.Pokemon.web.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public JsonResult GetDetails(MyPokemon poke)
+        {
+            return Json(poke);
+        }
+
         public IActionResult Error(int? statusCode)
         {
             if (statusCode.HasValue)
