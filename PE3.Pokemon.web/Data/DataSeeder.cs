@@ -109,6 +109,61 @@ namespace PE3.Pokemon.web.Data
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000015"),
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000019"),//rattata
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000001")//normal
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000106"),//hitmonlee
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000002")//fighting
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000016"),//pidgey
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000003")//flying
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000109"),//koffing
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")//poison
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000050"),//diglett
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000005")//ground
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000095"),//onix
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000006")//rock
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000092"),//gastly
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000008")//ghost
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000025"),//pikachu
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000D")//electric
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000150"),//mewtwo
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000E")//psychic
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000087"),//dewgong
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000F")//ice
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000147"),//dratini
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000010")//dragon
                 }
             );
 
@@ -273,6 +328,116 @@ namespace PE3.Pokemon.web.Data
                         ImgUrl = "Beedrill.png",
                         Location = "Evolve Kakuna",
                         Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000019"),
+                        Name = "Rattata",
+                        HasAllolanForm = true,
+                        ImgUrl = "Rattata.png",
+                        Location = "Somewhere",
+                        Description = "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000106"),
+                        Name = "Hitmonlee",
+                        HasAllolanForm = false,
+                        ImgUrl = "Hitmonlee.png",
+                        Location = "Somewhere",
+                        Description = "Is a humanoid Pokémon with an ovoid body. Hitmonlee's legs freely contract and stretch similar to a coiled spring."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000016"),
+                        Name = "Pidgey",
+                        HasAllolanForm = false,
+                        ImgUrl = "Pidgey.png",
+                        Location = "Somewhere",
+                        Description = "Has an extremely sharp sense of direction and homing instincts."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000109"),
+                        Name = "Koffing",
+                        HasAllolanForm = false,
+                        ImgUrl = "Koffing.png",
+                        Location = "Somewhere",
+                        Description = "Creates gases within its body by mixing toxins with garbage, and produces more gas in higher temperatures."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000050"),
+                        Name = "Diglett",
+                        HasAllolanForm = true,
+                        ImgUrl = "Diglett.png",
+                        Location = "Somewhere",
+                        Description = "Is a tiny, brown Pokémon that seems to be perpetually buried within the earth, leaving only its head visible."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000095"),
+                        Name = "Onix",
+                        HasAllolanForm = false,
+                        ImgUrl = "Onix.png",
+                        Location = "Somewhere",
+                        Description = "Resembles a giant chain of gray boulders that become smaller towards the tail."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000092"),
+                        Name = "Gastly",
+                        HasAllolanForm = false,
+                        ImgUrl = "Gastly.png",
+                        Location = "Somewhere",
+                        Description = "Has no true form, due to 95% of its body being poisonous gas."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000025"),
+                        Name = "Pikachu",
+                        HasAllolanForm = true,
+                        ImgUrl = "Pikachu.png",
+                        Location = "Somewhere",
+                        Description = "Is covered in yellow fur with two horizontal brown stripes on its back."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000150"),
+                        Name = "Mewtwo",
+                        HasAllolanForm = false,
+                        ImgUrl = "Mewtwo.png",
+                        Location = "Somewhere",
+                        Description = "Is a Pokémon created by science. It is a bipedal, humanoid creature with some feline features."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000087"),
+                        Name = "Dewgong",
+                        HasAllolanForm = false,
+                        ImgUrl = "Dewgong.png",
+                        Location = "Somewhere",
+                        Description = "Has a snowy white, furry body, which renders it virtually invisible in snowy conditions."
+
+                    },
+                    new Entities.MyPokemon
+                    {
+                        Id = new Guid("00000000-0000-0000-0000-000000000147"),
+                        Name = "Dratini",
+                        HasAllolanForm = false,
+                        ImgUrl = "Dratini.png",
+                        Location = "Somewhere",
+                        Description = "is filled with life energy. Dratini is constantly growing, and can thus reach lengths of over six feet."
 
                     }
                 );
