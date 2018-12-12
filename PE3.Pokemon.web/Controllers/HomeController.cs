@@ -41,9 +41,11 @@ namespace PE3.Pokemon.web.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetDetails(MyPokemon poke)
+        public async Task<JsonResult> GetDetails(string guidString)
         {
-            return Json(poke);
+            var parsedId = Guid.Parse(guidString);
+            var relatedPoke = await pokemonContext.Pokemons.Where(p => p.Id == parsedId).FirstOrDefaultAsync();
+            return Json(relatedPoke);
         }
 
         public IActionResult Error(int? statusCode)
