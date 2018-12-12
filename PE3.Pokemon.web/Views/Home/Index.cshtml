@@ -8,42 +8,16 @@
 <div>Hello @Model.Username</div>
 <div class="pokeview">
     <div class="pokelist">
-        @{ 
-            foreach(var pokemon in Model.AllCaughtPokemon)
+        @{
+            foreach (var pokemon in Model.AllCaughtPokemon)
             {
                 <div class="pokecell">
-                    <button>@pokemon.Key.Id.ToString().PadLeft(3, '0')</button> <!-- shows last 3 digits of ID-->
+                    <a title="@pokemon.Key.Name" asp-controller="Home" asp-action="Pokemon" asp-route-id="@pokemon.Key.Id">
+                        <img src="~/images/PokeImages/@pokemon.Key.ImgUrl" />
+                    </a>
                 </div>
             }
-            
         }
-    </div>
-    <div class="pokedetail">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script>
-            $("button").click(function () {
-                var html = $(this).html();
-                console.warn(html);
-                $.ajax({
-                    type: "POST",
-                    url:"Home/GetDetails" + html, //input MyPokemon parameter somehow?
-                    dataType: "json",
-
-                    success: function (data) {
-                        console.log(data);
-                        console.log(data.id);
-                        console.log(data.description);
-                        $.each(data.PokemonTypes, function (obj) {
-                            console.log(obj.Name + ":" + obj.Colour);
-                        });
-                    },
-
-                    error: function (response) {
-                        console.error("error!");
-                    }
-                });
-            })
-        </script>
     </div>
 </div>
 

@@ -40,15 +40,12 @@ namespace PE3.Pokemon.web.Controllers
             return View(vm);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> GetDetails(string guidString)
+        public async Task<IActionResult> Pokemon(Guid id)
         {
-            var parsedId = Guid.Parse(guidString);
-            var relatedPoke = await pokemonContext.Pokemons.Where(p => p.Id == parsedId).FirstOrDefaultAsync();
-            return Json(relatedPoke);
+            var thisPoke = await pokemonContext.Pokemons.Where(p => p.Id == id).FirstOrDefaultAsync();
+            return View(thisPoke);
         }
-
-        public IActionResult Error(int? statusCode)
+        public IActionResult Error(int? statusCode) //refactor to simplicity/more use
         {
             if (statusCode.HasValue)
             {
