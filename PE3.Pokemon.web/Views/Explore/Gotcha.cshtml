@@ -12,5 +12,6 @@
 
         <p>You caught @Model.CaughtPokemon.Name</p>
     </div>
-    <img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" />
+    <img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" /><br />
+    <a asp-controller="Home" asp-action="Index">Return to index or wait <span id="gotchaTimer">5</span> seconds</a>
 </div>

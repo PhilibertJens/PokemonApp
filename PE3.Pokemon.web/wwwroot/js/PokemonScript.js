@@ -5,27 +5,31 @@
 $(document).ready(function () {
     $('select').niceSelect();
     $('.pokeball').on('click', AnimateAndCatchPokemon);
+    if (window.location.pathname === "/Explore/Gotcha") StartTimer(false);
 });
 
 
-/*Timer to delay the get request to CatchProcesser*/
+/*Timer to delay the get request to the specific View*/
 var counter = 0;
 var timer = null;
+var timeToCatchProcesser = 2;
+var timeToHomeIndex = 5;
 
 function AnimateAndCatchPokemon() {
     $('.pokeball').addClass("pokeballMove");
     $(".pokemon").fadeOut("slow");
     $(".generatePokemon").addClass("backgroundAfterThrow");
-    StartTimer();
+    StartTimer(true);
 }
 
-function StartTimer() {
-    timer = window.setInterval(IncreaseTime, 1000);
+function StartTimer(goToCatchProcesser) {
+    if (goToCatchProcesser) timer = window.setInterval(TimerToCatchProcesser, 1000);
+    else timer = window.setInterval(TimerToIndex, 1000);
 }
 
-function IncreaseTime() {
+function TimerToCatchProcesser() {
     counter++;
-    if (counter === 2) {//pas na 2 seconden is dit het geval
+    if (counter === timeToCatchProcesser) {//pas na 2 seconden is dit het geval
         window.clearInterval(timer);
         counter = 0;
         var protocol, hostname, port, goToCatchProcesser;
@@ -37,6 +41,20 @@ function IncreaseTime() {
     }
 }
 
+function TimerToIndex() {
+    counter++;
+    $("#gotchaTimer").html(timeToHomeIndex-counter);
+    if (counter === timeToHomeIndex) {//pas na 5 seconden is dit het geval
+        window.clearInterval(timer);
+        counter = 0;
+        var protocol, hostname, port, goToHomeIndex;
+        protocol = window.location.protocol;
+        hostname = window.location.hostname;
+        port = window.location.port;
+        goToHomeIndex = protocol + "//" + hostname + ":" + port + "/Home/Index";
+        window.location = goToHomeIndex;
+    }
+}
 
 /*Jquery code to show animation select tag in Walkaround page*/
 (function($) {
