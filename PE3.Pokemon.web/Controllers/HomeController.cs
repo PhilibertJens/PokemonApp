@@ -42,9 +42,18 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> Pokemon(Guid id)
         {
-            var thisPoke = await pokemonContext.Pokemons.Where(p => p.Id == id).FirstOrDefaultAsync();
+            var thisPoke = await pokemonContext.Pokemons
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+
+            thisPoke.PokemonTypes = await pokemonContext.PokemonTypes
+                .Where(pt => pt.PokemonId == thisPoke.Id)
+                .Include(pt => pt.Type)
+                .ToListAsync();
+
             return View(thisPoke);
         }
+
         public IActionResult Error(int? statusCode) //refactor to simplicity/more use
         {
             if (statusCode.HasValue)

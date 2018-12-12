@@ -62,6 +62,11 @@ namespace PE3.Pokemon.web
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "pokeDetail",
+                    template: "Pokemon/{id}",
+                    defaults: new {controller = "Home", action ="Pokemon"}
+                    );
 
                 routes.MapRoute(
                     name: "default",

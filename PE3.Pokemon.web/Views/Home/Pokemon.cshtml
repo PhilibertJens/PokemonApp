@@ -1,0 +1,35 @@
+﻿@model PE3.Pokemon.web.Entities.MyPokemon
+@{
+    ViewData["Title"] = "Pokemon";
+}
+@{ 
+    StringBuilder sb = new StringBuilder();
+
+    foreach(var t in Model.PokemonTypes)
+    {
+        sb.Append($"{t.Type.Name} ");
+    }
+}
+
+<div class="pokeview">
+    <div class="pokedetail">
+        <div class="poke-img">
+            <img src="~/images/PokeImages/@Model.ImgUrl" />
+        </div>
+        <div class="poke-meta">
+            <div class="poke-item">
+                <p><b>Name: </b>@Model.Name</p>
+            </div>
+            <div class="poke-item">
+                <p><b>ID: </b>@Model.Id.ToString().TrimStart(new char[] {'0','-'}).PadLeft(3,'0')</p>
+            </div>
+            <div class="poke-item">
+                <p><b>Type(s): </b>@sb.ToString()</p>
+            </div>
+            <div class="poke-item">
+                <p><b>Descr: </b>@Model.Description</p>
+            </div>
+        </div>
+    </div>
+</div>
+
