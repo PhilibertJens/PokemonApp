@@ -11,5 +11,6 @@ namespace PE3.Pokemon.web.Models
     {
         public IEnumerable<MyPokemon> AllPokemonWithTypeInfo { get; set; }
         public string Username { get; set; }
+        public IDictionary<MyPokemon, PokemonUser> AllCaughtPokemon { get; set; }
     }
 }

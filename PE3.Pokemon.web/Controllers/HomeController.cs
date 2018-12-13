@@ -26,10 +26,8 @@ namespace PE3.Pokemon.web.Controllers
             var vm = new HomeIndexVm
             {
                 Username = userName
-        };
-            
-            //enkel Bulbasaur en Charmander worden getoond omdat er maar 2 PokemonType queries zijn.
-            //De andere moeten automatisch toegevoegd worden.
+            };
+           
             var allPokemonWithTypes = await pokemonContext.Set<PokemonType>()
                                             .Include(pt => pt.Pokemon)//join
                                             .ThenInclude(p => p.PokemonTypes)
@@ -38,11 +36,25 @@ namespace PE3.Pokemon.web.Controllers
                                             .ToListAsync();
 
             vm.AllPokemonWithTypeInfo = allPokemonWithTypes.Select(pt => pt.Pokemon);
-            //vm.AllPokemonWithTypeInfo = await pokemonContext.Pokemons.ToListAsync();
+            vm.AllCaughtPokemon = await getAllCaught(userName);
             return View(vm);
         }
 
-        public IActionResult Error(int? statusCode)
+        public async Task<IActionResult> Pokemon(Guid id)
+        {
+            var thisPoke = await pokemonContext.Pokemons
+                .Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
+
+            thisPoke.PokemonTypes = await pokemonContext.PokemonTypes
+                .Where(pt => pt.PokemonId == thisPoke.Id)
+                .Include(pt => pt.Type)
+                .ToListAsync();
+
+            return View(thisPoke);
+        }
+
+        public IActionResult Error(int? statusCode) //refactor to simplicity/more use
         {
             if (statusCode.HasValue)
             {
@@ -53,6 +65,32 @@ namespace PE3.Pokemon.web.Controllers
                 }
             }
             return View();
+        }
+
+        private async Task<IDictionary<MyPokemon, PokemonUser>> getAllCaught(string username)
+        {
+            var numberOfPokemon = await pokemonContext.Set<PokemonUser>()
+                    .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
+                    .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
+                    .Where(u => u.User.Username == username)
+                    .CountAsync();
+
+            IDictionary<MyPokemon, PokemonUser> myPokemons;
+            if(numberOfPokemon != 0)
+            {
+                var allPoke = await pokemonContext.Set<PokemonUser>()//all pokemonuser objects per current user
+                    .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
+                    .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
+                    .Where(u => u.User.Username == username).ToListAsync();
+                myPokemons = new Dictionary<MyPokemon, PokemonUser>();
+                foreach (var o in allPoke)
+                {
+                    myPokemons.Add(o.Pokemon, o);
+                }
+            }
+            else myPokemons = new Dictionary<MyPokemon, PokemonUser>();
+
+            return myPokemons;
         }
     }
 }

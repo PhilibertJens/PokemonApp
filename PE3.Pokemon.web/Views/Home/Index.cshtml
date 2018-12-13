@@ -6,19 +6,22 @@
 <h2>Index</h2>
 
 <div>Hello @Model.Username</div>
-<ul>
-    @{
-        foreach (var pokemon in Model.AllPokemonWithTypeInfo)
-        {
-            <li>
-                <p><b>@pokemon.Name</b></p>
-                @foreach (var type in pokemon.PokemonTypes)
-                {
-                    <p>Type: @type.Type.Name</p>
-                }
-            </li>
+<div class="pokeview">
+    <div class="pokelist">
+        @{
+            foreach (var pokemon in Model.AllCaughtPokemon)
+            {
+                var colors = new string[2];
+                colors[0] = pokemon.Key.PokemonTypes.FirstOrDefault().Type.Colour;
+                colors[1] = (pokemon.Key.PokemonTypes.Count < 2) ? colors[0] : pokemon.Key.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
+                <div class="pokecell" style="background: linear-gradient(90deg, @colors[0] 50%, @colors[1] 50%);">
+                    <a title="@pokemon.Key.Name" asp-controller="Home" asp-action="Pokemon" asp-route-id="@pokemon.Key.Id">
+                        <img src="~/images/PokeImages/@pokemon.Key.ImgUrl" />
+                    </a>
+                </div>
+            }
         }
-    }
-</ul>
+    </div>
+</div>
 
 

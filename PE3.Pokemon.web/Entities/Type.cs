@@ -10,6 +10,6 @@ namespace PE3.Pokemon.web.Entities
         public Guid Id { get; set; }
         public string Name { get; set; }
         public ICollection<PokemonType> PokemonTypes { get; set; }
-
+        public string Colour { get; set; }
     }
 }

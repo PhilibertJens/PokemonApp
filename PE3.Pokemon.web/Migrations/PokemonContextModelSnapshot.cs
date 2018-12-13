@@ -82,30 +82,42 @@ namespace PE3.Pokemon.web.Migrations
 
                     b.HasData(
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000001"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000001"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000002"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000002"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000003"), TypeId = new Guid("00000000-0000-0000-0000-00000000000c") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000003"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000004"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000005"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000006"), TypeId = new Guid("00000000-0000-0000-0000-00000000000a") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000006"), TypeId = new Guid("00000000-0000-0000-0000-000000000003") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000007"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000008"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000009"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000010"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000011"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000012"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000012"), TypeId = new Guid("00000000-0000-0000-0000-000000000003") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000013"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000013"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000014"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000014"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000015"), TypeId = new Guid("00000000-0000-0000-0000-000000000007") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000015"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000019"), TypeId = new Guid("00000000-0000-0000-0000-000000000001") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000106"), TypeId = new Guid("00000000-0000-0000-0000-000000000002") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000016"), TypeId = new Guid("00000000-0000-0000-0000-000000000003") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000016"), TypeId = new Guid("00000000-0000-0000-0000-000000000001") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000109"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000050"), TypeId = new Guid("00000000-0000-0000-0000-000000000005") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000095"), TypeId = new Guid("00000000-0000-0000-0000-000000000006") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000095"), TypeId = new Guid("00000000-0000-0000-0000-000000000005") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000092"), TypeId = new Guid("00000000-0000-0000-0000-000000000008") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000092"), TypeId = new Guid("00000000-0000-0000-0000-000000000004") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000025"), TypeId = new Guid("00000000-0000-0000-0000-00000000000d") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000150"), TypeId = new Guid("00000000-0000-0000-0000-00000000000e") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000087"), TypeId = new Guid("00000000-0000-0000-0000-00000000000f") },
+                        new { PokemonId = new Guid("00000000-0000-0000-0000-000000000087"), TypeId = new Guid("00000000-0000-0000-0000-00000000000b") },
                         new { PokemonId = new Guid("00000000-0000-0000-0000-000000000147"), TypeId = new Guid("00000000-0000-0000-0000-000000000010") }
                     );
                 });
@@ -130,6 +142,8 @@ namespace PE3.Pokemon.web.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Colour");
+
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
@@ -137,24 +151,24 @@ namespace PE3.Pokemon.web.Migrations
                     b.ToTable("Types");
 
                     b.HasData(
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000001"), Name = "Normal" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000002"), Name = "Fighting" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000003"), Name = "Flying" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000004"), Name = "Poison" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000005"), Name = "Ground" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000006"), Name = "Rock" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000007"), Name = "Bug" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000008"), Name = "Ghost" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000009"), Name = "Steel" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000a"), Name = "Fire" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000b"), Name = "Water" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000c"), Name = "Grass" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000d"), Name = "Electric" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000e"), Name = "Psychic" },
-                        new { Id = new Guid("00000000-0000-0000-0000-00000000000f"), Name = "Ice" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000010"), Name = "Dragon" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000011"), Name = "Dark" },
-                        new { Id = new Guid("00000000-0000-0000-0000-000000000012"), Name = "Fairy" }
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000001"), Colour = "#A8A878", Name = "Normal" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000002"), Colour = "#C03028", Name = "Fighting" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000003"), Colour = "#A890F0", Name = "Flying" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000004"), Colour = "#A040A0", Name = "Poison" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000005"), Colour = "#E0C068", Name = "Ground" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000006"), Colour = "#B8A038", Name = "Rock" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000007"), Colour = "#A8B820", Name = "Bug" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000008"), Colour = "#705898", Name = "Ghost" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000009"), Colour = "#B8B8D0", Name = "Steel" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000a"), Colour = "#F08030", Name = "Fire" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000b"), Colour = "#6890F0", Name = "Water" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000c"), Colour = "#78C850", Name = "Grass" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000d"), Colour = "#F8D030", Name = "Electric" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000e"), Colour = "#F85888", Name = "Psychic" },
+                        new { Id = new Guid("00000000-0000-0000-0000-00000000000f"), Colour = "#98D8D8", Name = "Ice" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000010"), Colour = "#7038F8", Name = "Dragon" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000011"), Colour = "#705848", Name = "Dark" },
+                        new { Id = new Guid("00000000-0000-0000-0000-000000000012"), Colour = "#EE99AC", Name = "Fairy" }
                     );
                 });
 
