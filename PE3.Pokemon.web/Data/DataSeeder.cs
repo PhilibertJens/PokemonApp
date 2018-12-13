@@ -37,78 +37,118 @@ namespace PE3.Pokemon.web.Data
             modelBuilder.Entity<PokemonType>().HasData(//enkele koppelingen toegevoegd om de join te testen.
                 new PokemonType
                 {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000001"),//bulbasaur
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000C")
+                },
+                new PokemonType
+                {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000001"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000002"),//ivysaur
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000C")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000002"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000003"),//venusaur
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000C")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000003"),
-                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000C")
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000004"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000004"),//charmander
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000A")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000005"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000005"),//charmeleon
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000A")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000006"),//charizard
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000A")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000006"),
-                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000A")
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000003")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000007"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000007"),//squirtle
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000B")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000008"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000008"),//wartortle
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000B")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000009"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000009"),//blastoise
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000B")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000010"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000010"),//caterpie
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
                 },
                 new PokemonType
                 {
-                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000011"),
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000011"),//metapod
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000012"),//butterfree
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000012"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000003")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000013"),//weedle
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000013"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000014"),//kakuna
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000014"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000015"),//beedrill
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000015"),
-                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000007")
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
                 },
                 new PokemonType
                 {
@@ -127,6 +167,11 @@ namespace PE3.Pokemon.web.Data
                 },
                 new PokemonType
                 {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000016"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000001")
+                },
+                new PokemonType
+                {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000109"),//koffing
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")//poison
                 },
@@ -140,10 +185,20 @@ namespace PE3.Pokemon.web.Data
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000095"),//onix
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000006")//rock
                 },
+                 new PokemonType
+                 {
+                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000095"),
+                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000005")
+                 },
                 new PokemonType
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000092"),//gastly
                     TypeId = Guid.Parse("00000000-0000-0000-0000-000000000008")//ghost
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000092"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-000000000004")
                 },
                 new PokemonType
                 {
@@ -159,6 +214,11 @@ namespace PE3.Pokemon.web.Data
                 {
                     PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000087"),//dewgong
                     TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000F")//ice
+                },
+                new PokemonType
+                {
+                    PokemonId = Guid.Parse("00000000-0000-0000-0000-000000000087"),
+                    TypeId = Guid.Parse("00000000-0000-0000-0000-00000000000B")
                 },
                 new PokemonType
                 {

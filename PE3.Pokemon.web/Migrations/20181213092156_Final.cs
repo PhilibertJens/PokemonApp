@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PE3.Pokemon.web.Migrations
 {
-    public partial class SeedData : Migration
+    public partial class Final : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace PE3.Pokemon.web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    Colour = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -114,7 +115,7 @@ namespace PE3.Pokemon.web.Migrations
                     { new Guid("00000000-0000-0000-0000-000000000109"), "Creates gases within its body by mixing toxins with garbage, and produces more gas in higher temperatures.", false, "Koffing.png", "Somewhere", "Koffing" },
                     { new Guid("00000000-0000-0000-0000-000000000016"), "Has an extremely sharp sense of direction and homing instincts.", false, "Pidgey.png", "Somewhere", "Pidgey" },
                     { new Guid("00000000-0000-0000-0000-000000000106"), "Is a humanoid Pokémon with an ovoid body. Hitmonlee's legs freely contract and stretch similar to a coiled spring.", false, "Hitmonlee.png", "Somewhere", "Hitmonlee" },
-                    { new Guid("00000000-0000-0000-0000-000000000024"), "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth.", true, "Rattata.png", "Somewhere", "Rattata" },
+                    { new Guid("00000000-0000-0000-0000-000000000019"), "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth.", true, "Rattata.png", "Somewhere", "Rattata" },
                     { new Guid("00000000-0000-0000-0000-000000000015"), "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.", false, "Beedrill.png", "Evolve Kakuna", "Beedrill" },
                     { new Guid("00000000-0000-0000-0000-000000000014"), "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators.", false, "Kakuna.png", "Routes 24 and 25, Viridian Forest", "Kakuna" },
                     { new Guid("00000000-0000-0000-0000-000000000025"), "Is covered in yellow fur with two horizontal brown stripes on its back.", true, "Pikachu.png", "Somewhere", "Pikachu" },
@@ -134,27 +135,27 @@ namespace PE3.Pokemon.web.Migrations
 
             migrationBuilder.InsertData(
                 table: "Types",
-                columns: new[] { "Id", "Name" },
+                columns: new[] { "Id", "Colour", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000011"), "Dark" },
-                    { new Guid("00000000-0000-0000-0000-00000000000b"), "Water" },
-                    { new Guid("00000000-0000-0000-0000-000000000010"), "Dragon" },
-                    { new Guid("00000000-0000-0000-0000-00000000000f"), "Ice" },
-                    { new Guid("00000000-0000-0000-0000-00000000000e"), "Psychic" },
-                    { new Guid("00000000-0000-0000-0000-00000000000d"), "Electric" },
-                    { new Guid("00000000-0000-0000-0000-00000000000c"), "Grass" },
-                    { new Guid("00000000-0000-0000-0000-00000000000a"), "Fire" },
-                    { new Guid("00000000-0000-0000-0000-000000000004"), "Poison" },
-                    { new Guid("00000000-0000-0000-0000-000000000008"), "Ghost" },
-                    { new Guid("00000000-0000-0000-0000-000000000007"), "Bug" },
-                    { new Guid("00000000-0000-0000-0000-000000000006"), "Rock" },
-                    { new Guid("00000000-0000-0000-0000-000000000005"), "Ground" },
-                    { new Guid("00000000-0000-0000-0000-000000000003"), "Flying" },
-                    { new Guid("00000000-0000-0000-0000-000000000002"), "Fighting" },
-                    { new Guid("00000000-0000-0000-0000-000000000001"), "Normal" },
-                    { new Guid("00000000-0000-0000-0000-000000000012"), "Fairy" },
-                    { new Guid("00000000-0000-0000-0000-000000000009"), "Steel" }
+                    { new Guid("00000000-0000-0000-0000-000000000011"), "#705848", "Dark" },
+                    { new Guid("00000000-0000-0000-0000-00000000000b"), "#6890F0", "Water" },
+                    { new Guid("00000000-0000-0000-0000-000000000010"), "#7038F8", "Dragon" },
+                    { new Guid("00000000-0000-0000-0000-00000000000f"), "#98D8D8", "Ice" },
+                    { new Guid("00000000-0000-0000-0000-00000000000e"), "#F85888", "Psychic" },
+                    { new Guid("00000000-0000-0000-0000-00000000000d"), "#F8D030", "Electric" },
+                    { new Guid("00000000-0000-0000-0000-00000000000c"), "#78C850", "Grass" },
+                    { new Guid("00000000-0000-0000-0000-00000000000a"), "#F08030", "Fire" },
+                    { new Guid("00000000-0000-0000-0000-000000000004"), "#A040A0", "Poison" },
+                    { new Guid("00000000-0000-0000-0000-000000000008"), "#705898", "Ghost" },
+                    { new Guid("00000000-0000-0000-0000-000000000007"), "#A8B820", "Bug" },
+                    { new Guid("00000000-0000-0000-0000-000000000006"), "#B8A038", "Rock" },
+                    { new Guid("00000000-0000-0000-0000-000000000005"), "#E0C068", "Ground" },
+                    { new Guid("00000000-0000-0000-0000-000000000003"), "#A890F0", "Flying" },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), "#C03028", "Fighting" },
+                    { new Guid("00000000-0000-0000-0000-000000000001"), "#A8A878", "Normal" },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), "#EE99AC", "Fairy" },
+                    { new Guid("00000000-0000-0000-0000-000000000009"), "#B8B8D0", "Steel" }
                 });
 
             migrationBuilder.InsertData(
@@ -167,21 +168,44 @@ namespace PE3.Pokemon.web.Migrations
                 columns: new[] { "PokemonId", "TypeId" },
                 values: new object[,]
                 {
-                    { new Guid("00000000-0000-0000-0000-000000000010"), new Guid("00000000-0000-0000-0000-000000000007") },
-                    { new Guid("00000000-0000-0000-0000-000000000011"), new Guid("00000000-0000-0000-0000-000000000007") },
-                    { new Guid("00000000-0000-0000-0000-000000000012"), new Guid("00000000-0000-0000-0000-000000000007") },
-                    { new Guid("00000000-0000-0000-0000-000000000013"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000019"), new Guid("00000000-0000-0000-0000-000000000001") },
                     { new Guid("00000000-0000-0000-0000-000000000014"), new Guid("00000000-0000-0000-0000-000000000007") },
                     { new Guid("00000000-0000-0000-0000-000000000015"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000092"), new Guid("00000000-0000-0000-0000-000000000008") },
                     { new Guid("00000000-0000-0000-0000-000000000004"), new Guid("00000000-0000-0000-0000-00000000000a") },
                     { new Guid("00000000-0000-0000-0000-000000000005"), new Guid("00000000-0000-0000-0000-00000000000a") },
                     { new Guid("00000000-0000-0000-0000-000000000006"), new Guid("00000000-0000-0000-0000-00000000000a") },
                     { new Guid("00000000-0000-0000-0000-000000000007"), new Guid("00000000-0000-0000-0000-00000000000b") },
                     { new Guid("00000000-0000-0000-0000-000000000008"), new Guid("00000000-0000-0000-0000-00000000000b") },
                     { new Guid("00000000-0000-0000-0000-000000000009"), new Guid("00000000-0000-0000-0000-00000000000b") },
+                    { new Guid("00000000-0000-0000-0000-000000000087"), new Guid("00000000-0000-0000-0000-00000000000b") },
                     { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-00000000000c") },
                     { new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0000-00000000000c") },
-                    { new Guid("00000000-0000-0000-0000-000000000003"), new Guid("00000000-0000-0000-0000-00000000000c") }
+                    { new Guid("00000000-0000-0000-0000-000000000003"), new Guid("00000000-0000-0000-0000-00000000000c") },
+                    { new Guid("00000000-0000-0000-0000-000000000025"), new Guid("00000000-0000-0000-0000-00000000000d") },
+                    { new Guid("00000000-0000-0000-0000-000000000150"), new Guid("00000000-0000-0000-0000-00000000000e") },
+                    { new Guid("00000000-0000-0000-0000-000000000013"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000011"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000010"), new Guid("00000000-0000-0000-0000-000000000007") },
+                    { new Guid("00000000-0000-0000-0000-000000000016"), new Guid("00000000-0000-0000-0000-000000000001") },
+                    { new Guid("00000000-0000-0000-0000-000000000106"), new Guid("00000000-0000-0000-0000-000000000002") },
+                    { new Guid("00000000-0000-0000-0000-000000000006"), new Guid("00000000-0000-0000-0000-000000000003") },
+                    { new Guid("00000000-0000-0000-0000-000000000012"), new Guid("00000000-0000-0000-0000-000000000003") },
+                    { new Guid("00000000-0000-0000-0000-000000000016"), new Guid("00000000-0000-0000-0000-000000000003") },
+                    { new Guid("00000000-0000-0000-0000-000000000001"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000002"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000087"), new Guid("00000000-0000-0000-0000-00000000000f") },
+                    { new Guid("00000000-0000-0000-0000-000000000003"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000014"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000015"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000109"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000092"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000050"), new Guid("00000000-0000-0000-0000-000000000005") },
+                    { new Guid("00000000-0000-0000-0000-000000000095"), new Guid("00000000-0000-0000-0000-000000000005") },
+                    { new Guid("00000000-0000-0000-0000-000000000095"), new Guid("00000000-0000-0000-0000-000000000006") },
+                    { new Guid("00000000-0000-0000-0000-000000000013"), new Guid("00000000-0000-0000-0000-000000000004") },
+                    { new Guid("00000000-0000-0000-0000-000000000147"), new Guid("00000000-0000-0000-0000-000000000010") }
                 });
 
             migrationBuilder.CreateIndex(
