@@ -187,7 +187,7 @@ header, .walkAround {
     text-align: center;
 }
 
-.congrats {
+.congrats, .gotcha a {
     background-color: ghostwhite;
     border-radius: 35px;
     width: 30%;
@@ -198,6 +198,10 @@ header, .walkAround {
 
 .gotcha span {
     font-size: 1.4em;
+}
+
+.gotcha a {
+    padding: 5px;
 }
 
 @media screen and (max-width: 650px) { /* voor gsm in breedte*/
