@@ -206,8 +206,16 @@ header, .walkAround {
 
 @media screen and (max-width: 650px) { /* voor gsm in breedte*/
 
-    .gotcha img {
-        width: 8em;
+    .gotcha .pokeballStar {
+        width: 3em;
+    }
+
+    .gotcha .star1, .gotcha .star2, .gotcha .star3 {
+        width: 1.5em;
+    }
+
+    .gotcha .caughtPokemon {
+        width: 6em;
     }
 
     .congrats {
@@ -215,10 +223,101 @@ header, .walkAround {
     }
 
     .gotcha .congrats {
-        font-size: 0.8em;
+        font-size: 0.7em;
+    }
+
+    .gotcha h2 {
+        font-size: 20px;
+    }
+}
+         /* Pokeball star animation */
+.animateStars .star1{
+    animation: star1 1.25s;
+}
+
+.animateStars .star2 {
+    animation: star2 1.25s;
+}
+
+.animateStars .star3 {
+    animation: star3 1.25s;
+}
+
+.stars img {
+    opacity: 0;
+    width: 50px;
+    display: inline-block;
+}
+
+.caughtPokemon{
+    opacity: 0;
+    width: 250px;
+}
+
+@keyframes star1 {
+    0% {
+        opacity: 1;
+        transform: rotate(0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: rotate(-45deg)scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(-60deg) scale(1);
     }
 }
 
+@keyframes star2 {
+    0% {
+        opacity: 1;
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1);
+    }
+}
+
+@keyframes star3 {
+    0% {
+        opacity: 1;
+        transform: rotate(0);
+    }
+
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    80% {
+        opacity: 1;
+        transform: rotate(45deg) scale(1.2);
+    }
+
+    100% {
+        opacity: 0;
+        transform: rotate(60deg) scale(1);
+    }
+}
 
 /*RegisterSuccess page*/
 .welcome {
