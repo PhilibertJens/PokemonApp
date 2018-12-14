@@ -35,6 +35,7 @@ namespace PE3.Pokemon.web
 
             services.AddDbContext<PokemonContext>(options => options.UseSqlServer(Configuration.GetConnectionString("PokemonDb")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMemoryCache();
             services.AddSession();
         }
 
