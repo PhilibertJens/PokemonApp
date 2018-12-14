@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
 using PE3.Pokemon.web.Models;
@@ -17,11 +18,6 @@ namespace PE3.Pokemon.web.Controllers
     {
         private PokemonContext pokemonContext;
         private Random random;
-        /*
-         Nog te fixen:
-         - opslaan van ExploreGeneratePokemonVm viewModel in session i.p.v. string value
-         - redirect naar GeneratePokemon staat in commentaar tot er extra geseed wordt.
-        */
 
         public ExploreController(PokemonContext context)
         {
@@ -31,8 +27,7 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult WalkAround()
         {
-            HttpContext.Session.Remove("AppearedPokemon"); //bestaande Sessions worden verwijderd
-            HttpContext.Session.Remove("ChosenType");
+            HttpContext.Session.Remove("PokemonData"); //bestaande Sessions worden verwijderd
             var listEnvironments = new List<SelectListItem> {
                 new SelectListItem { Value = "0", Text = "== Where are you? ==" },
                 new SelectListItem { Value = "1", Text = "In a forest" },
@@ -64,8 +59,10 @@ namespace PE3.Pokemon.web.Controllers
             if (ModelState.IsValid)
             {
                 Type foundType = FindType(userData.SelectedEnvironmentId, userData.SelectedDayTimeId);
-                HttpContext.Session.SetString("ChosenType", foundType.Name);
-                //return Content($"Found type: {foundType.Name}","text/html");//staat zo tot er nog extra PokemonTypes zijn toegevoegd
+                PokemonSessionData pokemonData = new PokemonSessionData();
+                pokemonData.Type = foundType.Name;
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
                 return new RedirectToActionResult("GeneratePokemon", "Explore", null);
             }
             else return View(userData);
@@ -74,37 +71,36 @@ namespace PE3.Pokemon.web.Controllers
         public async Task<IActionResult> GeneratePokemon()
         {
             MyPokemon appearedPokemon;
-            string type = HttpContext.Session.GetString("ChosenType");
+            PokemonSessionData pokemonData;
+            string serializedPokemon;
+
+            serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getType = pokemonContext.Types
-                .Where(t => t.Name == type).FirstOrDefault();
-            if (HttpContext.Session.GetString("AppearedPokemon") == null)//er is nog geen pokemon gegenereerd
+                .Where(t => t.Name == pokemonData.Type).FirstOrDefault();
+            if (pokemonData.Name == null)//er is nog geen pokemon gegenereerd. Is dit wel zo zal de bovenstaande terug getoond worden
             {
                 appearedPokemon = await LetPokemonAppear(getType);
-            }
-            else
-            {//vermijden dat de gebruiker de pagina refresht en een nieuwe pokemon krijgt
-                string pokemonExists = HttpContext.Session.GetString("AppearedPokemon");
-                appearedPokemon = pokemonContext.Pokemons
-                        .Where(p => p.Name == pokemonExists).FirstOrDefault();
+                serializedPokemon = HttpContext.Session.GetString("PokemonData");
+                pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             }
 
-            if (appearedPokemon != null)
-            {
-                ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
-                vm.AppearedPokemon = appearedPokemon;
-                vm.HP = 50; //random bepaald
-                vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
-                return View(vm);
-            }
-            else return Content($"No pokemon was found with type {type}","text/html");
-            //dit moet uiteindelijk verdwijnen. Dit kan pas wanneer er van elk type een pokemon is.
+            appearedPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
+
+            ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
+            vm.AppearedPokemon = appearedPokemon;
+            vm.HP = pokemonData.HP;
+            vm.Moves = pokemonData.Moves;
+            return View(vm);
         }
 
         public async Task<IActionResult> CatchProcesser()
         {
-            string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+            string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getPokemon = pokemonContext.Pokemons
-                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+                    .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
 
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
@@ -136,8 +132,8 @@ namespace PE3.Pokemon.web.Controllers
             {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
                 ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
                 vm.AppearedPokemon = getPokemon;
-                vm.HP = 50; //random bepaald
-                vm.Moves = new List<string> { "flamethrower", "bite" }; //deels random bepaald
+                vm.HP = pokemonData.HP;
+                vm.Moves = pokemonData.Moves;
                 return View(vm);
             }
         }
@@ -145,9 +141,10 @@ namespace PE3.Pokemon.web.Controllers
         public IActionResult Gotcha()
         {
             string userName = HttpContext.Session.GetString("Username");
-            string appearedPokemon = HttpContext.Session.GetString("AppearedPokemon");
+            string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getPokemon = pokemonContext.Pokemons
-                    .Where(p => p.Name == appearedPokemon).FirstOrDefault();
+                    .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
             ExploreGotchaVm vm = new ExploreGotchaVm();
             vm.Username = userName;
             vm.CaughtPokemon = getPokemon;
@@ -168,7 +165,16 @@ namespace PE3.Pokemon.web.Controllers
             {
                 int listItem = random.Next(0, max);
                 var appearedPokemon = givePokemonType[listItem];//geeft een Pokemon met type. Moet omgezet worden naar een Pokemon
-                HttpContext.Session.SetString("AppearedPokemon", appearedPokemon.Pokemon.Name);
+                                                                //HttpContext.Session.SetString("AppearedPokemon", appearedPokemon.Pokemon.Name);
+                string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+                var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
+                pokemonData.Name = appearedPokemon.Pokemon.Name;
+                pokemonData.Id = appearedPokemon.Pokemon.Id;
+                pokemonData.HP = 50; //dit wordt random bepaald
+                pokemonData.Moves = new List<string> { "Bite", "Shadowball" };//dit wordt bepaald per type
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+
                 return appearedPokemon.Pokemon;
             }
             else return null;

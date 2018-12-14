@@ -5,6 +5,7 @@
 $(document).ready(function () {
     $('select').niceSelect();
     $('.pokeball').on('click', AnimateAndCatchPokemon);
+    $('.noclick').unbind();
     if (window.location.pathname === "/Explore/Gotcha") StartTimer(false);
 });
 
@@ -13,7 +14,7 @@ $(document).ready(function () {
 var counter = 0;
 var timer = null;
 var timeToCatchProcesser = 2;
-var timeToHomeIndex = 5;
+var timeToHomeIndex = 10;
 
 function AnimateAndCatchPokemon() {
     $('.pokeball').addClass("pokeballMove");
@@ -43,7 +44,18 @@ function TimerToCatchProcesser() {
 
 function TimerToIndex() {
     counter++;
-    $("#gotchaTimer").html(timeToHomeIndex-counter);
+    $("#gotchaTimer").html(timeToHomeIndex - counter);
+    if (counter === 1) {
+        $(".stars").addClass("animateStars");
+    }
+    if (counter === 3) {
+        $(".caughtPokemon")
+            .slideDown('slow')
+            .animate(
+                { opacity: 1 },
+                { queue: true, duration: 'slow' }
+            );
+    }
     if (counter === timeToHomeIndex) {//pas na 5 seconden is dit het geval
         window.clearInterval(timer);
         counter = 0;
