@@ -1,0 +1,39 @@
+﻿@model PE3.Pokemon.web.Areas.Admin.Models.UsersIndexVm
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_PokemonAdminLayout.cshtml";
+}
+
+<h2>User administration</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Users.FirstOrDefault().Username)
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                (hashed) @Html.DisplayNameFor(model => model.Users.FirstOrDefault().Password)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelUser => user.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelUser => user.FirstName) @Html.DisplayFor(modelUser=> user.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelUser=>user.Password)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
