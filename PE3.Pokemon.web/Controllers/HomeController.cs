@@ -14,15 +14,18 @@ namespace PE3.Pokemon.web.Controllers
     public class HomeController : Controller
     {
         private PokemonContext pokemonContext;
+        private LoginChecker loginChecker;
 
         public HomeController(PokemonContext context)
         {
+            loginChecker = new LoginChecker();
             pokemonContext = context;
         }
 
         public async Task<IActionResult> Index()
         {
             string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             var vm = new HomeIndexVm
             {
                 Username = userName
@@ -42,6 +45,9 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> Pokemon(Guid id)
         {
+            string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
+
             var thisPoke = await pokemonContext.Pokemons
                 .Where(p => p.Id == id)
                 .FirstOrDefaultAsync();
@@ -60,6 +66,9 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult Error(int? statusCode) //refactor to simplicity/more use
         {
+            string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
+
             if (statusCode.HasValue)
             {
                 if(statusCode == 404)
