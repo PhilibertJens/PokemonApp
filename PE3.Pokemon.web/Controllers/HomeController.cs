@@ -51,6 +51,10 @@ namespace PE3.Pokemon.web.Controllers
                 .Include(pt => pt.Type)
                 .ToListAsync();
 
+            thisPoke.PokemonUsers = await pokemonContext.PokemonUsers
+                .Where(pu => pu.PokemonId == thisPoke.Id)
+                .ToListAsync();
+
             return View(thisPoke);
         }
 

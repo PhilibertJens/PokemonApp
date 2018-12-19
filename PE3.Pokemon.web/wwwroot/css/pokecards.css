@@ -84,11 +84,11 @@ body{
 
 .poke-meta {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 2fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 4fr;
 }
 
 .poke-img > img{
-  background-color: #DFDFE4;
+  background-color: transparent;
   height: 100%;
   width: 90%;
 }
@@ -98,6 +98,6 @@ body{
   width: 95%;
   margin: 5px;
   padding: 2px;
-  font-size: 1.125rem;
+  font-size: 1.125em;
   box-shadow: 2px 2px rgba(43, 43, 43, 0.301);
 }
