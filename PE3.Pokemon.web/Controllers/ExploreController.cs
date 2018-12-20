@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
 using PE3.Pokemon.web.Models;
-using Type = PE3.Pokemon.web.Entities.Type;
+using Type = PE3.Pokemon.web.Entities.Type;//om een ambiguous reference naar 'Type' error te vermijden
 
 namespace PE3.Pokemon.web.Controllers
 {
@@ -27,6 +27,8 @@ namespace PE3.Pokemon.web.Controllers
 
         public IActionResult WalkAround()
         {
+            string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             HttpContext.Session.Remove("PokemonData"); //bestaande Sessions worden verwijderd
             var listEnvironments = new List<SelectListItem> {
                 new SelectListItem { Value = "0", Text = "== Where are you? ==" },
@@ -70,6 +72,8 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> GeneratePokemon()
         {
+            string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             MyPokemon appearedPokemon;
             PokemonSessionData pokemonData;
             string serializedPokemon;
@@ -97,6 +101,8 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> CatchProcesser()
         {
+            string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             string serializedPokemon = HttpContext.Session.GetString("PokemonData");
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getPokemon = pokemonContext.Pokemons
@@ -105,7 +111,6 @@ namespace PE3.Pokemon.web.Controllers
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
-                string userName = HttpContext.Session.GetString("Username");
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
@@ -141,6 +146,7 @@ namespace PE3.Pokemon.web.Controllers
         public IActionResult Gotcha()
         {
             string userName = HttpContext.Session.GetString("Username");
+            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             string serializedPokemon = HttpContext.Session.GetString("PokemonData");
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getPokemon = pokemonContext.Pokemons

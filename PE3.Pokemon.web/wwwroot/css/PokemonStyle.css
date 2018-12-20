@@ -1,4 +1,7 @@
-﻿/*Walkaround page*/
+﻿button {
+    outline: none;
+}
+/*Walkaround page*/
 header, .walkAround {
     text-align: center;
 }
