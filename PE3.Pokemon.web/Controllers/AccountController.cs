@@ -101,5 +101,10 @@ namespace PE3.Pokemon.web.Controllers
 
         private bool verifyPassword(User user, string providedPW) => (pH.VerifyHashedPassword(user, user.Password, providedPW) == PasswordVerificationResult.Success);
 
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login","Account",null);
+        }
     }
 }
