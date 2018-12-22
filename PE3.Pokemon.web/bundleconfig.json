@@ -1,0 +1,15 @@
+[
+  {
+    "inputFiles": [
+      "node_modules/jquery/dist/jquery.js",
+      "node_modules/bootstrap/dist/js/bootstrap.bundle.js"
+    ],
+    "outputFileName": "wwwroot/bundles/pokebundle.js",
+    "minify": {
+      "enabled": true,
+      "commentMode": "all"
+    },
+    "includeInProject": true,
+    "sourceMap": true
+  }
+]
