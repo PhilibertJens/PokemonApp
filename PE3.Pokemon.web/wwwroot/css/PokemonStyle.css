@@ -205,6 +205,9 @@ header, .walkAround {
 
 .gotcha a {
     padding: 5px;
+    text-decoration: none;
+    color: red;
+    font-size: 1.5em;
 }
 
 @media screen and (max-width: 650px) { /* voor gsm in breedte*/
@@ -231,6 +234,13 @@ header, .walkAround {
 
     .gotcha h2 {
         font-size: 20px;
+    }
+
+    .gotcha a {
+        padding: 5px;
+        text-decoration: none;
+        color: red;
+        font-size: 1em;
     }
 }
          /* Pokeball star animation */
