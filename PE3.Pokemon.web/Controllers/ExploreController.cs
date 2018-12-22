@@ -29,7 +29,7 @@ namespace PE3.Pokemon.web.Controllers
         {
             string userName = HttpContext.Session.GetString("Username");
             if (userName == null) return new RedirectToActionResult("Login", "Account", null);
-            HttpContext.Session.Remove("PokemonData"); //bestaande Sessions worden verwijderd
+            HttpContext.Session.Remove("PokemonData"); //bestaande Session wordt verwijderd
             var listEnvironments = new List<SelectListItem> {
                 new SelectListItem { Value = "0", Text = "== Where are you? ==" },
                 new SelectListItem { Value = "1", Text = "In a forest" },
@@ -72,13 +72,15 @@ namespace PE3.Pokemon.web.Controllers
 
         public async Task<IActionResult> GeneratePokemon()
         {
-            string userName = HttpContext.Session.GetString("Username");
-            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
             MyPokemon appearedPokemon;
             PokemonSessionData pokemonData;
-            string serializedPokemon;
+            string serializedPokemon, userName;
 
+            userName = HttpContext.Session.GetString("Username");
+            if (UserNameErrorCheck(userName)) return new RedirectToActionResult("Login", "Account", null);
             serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            if (PokemonErrorCheck(serializedPokemon)) return new RedirectToActionResult("Walkaround", "Explore", null);
+
             pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getType = pokemonContext.Types
                 .Where(t => t.Name == pokemonData.Type).FirstOrDefault();
@@ -96,14 +98,17 @@ namespace PE3.Pokemon.web.Controllers
             vm.AppearedPokemon = appearedPokemon;
             vm.HP = pokemonData.HP;
             vm.Moves = pokemonData.Moves;
+            vm.CheatingWarning = pokemonData.CheatingWarning;
             return View(vm);
         }
 
         public async Task<IActionResult> CatchProcesser()
         {
             string userName = HttpContext.Session.GetString("Username");
-            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
+            if (UserNameErrorCheck(userName)) return new RedirectToActionResult("Login", "Account", null);
             string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            if (PokemonErrorCheck(serializedPokemon)) return new RedirectToActionResult("Walkaround", "Explore", null);
+
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
             var getPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
@@ -111,6 +116,10 @@ namespace PE3.Pokemon.web.Controllers
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
+                pokemonData.Caught = true;/*om cheaten te vermijden*/
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
@@ -146,9 +155,19 @@ namespace PE3.Pokemon.web.Controllers
         public IActionResult Gotcha()
         {
             string userName = HttpContext.Session.GetString("Username");
-            if (userName == null) return new RedirectToActionResult("Login", "Account", null);
+            if (UserNameErrorCheck(userName)) return new RedirectToActionResult("Login", "Account", null);
             string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            if(PokemonErrorCheck(serializedPokemon)) return new RedirectToActionResult("Walkaround", "Explore", null);
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
+
+            if (!pokemonData.Caught)
+            {/*de bool niet op true gezet in CatchProcesser. De user heeft dus gecheat*/
+                pokemonData.CheatingWarning = "Professor Oak can't allow cheating!";
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+                return new RedirectToActionResult("GeneratePokemon", "Explore", null);
+            }
+
             var getPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
             ExploreGotchaVm vm = new ExploreGotchaVm();
@@ -156,6 +175,17 @@ namespace PE3.Pokemon.web.Controllers
             vm.CaughtPokemon = getPokemon;
             return View(vm);
         }
+
+        private bool UserNameErrorCheck(string userName)
+        {
+            return userName == null;
+        }
+
+        private bool PokemonErrorCheck(string serializedPokemon)
+        {
+            return serializedPokemon == null;
+        }
+
 
         private async Task<MyPokemon> LetPokemonAppear(Type type)
         {
@@ -190,19 +220,19 @@ namespace PE3.Pokemon.web.Controllers
         {
             List<List<string>> environments = new List<List<string>>()
             {
-                new List<string>(){ "Grass", "Bug", "Normal" },//default
+                new List<string>(){ "Grass", "Fire", "Water", "Bug", "Normal" },//default
                 new List<string>(){ "Grass", "Bug", "Psychic" },//forest
                 new List<string>(){ "Water"},//sea
-                new List<string>(){ "Normal", "Fighting", "Electric", "Fire" },//city
+                new List<string>(){ "Fighting", "Electric", "Fire" },//city
                 new List<string>(){ "Flying", "Dragon" },//sky
                 new List<string>(){ "Grass", "Ground", "Rock", "Ice" },//mountain
                 new List<string>(){ "Poison", "Bug", "Dragon", "Ghost" }//cave
             };
             List<List<string>> daytimes = new List<List<string>>()
             {
-                new List<string>(){ "Grass", "Bug" },//default
+                new List<string>(){ "Water", "Bug" },//default
                 new List<string>(){ "Normal", "Bug", "Psychic" },//morning
-                new List<string>(){ "Water", "Grass", "Fire" },//midday
+                new List<string>(){ "Normal" },//midday
                 new List<string>(){ "Normal", "Ghost" },//evening
                 new List<string>(){ "Normal", "Ghost" },//midnight
             };

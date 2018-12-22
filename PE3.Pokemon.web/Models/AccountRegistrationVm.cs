@@ -10,16 +10,20 @@ namespace PE3.Pokemon.web.Models
     public class AccountRegistrationVm
     {
         [Required(ErrorMessage ="Please provide your First name")]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Your Firstname must be between {2} and {1} characters")]
+        [RegularExpression(@"^[\w\d-\.áéÁÉèàâêîôûäëïöü]{1,}$", ErrorMessage = "Your Firstname cannot contain whitespaces or special characters")]
         [Display(Name ="First name")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "Please provide your Last name")]
+        [StringLength(70, MinimumLength = 2, ErrorMessage = "Your Lastname must be between {2} and {1} characters")]
+        [RegularExpression(@"^[\w\d-\.áéÁÉèàâêîôûäëïöü]{1,}$", ErrorMessage = "Your Lastname cannot contain whitespaces or special characters")]
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Please provide a Username")]
         [StringLength(20, MinimumLength = 5, ErrorMessage = "Your Username must be between {2} and {1} characters")]
-        [RegularExpression(@"^[\w\d.]{5,}$", ErrorMessage = "Username cannot contain whitespaces or special characters")]
+        [RegularExpression(@"^[\w\d-]{1,}$", ErrorMessage = "Username cannot contain whitespaces or special characters")]
         [Display(Name = "Username")]
         public string Username { get; set; }
 
@@ -37,8 +41,5 @@ namespace PE3.Pokemon.web.Models
         [Required(ErrorMessage = "Please provide a valid e-mail address")]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Display(Name = "Remember me")]
-        public bool RememberMe { get; set; }
     }
 }

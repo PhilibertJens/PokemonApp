@@ -1,6 +1,8 @@
-﻿button {
+﻿/*Algemeen*/
+button {
     outline: none;
 }
+
 /*Walkaround page*/
 header, .walkAround {
     text-align: center;
@@ -11,11 +13,10 @@ header, .walkAround {
     margin-left: auto;
     margin-right: auto;
 }
+
 .walkAround {
-    /*background-color: ghostwhite;*/
     border-radius: 20px;
     padding: 0.5em;
-    /*display: inline-block;*/
     margin-left: auto;
     margin-right: auto;
     width: 50%;
@@ -68,7 +69,6 @@ header, .walkAround {
     display: inline-block;
     width: 100%;
     margin-top: 1em;
-    /*margin-left: 25%;*/
 }
 
 .generatePokemon img {
@@ -97,11 +97,9 @@ header, .walkAround {
     position: absolute;
     top: 250px;
     left: 400px;
-    /*transition: position 2s;*/ /*werkt nog niet*/
-    /*transform: translate(50%, 10%) rotate(60deg) scale(0.75);*/
 }
 
-        /* Pokeball throw Animation */
+        /* Pokeball shake Animation */
 @keyframes shake {
     0% {
         transform: translate(0, 0) rotate(0);
@@ -178,6 +176,8 @@ header, .walkAround {
     }
 }
 
+
+
 /*Gotcha page*/
 .gotcha {
     background-image: url("/images/Backgrounds/ProfessorOakHome.png");
@@ -205,6 +205,9 @@ header, .walkAround {
 
 .gotcha a {
     padding: 5px;
+    text-decoration: none;
+    color: red;
+    font-size: 1.5em;
 }
 
 @media screen and (max-width: 650px) { /* voor gsm in breedte*/
@@ -231,6 +234,13 @@ header, .walkAround {
 
     .gotcha h2 {
         font-size: 20px;
+    }
+
+    .gotcha a {
+        padding: 5px;
+        text-decoration: none;
+        color: red;
+        font-size: 1em;
     }
 }
          /* Pokeball star animation */
@@ -321,6 +331,8 @@ header, .walkAround {
         transform: rotate(60deg) scale(1);
     }
 }
+
+
 
 /*RegisterSuccess page*/
 .welcome {

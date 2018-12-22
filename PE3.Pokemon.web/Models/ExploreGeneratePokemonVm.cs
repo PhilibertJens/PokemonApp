@@ -9,7 +9,8 @@ namespace PE3.Pokemon.web.Models
     public class ExploreGeneratePokemonVm
     {
         public MyPokemon AppearedPokemon { get; set; }
-        public int HP;
-        public List<string> Moves;
+        public int HP { get; set; }
+        public List<string> Moves { get; set; }
+        public string CheatingWarning { get; set; }
     }
 }
