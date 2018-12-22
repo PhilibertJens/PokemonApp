@@ -98,6 +98,7 @@ namespace PE3.Pokemon.web.Controllers
             vm.AppearedPokemon = appearedPokemon;
             vm.HP = pokemonData.HP;
             vm.Moves = pokemonData.Moves;
+            vm.CheatingWarning = pokemonData.CheatingWarning;
             return View(vm);
         }
 
@@ -115,6 +116,10 @@ namespace PE3.Pokemon.web.Controllers
             int luckyNumber = random.Next(0,2);
             if (luckyNumber == 1)//50% dat de pokemon is gevangen.
             {
+                pokemonData.Caught = true;/*om cheaten te vermijden*/
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
@@ -154,6 +159,15 @@ namespace PE3.Pokemon.web.Controllers
             string serializedPokemon = HttpContext.Session.GetString("PokemonData");
             if(PokemonErrorCheck(serializedPokemon)) return new RedirectToActionResult("Walkaround", "Explore", null);
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
+
+            if (!pokemonData.Caught)
+            {/*de bool niet op true gezet in CatchProcesser. De user heeft dus gecheat*/
+                pokemonData.CheatingWarning = "Professor Oak can't allow cheating!";
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+                return new RedirectToActionResult("GeneratePokemon", "Explore", null);
+            }
+
             var getPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
             ExploreGotchaVm vm = new ExploreGotchaVm();

@@ -3,6 +3,15 @@
     ViewData["Title"] = "GeneratePokemon";
 }
 
-<h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
+@{
+    if (Model.CheatingWarning != null)
+    {
+        <h2 class="text-danger">@Model.CheatingWarning</h2><br />
+    }
+    else
+    {
+        <h2>Oh, A Wild @Model.AppearedPokemon.Name Appeared!</h2><br />
+    }
+}
 
 <partial name="Partial/PokemonToCatchPartial" model="@Model" />

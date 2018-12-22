@@ -13,11 +13,10 @@ header, .walkAround {
     margin-left: auto;
     margin-right: auto;
 }
+
 .walkAround {
-    /*background-color: ghostwhite;*/
     border-radius: 20px;
     padding: 0.5em;
-    /*display: inline-block;*/
     margin-left: auto;
     margin-right: auto;
     width: 50%;
@@ -70,7 +69,6 @@ header, .walkAround {
     display: inline-block;
     width: 100%;
     margin-top: 1em;
-    /*margin-left: 25%;*/
 }
 
 .generatePokemon img {
@@ -99,11 +97,9 @@ header, .walkAround {
     position: absolute;
     top: 250px;
     left: 400px;
-    /*transition: position 2s;*/ /*werkt nog niet*/
-    /*transform: translate(50%, 10%) rotate(60deg) scale(0.75);*/
 }
 
-        /* Pokeball throw Animation */
+        /* Pokeball shake Animation */
 @keyframes shake {
     0% {
         transform: translate(0, 0) rotate(0);
@@ -179,6 +175,8 @@ header, .walkAround {
         left: 100px;
     }
 }
+
+
 
 /*Gotcha page*/
 .gotcha {
@@ -323,6 +321,8 @@ header, .walkAround {
         transform: rotate(60deg) scale(1);
     }
 }
+
+
 
 /*RegisterSuccess page*/
 .welcome {
