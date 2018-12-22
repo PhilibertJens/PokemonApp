@@ -1,6 +1,8 @@
-﻿button {
+﻿/*Algemeen*/
+button {
     outline: none;
 }
+
 /*Walkaround page*/
 header, .walkAround {
     text-align: center;

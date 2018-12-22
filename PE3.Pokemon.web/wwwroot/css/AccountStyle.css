@@ -107,6 +107,10 @@ h2 {
     }
 }
 
+button {
+    outline: none;
+}
+
 /*New fonts*/
 @font-face {
     font-family: PokemonGB;
