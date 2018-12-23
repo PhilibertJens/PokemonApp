@@ -100,6 +100,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Controllers
                 ImgUrl = pokemonCreateVm.ImgUrl,
                 Description = pokemonCreateVm.Description,
                 Location = pokemonCreateVm.location,
+                NDex = pokemonCreateVm.NDex,
                 Id = Guid.NewGuid()
                 
 

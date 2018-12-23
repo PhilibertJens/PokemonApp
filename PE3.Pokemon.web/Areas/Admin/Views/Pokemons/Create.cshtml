@@ -31,6 +31,11 @@
                 <span asp-validation-for="location" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="NDex" class="control-label">National Index N°</label>
+                <input asp-for="NDex" class="form-control" />
+                <span asp-validation-for="NDex" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="UploadedImage" class="control-label">Upload an image for this new Pokemon</label>
                 <input type="file" asp-for="UploadedImage" class="form-control" />
                 <p>
