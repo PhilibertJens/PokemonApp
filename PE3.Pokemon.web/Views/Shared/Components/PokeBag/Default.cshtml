@@ -1,14 +1,14 @@
 ﻿@using PE3.Pokemon.web.Entities
-@model IDictionary<MyPokemon,PokemonUser>
+@model PokebagVm
 
 <ul class="dropdown-menu">
     @{
-        if (Model.Any())
+        if (Model.MostCaught.Any())
         {
 
-            foreach (var pok in Model)
+            foreach (var p in Model.PokemonData)
             {
-                <li>@pok.Key.Name : @pok.Value.Catches</li>
+                <li>@p.Key : @p.Value.ToString()</li>
             }
         }
         else
