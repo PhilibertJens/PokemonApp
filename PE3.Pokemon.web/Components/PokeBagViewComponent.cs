@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
+using PE3.Pokemon.web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,14 +21,6 @@ namespace PE3.Pokemon.web.Components
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //----query in SSMS:----
-            //select u.Username, p.Name, pu.Catches
-            //from[dbo].[PokemonUsers] pu
-            //join Pokemons p on pu.PokemonId = p.Id
-            //join Users u on pu.UserId = u.Id
-            //where u.Id = '10000000-0000-0000-0000-000000000000'
-            //order by pu.Catches desc
-
             string userName = HttpContext.Session.GetString("Username");
             if (userName != null)
             {
@@ -40,26 +33,28 @@ namespace PE3.Pokemon.web.Components
                     .Where(u => u.UserId == currentUser.Id)
                     .CountAsync();
 
-                IDictionary<MyPokemon, PokemonUser> myPokemons;
+                var vm = new PokebagVm();
                 if (numberOfPokemon != 0)//als deze check niet gedaan wordt komt er een error wanneer je bag leeg is.
                 {
-                    var top3PokemonUser = await _pokemonContext.Set<PokemonUser>()
-                    .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
-                    .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
-                    .Where(u => u.UserId == currentUser.Id)
-                    .OrderByDescending(pu => pu.Catches)
-                    .Take(3).ToListAsync();
+                    vm.MostCaught = await _pokemonContext.Set<PokemonUser>()
+                                            .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
+                                            .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
+                                            .Where(u => u.UserId == currentUser.Id)
+                                            .OrderByDescending(pu => pu.Catches)
+                                            .Take(3).ToListAsync();
 
-                    myPokemons = new Dictionary<MyPokemon, PokemonUser>();
-                    foreach (var o in top3PokemonUser)
+                    vm.PokemonData = new Dictionary<string, short>();
+
+                    foreach (var mc in vm.MostCaught)
                     {
-                        myPokemons.Add(o.Pokemon, o);
+                        vm.PokemonData.Add(mc.Pokemon.Name, mc.Catches);
+
                     }
                 }
-                else myPokemons = new Dictionary<MyPokemon, PokemonUser>();
-                return View(myPokemons);
+                else vm.MostCaught = new List<PokemonUser>();
+                return View(vm);
             }
-            else return View(new Dictionary<MyPokemon, PokemonUser>());
+            else return View();
         }
     }
 }

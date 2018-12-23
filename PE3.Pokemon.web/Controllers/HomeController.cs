@@ -43,13 +43,13 @@ namespace PE3.Pokemon.web.Controllers
             return View(vm);
         }
 
-        public async Task<IActionResult> Pokemon(Guid id)
+        public async Task<IActionResult> Pokemon(short ndex)
         {
             string userName = HttpContext.Session.GetString("Username");
             if (userName == null) return new RedirectToActionResult("Login", "Account", null);
 
             var thisPoke = await pokemonContext.Pokemons
-                .Where(p => p.Id == id)
+                .Where(p => p.NDex == ndex)
                 .FirstOrDefaultAsync();
 
             thisPoke.PokemonTypes = await pokemonContext.PokemonTypes
