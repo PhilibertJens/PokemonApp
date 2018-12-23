@@ -248,7 +248,8 @@ namespace PE3.Pokemon.web.Data
                     HasAllolanForm = false,
                     ImgUrl = "Bulbasaur.png",
                     Location = "Starter",
-                    Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. "
+                    Description = "It bears the seed of a plant on its back from birth. The seed slowly develops. Researchers are unsure whether to classify Bulbasaur as a plant or animal. Bulbasaur are extremely calm and very difficult to capture in the wild. ",
+                    NDex = 1
                 },
                 new Entities.MyPokemon
                 {
@@ -257,8 +258,8 @@ namespace PE3.Pokemon.web.Data
                     HasAllolanForm = false,
                     ImgUrl = "Ivysaur.png",
                     Location = "Evolve Bulbasaur",
-                    Description = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind leg"
-
+                    Description = "When the bulb on its back grows large, it appears to lose the ability to stand on its hind leg",
+                    NDex = 2
                 },
                  new Entities.MyPokemon
                  {
@@ -267,8 +268,8 @@ namespace PE3.Pokemon.web.Data
                      HasAllolanForm = false,
                      ImgUrl = "Venusaur.png",
                      Location = "Evolve Ivysaur",
-                     Description = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight."
-
+                     Description = "The plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
+                     NDex = 3
                  },
                  new Entities.MyPokemon
                  {
@@ -277,8 +278,8 @@ namespace PE3.Pokemon.web.Data
                      HasAllolanForm = false,
                      ImgUrl = "Charmander.png",
                      Location = "Starter",
-                     Description = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail."
-
+                     Description = "Obviously prefers hot places. When it rains, steam is said to spout from the tip of its tail.",
+                     NDex = 4
                  },
                  new Entities.MyPokemon
                  {
@@ -287,8 +288,8 @@ namespace PE3.Pokemon.web.Data
                      HasAllolanForm = false,
                      ImgUrl = "Charmeleon.png",
                      Location = "Evolve Charmander",
-                     Description = "When it swings its burning tail, it elevates the temperature to unbearably high levels."
-
+                     Description = "When it swings its burning tail, it elevates the temperature to unbearably high levels.",
+                     NDex = 5
                  },
                  new Entities.MyPokemon
                  {
@@ -297,8 +298,8 @@ namespace PE3.Pokemon.web.Data
                      HasAllolanForm = false,
                      ImgUrl = "Charizard.png",
                      Location = "Evolve Charmeleon",
-                     Description = "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally."
-
+                     Description = "Spits fire that is hot enough to melt boulders. Known to cause forest fires unintentionally.",
+                     NDex = 6
                  },
                  new Entities.MyPokemon
                  {
@@ -307,8 +308,8 @@ namespace PE3.Pokemon.web.Data
                      HasAllolanForm = false,
                      ImgUrl = "Squirtle.png",
                      Location = "Starter",
-                     Description = "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth."
-
+                     Description = "After birth, its back swells and hardens into a shell. Powerfully sprays foam from its mouth.",
+                     NDex = 7
                  },
                   new Entities.MyPokemon
                   {
@@ -317,8 +318,8 @@ namespace PE3.Pokemon.web.Data
                       HasAllolanForm = false,
                       ImgUrl = "Wartortle.png",
                       Location = "Evolve Squirtle",
-                      Description = "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance"
-
+                      Description = "Often hides in water to stalk unwary prey. For swimming fast, it moves its ears to maintain balance",
+                      NDex = 8
                   },
                    new Entities.MyPokemon
                    {
@@ -327,8 +328,8 @@ namespace PE3.Pokemon.web.Data
                        HasAllolanForm = false,
                        ImgUrl = "Blastoise.png",
                        Location = "evolve Wartortle",
-                       Description = "A brutal Pokémon with pressurized water jets on its shell. They are used for high speed tackles."
-
+                       Description = "A brutal Pokémon with pressurized water jets on its shell. They are used for high speed tackles.",
+                       NDex = 9
                    },
                     new Entities.MyPokemon
                     {
@@ -337,8 +338,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Caterpie.png",
                         Location = "Routes 2, 24 and 25,Viridian Forest",
-                        Description = "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls."
-
+                        Description = "Its short feet are tipped with suction pads that enable it to tirelessly climb slopes and walls.",
+                        NDex = 10
                     },
                     new Entities.MyPokemon
                     {
@@ -347,8 +348,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Metapod.png",
                         Location = "Routes 24 and 25, Viridian Forest or evolve Caterpie",
-                        Description = "This Pokémon is vulnerable to attack while its shell is soft, exposing its weak and tender body"
-
+                        Description = "This Pokémon is vulnerable to attack while its shell is soft, exposing its weak and tender body",
+                        NDex = 11
                     },
                     new Entities.MyPokemon
                     {
@@ -357,8 +358,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Butterfree.png",
                         Location = "Evolve Metapod",
-                        Description = "In battle, it flaps its wings at high speed to release highly toxic dust into the air."
-
+                        Description = "In battle, it flaps its wings at high speed to release highly toxic dust into the air.",
+                        NDex = 12
                     },
                     new Entities.MyPokemon
                     {
@@ -367,8 +368,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Weedle.png",
                         Location = "Routes 2, 24, and 25, Viridian Forest",
-                        Description = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head."
-
+                        Description = "Often found in forests, eating leaves. It has a sharp venomous stinger on its head.",
+                        NDex = 13
                     },
                     new Entities.MyPokemon
                     {
@@ -377,8 +378,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Kakuna.png",
                         Location = "Routes 24 and 25, Viridian Forest",
-                        Description = "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators."
-
+                        Description = "Almost incapable of moving, this Pokémon can only harden its shell to protect itself from predators.",
+                        NDex = 14
                     },
                     new Entities.MyPokemon
                     {
@@ -387,8 +388,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Beedrill.png",
                         Location = "Evolve Kakuna",
-                        Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail."
-
+                        Description = "Flies at high speed and attacks using its large venomous stingers on its forelegs and tail.",
+                        NDex = 15
                     },
                     new Entities.MyPokemon
                     {
@@ -397,8 +398,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = true,
                         ImgUrl = "Rattata.png",
                         Location = "Somewhere",
-                        Description = "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth."
-
+                        Description = "Is a small, quadruped rodent Pokémon. Its most notable feature is its large teeth.",
+                        NDex = 19
                     },
                     new Entities.MyPokemon
                     {
@@ -407,8 +408,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Hitmonlee.png",
                         Location = "Somewhere",
-                        Description = "Is a humanoid Pokémon with an ovoid body. Hitmonlee's legs freely contract and stretch similar to a coiled spring."
-
+                        Description = "Is a humanoid Pokémon with an ovoid body. Hitmonlee's legs freely contract and stretch similar to a coiled spring.",
+                        NDex = 106
                     },
                     new Entities.MyPokemon
                     {
@@ -417,8 +418,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Pidgey.png",
                         Location = "Somewhere",
-                        Description = "Has an extremely sharp sense of direction and homing instincts."
-
+                        Description = "Has an extremely sharp sense of direction and homing instincts.",
+                        NDex = 16
                     },
                     new Entities.MyPokemon
                     {
@@ -427,8 +428,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Koffing.png",
                         Location = "Somewhere",
-                        Description = "Creates gases within its body by mixing toxins with garbage, and produces more gas in higher temperatures."
-
+                        Description = "Creates gases within its body by mixing toxins with garbage, and produces more gas in higher temperatures.",
+                        NDex = 109
                     },
                     new Entities.MyPokemon
                     {
@@ -437,8 +438,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = true,
                         ImgUrl = "Diglett.png",
                         Location = "Somewhere",
-                        Description = "Is a tiny, brown Pokémon that seems to be perpetually buried within the earth, leaving only its head visible."
-
+                        Description = "Is a tiny, brown Pokémon that seems to be perpetually buried within the earth, leaving only its head visible.",
+                        NDex = 50
                     },
                     new Entities.MyPokemon
                     {
@@ -447,8 +448,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Onix.png",
                         Location = "Somewhere",
-                        Description = "Resembles a giant chain of gray boulders that become smaller towards the tail."
-
+                        Description = "Resembles a giant chain of gray boulders that become smaller towards the tail.",
+                        NDex = 95
                     },
                     new Entities.MyPokemon
                     {
@@ -457,8 +458,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Gastly.png",
                         Location = "Somewhere",
-                        Description = "Has no true form, due to 95% of its body being poisonous gas."
-
+                        Description = "Has no true form, due to 95% of its body being poisonous gas.",
+                        NDex = 92
                     },
                     new Entities.MyPokemon
                     {
@@ -467,8 +468,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = true,
                         ImgUrl = "Pikachu.png",
                         Location = "Somewhere",
-                        Description = "Is covered in yellow fur with two horizontal brown stripes on its back."
-
+                        Description = "Is covered in yellow fur with two horizontal brown stripes on its back.",
+                        NDex = 25
                     },
                     new Entities.MyPokemon
                     {
@@ -477,8 +478,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Mewtwo.png",
                         Location = "Somewhere",
-                        Description = "Is a Pokémon created by science. It is a bipedal, humanoid creature with some feline features."
-
+                        Description = "Is a Pokémon created by science. It is a bipedal, humanoid creature with some feline features.",
+                        NDex = 150
                     },
                     new Entities.MyPokemon
                     {
@@ -487,8 +488,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Dewgong.png",
                         Location = "Somewhere",
-                        Description = "Has a snowy white, furry body, which renders it virtually invisible in snowy conditions."
-
+                        Description = "Has a snowy white, furry body, which renders it virtually invisible in snowy conditions.",
+                        NDex = 87
                     },
                     new Entities.MyPokemon
                     {
@@ -497,8 +498,8 @@ namespace PE3.Pokemon.web.Data
                         HasAllolanForm = false,
                         ImgUrl = "Dratini.png",
                         Location = "Somewhere",
-                        Description = "is filled with life energy. Dratini is constantly growing, and can thus reach lengths of over six feet."
-
+                        Description = "is filled with life energy. Dratini is constantly growing, and can thus reach lengths of over six feet.",
+                        NDex = 147
                     }
                 );
         }

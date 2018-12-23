@@ -4,7 +4,7 @@
 }
 @{ 
     StringBuilder sb = new StringBuilder();
-    byte catches = Model.PokemonUsers.FirstOrDefault().Catches;
+    short catches = Model.PokemonUsers.FirstOrDefault().Catches;
     var colors = new string[2];
     colors[0] = Model.PokemonTypes.FirstOrDefault().Type.Colour;
     colors[1] = (Model.PokemonTypes.Count < 2) ? colors[0] : Model.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
@@ -27,7 +27,7 @@
                 <p><b>Caught: </b>@catches.ToString()</p>
             </div>
             <div class="poke-item">
-                <p><b>ID: </b>@Model.Id.ToString().TrimStart(new char[] {'0','-'}).PadLeft(3,'0')</p>
+                <p><b>ID: </b>@Model.NDex.ToString().PadLeft(3,'0')</p>
             </div>
             <div class="poke-item">
                 <p><b>Type(s): </b>@sb.ToString()</p>

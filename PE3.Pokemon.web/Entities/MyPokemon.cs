@@ -15,6 +15,6 @@ namespace PE3.Pokemon.web.Entities
         public string Location { get; set; }
         public ICollection<PokemonType> PokemonTypes { get; set; }
         public ICollection<PokemonUser> PokemonUsers { get; set; }
-
+        public short NDex { get; set; } //National Index N° 
     }
 }
