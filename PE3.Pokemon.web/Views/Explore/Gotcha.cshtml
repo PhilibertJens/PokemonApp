@@ -1,4 +1,4 @@
-﻿@model PE3.Pokemon.web.Models.ExploreGotchaVm
+﻿@model PE3.Pokemon.web.Models.ExploreCatchVm
 @{
     ViewData["Title"] = "Gotcha";
 }
@@ -8,11 +8,11 @@
     <div class="congrats">
         <h2>Gotcha</h2>
 
-        <div>Congratulations <span>@Model.Username!</span></div>
+        <div>Congratulations <span>@Model.UserName!</span></div>
 
-        <p>You caught @Model.CaughtPokemon.Name</p>
+        <p>You caught @Model.AppearedPokemon.Name</p>
     </div>
-    <img src="~/images/PokeImages/@(Model.CaughtPokemon.ImgUrl)" class="caughtPokemon"/><br />
+    <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="caughtPokemon"/><br />
     <button type="submit" class="pokeball noclick" title="Go Pokeball!">
         <div class="stars">
             <img src="~/images/star.png" class="star1" />

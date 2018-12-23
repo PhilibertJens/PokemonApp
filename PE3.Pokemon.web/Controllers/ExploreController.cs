@@ -94,11 +94,12 @@ namespace PE3.Pokemon.web.Controllers
             appearedPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
 
-            ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
+            ExploreCatchVm vm = new ExploreCatchVm();
             vm.AppearedPokemon = appearedPokemon;
             vm.HP = pokemonData.HP;
             vm.Moves = pokemonData.Moves;
             vm.CheatingWarning = pokemonData.CheatingWarning;
+            vm.UserName = userName;
             return View(vm);
         }
 
@@ -119,7 +120,6 @@ namespace PE3.Pokemon.web.Controllers
                 pokemonData.Caught = true;/*om cheaten te vermijden*/
                 string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
                 HttpContext.Session.SetString("PokemonData", serializedPokemonData);
-
 
                 var me = pokemonContext.Users
                     .Where(u => u.Username == userName).FirstOrDefault();
@@ -143,13 +143,32 @@ namespace PE3.Pokemon.web.Controllers
                 return new RedirectToActionResult("Gotcha", "Explore", null);
             }
             else
-            {//de pokemon is niet gevangen. Dezelfde pagina wordt opnieuw getoond tot de pokemon is gevangen
-                ExploreGeneratePokemonVm vm = new ExploreGeneratePokemonVm();
-                vm.AppearedPokemon = getPokemon;
-                vm.HP = pokemonData.HP;
-                vm.Moves = pokemonData.Moves;
-                return View(vm);
+            {
+                pokemonData.CheatingWarning = null;
+                string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
+                HttpContext.Session.SetString("PokemonData", serializedPokemonData);
+                return new RedirectToActionResult("TryAgain", "Explore", null);
+                //om een refresh bij CatchProcesser te voorkomen word je weggestuurd
             }
+        }
+
+        public IActionResult TryAgain()
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            if (UserNameErrorCheck(userName)) return new RedirectToActionResult("Login", "Account", null);
+            string serializedPokemon = HttpContext.Session.GetString("PokemonData");
+            if (PokemonErrorCheck(serializedPokemon)) return new RedirectToActionResult("Walkaround", "Explore", null);
+
+            var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
+            var getPokemon = pokemonContext.Pokemons
+                    .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
+
+            ExploreCatchVm vm = new ExploreCatchVm();
+            vm.AppearedPokemon = getPokemon;
+            vm.HP = pokemonData.HP;
+            vm.Moves = pokemonData.Moves;
+            vm.UserName = userName;
+            return View(vm);
         }
 
         public IActionResult Gotcha()
@@ -161,7 +180,7 @@ namespace PE3.Pokemon.web.Controllers
             var pokemonData = JsonConvert.DeserializeObject<PokemonSessionData>(serializedPokemon);
 
             if (!pokemonData.Caught)
-            {/*de bool niet op true gezet in CatchProcesser. De user heeft dus gecheat*/
+            {/*de bool is niet op true gezet in CatchProcesser. De user heeft dus gecheat*/
                 pokemonData.CheatingWarning = "Professor Oak can't allow cheating!";
                 string serializedPokemonData = JsonConvert.SerializeObject(pokemonData);
                 HttpContext.Session.SetString("PokemonData", serializedPokemonData);
@@ -170,9 +189,11 @@ namespace PE3.Pokemon.web.Controllers
 
             var getPokemon = pokemonContext.Pokemons
                     .Where(p => p.Name == pokemonData.Name).FirstOrDefault();
-            ExploreGotchaVm vm = new ExploreGotchaVm();
-            vm.Username = userName;
-            vm.CaughtPokemon = getPokemon;
+            ExploreCatchVm vm = new ExploreCatchVm();
+            vm.AppearedPokemon = getPokemon;
+            vm.HP = pokemonData.HP;
+            vm.Moves = pokemonData.Moves;
+            vm.UserName = userName;
             return View(vm);
         }
 
