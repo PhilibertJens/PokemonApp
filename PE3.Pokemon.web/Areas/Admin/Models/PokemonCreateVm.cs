@@ -28,7 +28,9 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         [Required]
         public string location { get; set; }
 
-        
+        [Required]
+        public short NDex { get; set; }
+
         public IFormFile UploadedImage { get; set; }
     }
 }

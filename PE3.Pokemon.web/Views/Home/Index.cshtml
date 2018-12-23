@@ -9,7 +9,7 @@
 <div class="pokeview">
     <div class="pokelist">
         @{
-            foreach (var pokemon in Model.AllCaughtPokemon)
+            foreach (var pokemon in Model.AllCaughtPokemon.OrderBy(m => m.Key.NDex))
             {
                 var colors = new string[2];
                 colors[0] = pokemon.Key.PokemonTypes.FirstOrDefault().Type.Colour;
