@@ -18,6 +18,12 @@ body{
 .body-content{
   height: 100vh;
 }
+
+.poke-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+}
 .pokeview {
   width: 400px;
   min-height: 400px;
@@ -26,6 +32,9 @@ body{
   border: solid 1px black;
   border-radius: 10%;
   box-shadow: 5px 10px 8px black;
+}
+.pokeview > h3 {
+  text-align: center;
 }
 .pokelist{
   margin: 20px;
