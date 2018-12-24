@@ -6,7 +6,9 @@
 <h2>Index</h2>
 
 <div>Hello @Model.Username</div>
+<div class="poke-grid">
 <div class="pokeview">
+    <h3>Your caught Pokémon:</h3>
     <div class="pokelist">
         @{
             foreach (var pokemon in Model.AllCaughtPokemon.OrderBy(m => m.Key.NDex))
@@ -23,5 +25,6 @@
         }
     </div>
 </div>
-
+<partial name="Partial/PokemonListViewPartial" model="@Model" />
+</div>
 

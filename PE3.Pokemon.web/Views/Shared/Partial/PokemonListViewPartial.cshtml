@@ -1,0 +1,20 @@
+﻿@model HomeIndexVm
+
+<div class="pokeview">
+    <h3>All Pokémon in the game:</h3>
+    <div class="pokelist">
+        @{
+            foreach (var pokemon in Model.AllPokemonWithTypeInfo.OrderBy(p => p.NDex).Distinct())
+            {
+                var colors = new string[2];
+                colors[0] = pokemon.PokemonTypes.FirstOrDefault().Type.Colour;
+                colors[1] = (pokemon.PokemonTypes.Count < 2) ? colors[0] : pokemon.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
+                <div class="pokecell" style="background: linear-gradient(90deg, @colors[0] 50%, @colors[1] 50%);">
+                    <a title="@pokemon.Name">
+                        <img src="~/images/PokeImages/@pokemon.ImgUrl" />
+                    </a>
+                </div>
+            }
+        }
+    </div>
+</div>
