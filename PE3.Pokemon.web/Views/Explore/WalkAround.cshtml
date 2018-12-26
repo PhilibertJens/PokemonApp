@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "WalkAround";
 }
-    
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <header>
         <h2>Welcome to the world of Pokemon!</h2>
@@ -64,3 +64,12 @@
     </div>
 </div>
 <script src="~/js/konami.js"></script>
+
+@section niceSelect {
+    <environment names="Production, Staging">
+        <link rel="stylesheet" asp-append-version="true" href="~/css/nice-select.css" />
+    </environment>
+    <environment names="Development">
+        <link rel="stylesheet" asp-append-version="true" href="~/css/nice-select.css" />
+    </environment>
+}
