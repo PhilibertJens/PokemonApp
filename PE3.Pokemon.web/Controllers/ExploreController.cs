@@ -29,7 +29,7 @@ namespace PE3.Pokemon.web.Controllers
         {
             string userName = HttpContext.Session.GetString("Username");
             if (userName == null) return new RedirectToActionResult("Login", "Account", null);
-            HttpContext.Session.Remove("PokemonData"); //bestaande Session wordt verwijderd
+            HttpContext.Session.Remove("PokemonData");
             var listEnvironments = new List<SelectListItem> {
                 new SelectListItem { Value = "0", Text = "== Where are you? ==" },
                 new SelectListItem { Value = "1", Text = "In a forest" },
@@ -194,6 +194,8 @@ namespace PE3.Pokemon.web.Controllers
             vm.HP = pokemonData.HP;
             vm.Moves = pokemonData.Moves;
             vm.UserName = userName;
+            HttpContext.Session.Remove("PokemonData");//om minder geheugen in te nemen op de server.
+                                                      //Ook om een Redirect te forceren bij terugkeer naar de vorige pagina
             return View(vm);
         }
 
