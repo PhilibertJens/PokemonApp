@@ -11,7 +11,6 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/PokemonStyle.css" />
-        <link rel="stylesheet" href="~/css/nice-select.css" />
         <link rel="stylesheet" href="~/css/pokecards.css" />
     </environment>
     <environment exclude="Development">
@@ -20,6 +19,7 @@
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
+    @RenderSection("niceSelect", false)
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -40,6 +40,7 @@
                         <a>Poké-Bag</a>
                         <vc:poke-bag></vc:poke-bag>
                     </li>
+                    <li><a asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a></li>
                 </ul>
             </div>
         </div>
@@ -57,6 +58,7 @@
 
     <environment include="Development">
         <script src="~/bundles/pokebundle.min.js"></script> @*toolchain bundle*@
+        @RenderSection("addScriptsForCarousel", false)
         <script src="~/js/PokemonScript.js"></script>
     </environment>
     <environment exclude="Development">

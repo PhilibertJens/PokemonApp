@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "WalkAround";
 }
-    
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
     <header>
         <h2>Welcome to the world of Pokemon!</h2>
@@ -64,3 +64,19 @@
     </div>
 </div>
 <script src="~/js/konami.js"></script>
+
+@section niceSelect {
+    <environment names="Production, Staging">
+        <link rel="stylesheet" asp-append-version="true" href="~/css/nice-select.css" />
+    </environment>
+    <environment names="Development">
+        <link rel="stylesheet" asp-append-version="true" href="~/css/nice-select.css" />
+    </environment>
+}
+
+@*Als dit niet wordt toegevoegd werkt de Bootstrap Carousel niet meer. 
+  Dit doordat de bootstrap niet na de jquery wordt uitgevoerd*@
+@section addScriptsForCarousel {
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"></script>
+}
