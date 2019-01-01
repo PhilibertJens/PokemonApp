@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -40,7 +42,10 @@
                         <a>Poké-Bag</a>
                         <vc:poke-bag></vc:poke-bag>
                     </li>
-                    <li><a asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a></li>
+                    @{
+                        string userName = Context.Session.GetString("Username");
+                        <li><a asp-area="" asp-controller="Account" asp-action="LogOut">Log Out trainer @userName</a></li>
+                    }
                 </ul>
             </div>
         </div>
