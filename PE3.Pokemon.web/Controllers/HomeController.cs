@@ -14,11 +14,9 @@ namespace PE3.Pokemon.web.Controllers
     public class HomeController : Controller
     {
         private PokemonContext pokemonContext;
-        private LoginChecker loginChecker;
 
         public HomeController(PokemonContext context)
         {
-            loginChecker = new LoginChecker();
             pokemonContext = context;
         }
 
