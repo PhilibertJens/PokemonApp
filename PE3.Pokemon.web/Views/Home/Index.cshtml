@@ -8,7 +8,7 @@
 <div>Hello @Model.Username</div>
 <div class="poke-grid">
 <div class="pokeview">
-    <h3>Your caught Pokémon:</h3>
+    <h3>Your caught Pokémon: @Model.AllCaughtPokemon.Count / @Model.AllPokemonWithTypeInfo.Count()</h3>
     <div class="pokelist">
         @{
             foreach (var pokemon in Model.AllCaughtPokemon.OrderBy(m => m.Key.NDex))
