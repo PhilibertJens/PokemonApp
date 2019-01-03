@@ -1,49 +1,26 @@
-﻿@model PE3.Pokemon.web.Entities.MyPokemon
-@{
-    ViewData["Title"] = "Pokemon";
-}
-@{ 
-    StringBuilder sb = new StringBuilder();
-    short catches;
-    if (Model.PokemonUsers.FirstOrDefault() == null)
-    {
-        catches = 0;
-    }
-    else
-    {
-        catches = Model.PokemonUsers.FirstOrDefault().Catches;
-    }
-    var colors = new string[2];
-    colors[0] = Model.PokemonTypes.FirstOrDefault().Type.Colour;
-    colors[1] = (Model.PokemonTypes.Count < 2) ? colors[0] : Model.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
-    foreach(var t in Model.PokemonTypes)
-    {
-        sb.Append($"{t.Type.Name} ");
-    }
-}
+﻿@model HomePokemonVm
 
 <div class="pokeview">
     <div class="pokedetail">
-        <div class="poke-img" style="background: linear-gradient(90deg, @colors[0] 50%, @colors[1] 50%);">
-            <img src="~/images/PokeImages/@Model.ImgUrl" />
+        <div class="poke-img" style="background: linear-gradient(90deg, @Model.Colors[0] 50%, @Model.Colors[1] 50%);">
+            <img src="~/images/PokeImages/@Model.SelectedPokemon.ImgUrl" />
         </div>
         <div class="poke-meta">
             <div class="poke-item">
-                <p><b>Name: </b>@Model.Name</p>
+                <p><b>Name: </b>@Model.SelectedPokemon.Name</p>
             </div>
             <div class="poke-item">
-                <p><b>Caught: </b>@catches.ToString()</p>
+                <p><b>Caught: </b>@Model.Catches.ToString()</p>
             </div>
             <div class="poke-item">
-                <p><b>ID: </b>@Model.NDex.ToString().PadLeft(3,'0')</p>
+                <p><b>ID: </b>@Model.SelectedPokemon.NDex.ToString().PadLeft(3,'0')</p>
             </div>
             <div class="poke-item">
-                <p><b>Type(s): </b>@sb.ToString()</p>
+                <p><b>Type(s): </b>@Model.Sb.ToString()</p>
             </div>
             <div class="poke-item">
-                <p><b>Descr: </b>@Model.Description </p>
+                <p><b>Descr: </b>@Model.SelectedPokemon.Description </p>
             </div>
         </div>
     </div>
 </div>
-
