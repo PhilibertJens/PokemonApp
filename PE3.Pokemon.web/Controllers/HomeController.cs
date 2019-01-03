@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -83,11 +84,16 @@ namespace PE3.Pokemon.web.Controllers
 
             if (statusCode.HasValue)
             {
-                if(statusCode == 404)
+                int? vn = 200;
+                switch (statusCode)
                 {
-                    string vn = $"Page{statusCode.ToString()}";
-                    return View(vn);
+                    case (int?)HttpStatusCode.NotFound:
+                        vn = statusCode;
+                        break;
+                    default:
+                        break;
                 }
+                return View($"Page{vn.ToString()}");
             }
             return View();
         }
