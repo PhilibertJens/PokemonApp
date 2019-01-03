@@ -3,28 +3,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
-
-<div>Hello @Model.Username</div>
+<h2>Pokédex of @Model.Username</h2>
+<p>Hey trainer. Here you can see your progress</p>
 <div class="poke-grid">
-<div class="pokeview">
-    <h3>Your caught Pokémon: @Model.AllCaughtPokemon.Count / @Model.AllPokemonWithTypeInfo.Distinct().Count()</h3>
-    <div class="pokelist">
-        @{
-            foreach (var pokemon in Model.AllCaughtPokemon.OrderBy(m => m.Key.NDex))
-            {
-                var colors = new string[2];
-                colors[0] = pokemon.Key.PokemonTypes.FirstOrDefault().Type.Colour;
-                colors[1] = (pokemon.Key.PokemonTypes.Count < 2) ? colors[0] : pokemon.Key.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
-                <div class="pokecell" style="background: linear-gradient(90deg, @colors[0] 50%, @colors[1] 50%);">
-                    <a title="@pokemon.Key.Name" asp-controller="Home" asp-action="Pokemon" asp-route-ndex="@pokemon.Key.NDex">
-                        <img src="~/images/PokeImages/@pokemon.Key.ImgUrl" />
-                    </a>
-                </div>
-            }
-        }
+    <div class="pokeview">
+        <h3>Your caught Pokémon: @Model.AllCaughtPokemon.Count() / @Model.AllPokemonWithTypeInfo.Distinct().Count()</h3>
+        <partial name="Partial/PokemonListViewPartial" model="Model.AllCaughtPokemon.OrderBy(m => m.NDex)" />
     </div>
-</div>
-<partial name="Partial/PokemonListViewPartial" model="@Model" />
+    <div class="pokeview">
+        <h3>Number of Pokemon: @Model.AllPokemonWithTypeInfo.Distinct().Count()</h3>
+        <partial name="Partial/PokemonListViewPartial" model="Model.AllPokemonWithTypeInfo.OrderBy(p => p.NDex).Distinct()" />
+    </div>
 </div>
 
