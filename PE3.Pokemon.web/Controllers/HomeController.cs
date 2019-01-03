@@ -78,7 +78,7 @@ namespace PE3.Pokemon.web.Controllers
             return View();
         }
 
-        private async Task<IDictionary<MyPokemon, PokemonUser>> getAllCaught(string username)
+        private async Task<IEnumerable<MyPokemon>> getAllCaught(string username)
         {
             var numberOfPokemon = await pokemonContext.Set<PokemonUser>()
                     .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
@@ -86,22 +86,18 @@ namespace PE3.Pokemon.web.Controllers
                     .Where(u => u.User.Username == username)
                     .CountAsync();
 
-            IDictionary<MyPokemon, PokemonUser> myPokemons;
-            if(numberOfPokemon != 0)
+            List<MyPokemon> myPokemonList = new List<MyPokemon>();
+            if (numberOfPokemon != 0)
             {
                 var allPoke = await pokemonContext.Set<PokemonUser>()//all pokemonuser objects per current user
                     .Include(pu => pu.Pokemon).ThenInclude(p => p.PokemonUsers)
                     .Include(pu => pu.User).ThenInclude(u => u.PokemonUsers)
                     .Where(u => u.User.Username == username).ToListAsync();
-                myPokemons = new Dictionary<MyPokemon, PokemonUser>();
-                foreach (var o in allPoke)
-                {
-                    myPokemons.Add(o.Pokemon, o);
-                }
-            }
-            else myPokemons = new Dictionary<MyPokemon, PokemonUser>();
 
-            return myPokemons;
+                foreach (var el in allPoke) myPokemonList.Add(el.Pokemon);
+            }
+            else myPokemonList = new List<MyPokemon>();
+            return myPokemonList;
         }
     }
 }

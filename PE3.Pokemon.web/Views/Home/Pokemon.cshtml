@@ -4,7 +4,15 @@
 }
 @{ 
     StringBuilder sb = new StringBuilder();
-    short catches = Model.PokemonUsers.FirstOrDefault().Catches;
+    short catches;
+    if (Model.PokemonUsers.FirstOrDefault() == null)
+    {
+        catches = 0;
+    }
+    else
+    {
+        catches = Model.PokemonUsers.FirstOrDefault().Catches;
+    }
     var colors = new string[2];
     colors[0] = Model.PokemonTypes.FirstOrDefault().Type.Colour;
     colors[1] = (Model.PokemonTypes.Count < 2) ? colors[0] : Model.PokemonTypes.ElementAtOrDefault(1).Type.Colour;
