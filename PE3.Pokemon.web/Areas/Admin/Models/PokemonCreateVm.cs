@@ -19,7 +19,7 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         
         public string ImgUrl { get; set; }
 
-        
+        [Required]
         public string Type { get; set; }
 
         [Required]
@@ -29,8 +29,10 @@ namespace PE3.Pokemon.web.Areas.Admin.Models
         public string location { get; set; }
 
         [Required]
+        [Range(1, short.MaxValue)]
         public short NDex { get; set; }
 
+        [Required]
         public IFormFile UploadedImage { get; set; }
     }
 }
