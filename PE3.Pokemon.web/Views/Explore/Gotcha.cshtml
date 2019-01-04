@@ -12,14 +12,14 @@
 
         <p>You caught @Model.AppearedPokemon.Name</p>
     </div>
-    <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="caughtPokemon"/><br />
+    <img src="~/images/PokeImages/@(Model.AppearedPokemon.ImgUrl)" class="caughtPokemon" alt="@Model.AppearedPokemon.Name" title="Caugth @Model.AppearedPokemon.Name"/><br />
     <button type="submit" class="pokeball noclick" title="Go Pokeball!">
         <div class="stars">
             <img src="~/images/star.png" class="star1" />
             <img src="~/images/star.png" class="star2" />
             <img src="~/images/star.png" class="star3" />
         </div>
-        <img src="~/images/Backgrounds/Pokeball.png" class="pokeballStar"/>
+        <img src="~/images/Backgrounds/Pokeball.png" class="pokeballStar" alt="Pokeball"/>
     </button>
     <a asp-controller="Home" asp-action="Index">Return to home or wait <span id="gotchaTimer">10</span> seconds</a>
 </div>
