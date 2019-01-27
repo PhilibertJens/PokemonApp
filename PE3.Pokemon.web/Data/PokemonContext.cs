@@ -18,6 +18,9 @@ namespace PE3.Pokemon.web.Data
         public DbSet<User> Users { get; set; }
         public DbSet<PokemonType> PokemonTypes { get; set; }
         public DbSet<PokemonUser> PokemonUsers { get; set; }
+        public DbSet<Chat> Chats { get; set; }
+        public DbSet<UserChat> UserChats { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +45,27 @@ namespace PE3.Pokemon.web.Data
                 .HasKey(pu => new { pu.PokemonId, pu.UserId });
 
             #endregion
+
+            modelBuilder.Entity<Chat>()
+                .HasMany(c => c.UserChats)
+                .WithOne(uc => uc.Chat);
+
+            modelBuilder.Entity<Chat>()
+                .HasMany(c => c.Messages)
+                .WithOne(m => m.Chat);
+
+            modelBuilder.Entity<UserChat>()
+                .HasKey(uc => new { uc.ChatId, uc.UserId });
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Sender)
+                .WithMany(s => s.Messages)
+                .HasForeignKey(m => m.SenderId);
+
+            modelBuilder.Entity<Message>()
+                .HasOne(m => m.Chat)
+                .WithMany(c => c.Messages)
+                .HasForeignKey(m => m.ChatId);
 
             DataSeeder.Seed(modelBuilder);
 
