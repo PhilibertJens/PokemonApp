@@ -12,6 +12,10 @@ namespace PE3.Pokemon.web.Entities
         public string LastName { get; set; }
         public string Password { get; set; }
         public string Username{ get; set; }
+
+        /*Navigation properties*/
         public ICollection<PokemonUser> PokemonUsers { get; set; }
+        public ICollection<UserChat> UserChats { get; set; }
+        public ICollection<Message> Messages { get; set; }
     }
 }
