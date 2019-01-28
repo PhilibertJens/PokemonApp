@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    $('select').niceSelect();
+    $('.walkAround select').niceSelect();
     $('.pokeball').on('click', AnimateAndCatchPokemon);
     $('.noclick').unbind();
     if (window.location.pathname === "/Explore/Gotcha") StartTimer(false);
