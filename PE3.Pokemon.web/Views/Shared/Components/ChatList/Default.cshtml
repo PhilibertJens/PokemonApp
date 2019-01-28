@@ -1,0 +1,15 @@
+﻿@model AllChatsForUserVm
+@{
+    ViewData["Title"] = "Default";
+}
+
+<div class="list-group">
+    @{
+        foreach (var chat in Model.ListChats)
+        {
+            <a asp-action="FindByDestination" asp-route-destinationId="@(chat.Id)" class="list-group-item list-group-item-action">
+                @(chat.Name)
+            </a>
+        }
+    }
+</div>

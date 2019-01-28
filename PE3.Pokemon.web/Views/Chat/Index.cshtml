@@ -3,7 +3,7 @@
 <div class="row chat">
     <div class="col-md-12">
         <h1>All chats for User @Model.User.Username</h1>
-        
+        <vc:chat-list></vc:chat-list>
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
@@ -12,23 +12,5 @@
             </div>
             <button type="submit" class="noLayout">Go to chat</button>
         </form>
-        <a asp-action="AddChat">New chat</a>
-        <table>
-            <thead>
-                <th>Naam</th>
-                <th>Id</th>
-                <th>Last message</th>
-            </thead>
-            <tbody>
-                @{
-                    foreach (var chat in Model.AllUserChatsForUser)
-                    {
-                        <td>@chat.Name</td>
-                        <td>@chat.Id</td>
-                        <td>@chat.LastMessage</td>
-                    }
-                }
-                </tbody>
-        </table>
     </div>
 </div>

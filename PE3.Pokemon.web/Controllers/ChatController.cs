@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using PE3.Pokemon.web.Data;
 using PE3.Pokemon.web.Entities;
 using PE3.Pokemon.web.Models;
@@ -54,5 +55,36 @@ namespace PE3.Pokemon.web.Controllers
 
             return View(vm);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(ChatIndexVm userdata)
+        {
+            if (ModelState.IsValid)
+            {
+                User selectedUser = await pokemonContext.Users
+                .Where(u => u.Id == userdata.SelectedUserId)
+                .FirstOrDefaultAsync();
+                string serializedReceiver = JsonConvert.SerializeObject(selectedUser);
+                HttpContext.Session.SetString("ReceiverData", serializedReceiver);
+                return new RedirectToActionResult("SendFirstMessage", "Chat", null);
+            }
+
+            return View(userdata);
+        }
+
+        public IActionResult SendFirstMessage()
+        {
+            var serializedReceiver = HttpContext.Session.GetString("ReceiverData");
+            User ChatReceiver = JsonConvert.DeserializeObject<User>(serializedReceiver);
+
+            ChatSendFirstMessageVm vm = new ChatSendFirstMessageVm()
+            {
+                Receiver = ChatReceiver
+            };
+            return View(vm);
+        }
+
+
     }
 }
