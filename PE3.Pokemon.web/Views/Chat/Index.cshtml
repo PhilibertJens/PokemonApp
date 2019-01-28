@@ -1,0 +1,34 @@
+﻿@model ChatIndexVm
+
+<div class="row chat">
+    <div class="col-md-12">
+        <h1>All chats for User @Model.User.Username</h1>
+        
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <label asp-for="SelectedUserId" class="control-label"></label>
+                <select asp-for="SelectedUserId" class="form-control" asp-items="@(Model.AllUsers)"></select>
+            </div>
+            <button type="submit" class="noLayout">Go to chat</button>
+        </form>
+        <a asp-action="AddChat">New chat</a>
+        <table>
+            <thead>
+                <th>Naam</th>
+                <th>Id</th>
+                <th>Last message</th>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var chat in Model.AllUserChatsForUser)
+                    {
+                        <td>@chat.Name</td>
+                        <td>@chat.Id</td>
+                        <td>@chat.LastMessage</td>
+                    }
+                }
+                </tbody>
+        </table>
+    </div>
+</div>
