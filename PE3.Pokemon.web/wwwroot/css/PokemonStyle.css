@@ -361,3 +361,17 @@ header, .walkAround {
     font-family: PokemonGB;
     src: url('/fonts/Pokemon_GB.ttf');
 }
+
+.chat ul li {
+    list-style-type: none;
+    border-radius: 20px;
+    padding: 0.5em;
+}
+
+.chat .me{
+    background-color: green;
+}
+
+.chat .other {
+    background-color: blue;
+}

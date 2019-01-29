@@ -160,7 +160,7 @@ namespace PE3.Pokemon.web.Controllers
         {
             string userName = HttpContext.Session.GetString("Username");
             var currentChat = await pokemonContext.Chats
-                    .Include(c => c.Messages)
+                    .Include(c => c.Messages).ThenInclude(m => m.Sender)
                     .Include(c => c.UserChats)
                     .Where(c => c.Id == chatId).FirstOrDefaultAsync();
 
@@ -172,6 +172,30 @@ namespace PE3.Pokemon.web.Controllers
 
             return View(vm);
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChatWithName(ChatWithNameVm userdata)
+        {
+            if (ModelState.IsValid)
+            {
+                string userName = HttpContext.Session.GetString("Username");
+                var me = await pokemonContext.Users
+                    .Where(u => u.Username == userName).FirstOrDefaultAsync();
+
+                Message message = new Message
+                {
+                    ChatId = userdata.Chat.Id,
+                    Sender = me,
+                    Text = userdata.Text,
+                    SendDate = DateTime.Now
+                };
+                pokemonContext.Messages.Add(message);
+                await pokemonContext.SaveChangesAsync();
+                return new RedirectToActionResult("ChatWithName", "Chat", userdata.Chat.Id);
+            }
+            return View(userdata);
         }
     }
 }
