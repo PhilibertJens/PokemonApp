@@ -14,9 +14,28 @@
             {
                 foreach (var chat in Model.ListChats)
                 {
-                    <a asp-action="FindByDestination" asp-route-destinationId="@(chat.Id)" class="list-group-item list-group-item-action">
+                    var otherUser = "";
+                    if(chat.UserChats == null)
+                    {
+                        <p>Nope</p>
+                    }
+                    else
+                    {
+                    foreach (var uc in chat.UserChats)
+                    {//uc.User is null wanneer deze Component wordt uitgevoerd bij ChatWithName.cshtml
+                        if (uc.User == null || uc.User.Username == Model.Username)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            otherUser = uc.User.Username;
+                        }
+                    }
+                    <a asp-action="ChatWithName" asp-route-chatId="@(chat.Id)" class="list-group-item list-group-item-action">
                         @(chat.Name)
                     </a>
+                    }
                 }
             }
         }

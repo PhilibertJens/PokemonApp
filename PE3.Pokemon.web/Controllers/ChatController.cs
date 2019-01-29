@@ -25,7 +25,6 @@ namespace PE3.Pokemon.web.Controllers
         public async Task<IActionResult> Index()
         {
             string userName = HttpContext.Session.GetString("Username");
-
             User user = await pokemonContext.Users
                 .Where(u => u.Username == userName)
                 .FirstOrDefaultAsync();
@@ -33,19 +32,11 @@ namespace PE3.Pokemon.web.Controllers
             var allUsers = await pokemonContext.Users.ToListAsync();
             allUsers = await FilterUserList(allUsers, userName);
 
-            var allUserChatsForUser = await pokemonContext.UserChats
-                .Include(uc => uc.Chat).ThenInclude(c => c.UserChats)
-                .Include(uc => uc.User).ThenInclude(u => u.UserChats)
-                .Where(uc => uc.User.Username == userName)
-                .Select(uc => uc.Chat).ToListAsync();
-
             ChatIndexVm vm = new ChatIndexVm()
             {
-                AllUserChatsForUser = allUserChatsForUser,
                 User = user,
                 AllUsers = new SelectList(allUsers, "Id", "Username")
             };
-
             return View(vm);
         }
 
@@ -59,8 +50,6 @@ namespace PE3.Pokemon.web.Controllers
                     break;
                 }
             }
-            var allChats = await pokemonContext.Chats
-                .Include(c => c.UserChats).ToListAsync();
 
             var allUserChats = await pokemonContext.UserChats
                 .Include(uc => uc.Chat).ThenInclude(c => c.UserChats)
@@ -167,6 +156,22 @@ namespace PE3.Pokemon.web.Controllers
             return View(vm);
         }
 
+        public async Task<IActionResult> ChatWithName(Guid chatId)
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            var currentChat = await pokemonContext.Chats
+                    .Include(c => c.Messages)
+                    .Include(c => c.UserChats)
+                    .Where(c => c.Id == chatId).FirstOrDefaultAsync();
 
+            ChatWithNameVm vm = new ChatWithNameVm
+            {
+                Chat = currentChat,
+                Username = userName
+            };
+
+            return View(vm);
+
+        }
     }
 }

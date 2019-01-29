@@ -1,15 +1,23 @@
-﻿@model ChatSendFirstMessageVm
+﻿@model ChatWithNameVm
 @{
-    ViewData["Title"] = "SendMessage";
+//ViewData["Title"] = "ChatWithUser";
 }
+
 <div class="row chat">
     <vc:chat-list></vc:chat-list>
     <div class="col-md-8">
-        <h2>Message to @Model.Receiver.Username</h2>
+        <h2>Message to @Model.Chat.Name</h2>
+        <ul>
+            @{ 
+                foreach(var message in Model.Chat.Messages)
+                {
+                    <li>@message.Text<br />@message.SendDate</li>
+                }
+            }
+        </ul>
         <form method="post">
             <div asp-validation-summary="ModelOnly"></div>
             <div class="form-group">
-                @*<label asp-for="Text"></label>*@
                 <input asp-for="Text" class="form-control">
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>

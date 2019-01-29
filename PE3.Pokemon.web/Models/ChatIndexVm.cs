@@ -11,7 +11,6 @@ namespace PE3.Pokemon.web.Models
     public class ChatIndexVm
     {
         public User User { get; set; }
-        //public ICollection<User> AllUsers { get; set; }
         public ICollection<Chat> AllUserChatsForUser { get; set; }
 
         [Required]
