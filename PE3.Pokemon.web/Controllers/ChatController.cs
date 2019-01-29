@@ -31,14 +31,7 @@ namespace PE3.Pokemon.web.Controllers
                 .FirstOrDefaultAsync();
 
             var allUsers = await pokemonContext.Users.ToListAsync();
-            foreach (var item in allUsers)
-            {
-                if (item.Username == userName)
-                {//eigen username verwijderen uit list en de loop stoppen.
-                    allUsers.Remove(item);
-                    break;
-                }
-            }
+            allUsers = await FilterUserList(allUsers, userName);
 
             var allUserChatsForUser = await pokemonContext.UserChats
                 .Include(uc => uc.Chat).ThenInclude(c => c.UserChats)
@@ -54,6 +47,39 @@ namespace PE3.Pokemon.web.Controllers
             };
 
             return View(vm);
+        }
+
+        private async Task<List<User>> FilterUserList(List<User> allUsers, string userName)
+        {
+            foreach (var item in allUsers)
+            {
+                if (item.Username == userName)
+                {//eigen username verwijderen uit list en de loop stoppen.
+                    allUsers.Remove(item);
+                    break;
+                }
+            }
+            var allChats = await pokemonContext.Chats
+                .Include(c => c.UserChats).ToListAsync();
+
+            var allUserChats = await pokemonContext.UserChats
+                .Include(uc => uc.Chat).ThenInclude(c => c.UserChats)
+                .Include(uc => uc.User).ThenInclude(u => u.UserChats)
+                .Where(uc => uc.User.Username == userName).ToListAsync();
+
+            var list = new List<User>();//bepalen met welke andere gebruikers je al een chat hebt
+            foreach(var userchat in allUserChats)
+            {
+                var chat = userchat.Chat;
+                foreach(var uc in chat.UserChats)
+                {
+                    if (uc.User.Username == userName) continue;
+                    else list.Add(uc.User);
+                }
+            }
+
+            foreach(var user in list) allUsers.Remove(user);
+            return allUsers;//enkel de gebruikers waarmee je nog geen gesprek bent gestart
         }
 
         [HttpPost]
