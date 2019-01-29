@@ -65,6 +65,7 @@
     <environment include="Development">
         <script src="~/bundles/pokebundle.min.js"></script> @*toolchain bundle*@
         @RenderSection("addScriptsForCarousel", false)
+        @RenderSection("jqueryValidate", false)
         <script src="~/js/PokemonScript.js"></script>
     </environment>
     <environment exclude="Development">

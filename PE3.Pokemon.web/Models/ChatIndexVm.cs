@@ -11,11 +11,9 @@ namespace PE3.Pokemon.web.Models
     public class ChatIndexVm
     {
         public User User { get; set; }
-        //public ICollection<User> AllUsers { get; set; }
         public ICollection<Chat> AllUserChatsForUser { get; set; }
 
         [Required]
-        [Display(Name = "Select a trainer")]
         public Guid SelectedUserId { get; set; }
         public SelectList AllUsers { get; set; }
     }

@@ -25,12 +25,23 @@ namespace PE3.Pokemon.web.Controllers
         public async Task<IActionResult> Index()
         {
             string userName = HttpContext.Session.GetString("Username");
-
             User user = await pokemonContext.Users
                 .Where(u => u.Username == userName)
                 .FirstOrDefaultAsync();
 
             var allUsers = await pokemonContext.Users.ToListAsync();
+            allUsers = await FilterUserList(allUsers, userName);
+
+            ChatIndexVm vm = new ChatIndexVm()
+            {
+                User = user,
+                AllUsers = new SelectList(allUsers, "Id", "Username")
+            };
+            return View(vm);
+        }
+
+        private async Task<List<User>> FilterUserList(List<User> allUsers, string userName)
+        {
             foreach (var item in allUsers)
             {
                 if (item.Username == userName)
@@ -40,20 +51,24 @@ namespace PE3.Pokemon.web.Controllers
                 }
             }
 
-            var allUserChatsForUser = await pokemonContext.UserChats
+            var allUserChats = await pokemonContext.UserChats
                 .Include(uc => uc.Chat).ThenInclude(c => c.UserChats)
                 .Include(uc => uc.User).ThenInclude(u => u.UserChats)
-                .Where(uc => uc.User.Username == userName)
-                .Select(uc => uc.Chat).ToListAsync();
+                .Where(uc => uc.User.Username == userName).ToListAsync();
 
-            ChatIndexVm vm = new ChatIndexVm()
+            var list = new List<User>();//bepalen met welke andere gebruikers je al een chat hebt
+            foreach(var userchat in allUserChats)
             {
-                AllUserChatsForUser = allUserChatsForUser,
-                User = user,
-                AllUsers = new SelectList(allUsers, "Id", "Username")
-            };
+                var chat = userchat.Chat;
+                foreach(var uc in chat.UserChats)
+                {
+                    if (uc.User.Username == userName) continue;
+                    else list.Add(uc.User);
+                }
+            }
 
-            return View(vm);
+            foreach(var user in list) allUsers.Remove(user);
+            return allUsers;//enkel de gebruikers waarmee je nog geen gesprek bent gestart
         }
 
         [HttpPost]
@@ -89,15 +104,15 @@ namespace PE3.Pokemon.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendFirstMessage(ChatSendFirstMessageVm vm)
         {
+            var serializedReceiver = HttpContext.Session.GetString("ReceiverData");
+            User chatReceiver = JsonConvert.DeserializeObject<User>(serializedReceiver);
+
             if (ModelState.IsValid)
             {
                 string userName = HttpContext.Session.GetString("Username");
                 User user = await pokemonContext.Users
                     .Where(u => u.Username == userName)
                     .FirstOrDefaultAsync();
-
-                var serializedReceiver = HttpContext.Session.GetString("ReceiverData");
-                User chatReceiver = JsonConvert.DeserializeObject<User>(serializedReceiver);
 
                 var chatName = userName + ", " + chatReceiver.Username;
                 Chat chat = new Chat
@@ -137,9 +152,50 @@ namespace PE3.Pokemon.web.Controllers
                 await pokemonContext.SaveChangesAsync();
                 return new RedirectToActionResult("Index", "Chat", null);
             }
+            vm.Receiver = chatReceiver;
             return View(vm);
         }
 
+        public async Task<IActionResult> ChatWithName(Guid chatId)
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            var currentChat = await pokemonContext.Chats
+                    .Include(c => c.Messages).ThenInclude(m => m.Sender)
+                    .Include(c => c.UserChats)
+                    .Where(c => c.Id == chatId).FirstOrDefaultAsync();
 
+            ChatWithNameVm vm = new ChatWithNameVm
+            {
+                Chat = currentChat,
+                Username = userName
+            };
+
+            return View(vm);
+
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChatWithName(ChatWithNameVm userdata)
+        {
+            if (ModelState.IsValid)
+            {
+                string userName = HttpContext.Session.GetString("Username");
+                var me = await pokemonContext.Users
+                    .Where(u => u.Username == userName).FirstOrDefaultAsync();
+
+                Message message = new Message
+                {
+                    ChatId = userdata.Chat.Id,
+                    Sender = me,
+                    Text = userdata.Text,
+                    SendDate = DateTime.Now
+                };
+                pokemonContext.Messages.Add(message);
+                await pokemonContext.SaveChangesAsync();
+                return new RedirectToActionResult("ChatWithName", "Chat", userdata.Chat.Id);
+            }
+            return View(userdata);
+        }
     }
 }

@@ -1,16 +1,25 @@
 ﻿@model ChatIndexVm
 
+
 <div class="row chat">
-    <div class="col-md-12">
-        <h1>All chats for User @Model.User.Username</h1>
-        <vc:chat-list></vc:chat-list>
-        <form method="post">
-            <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <label asp-for="SelectedUserId" class="control-label"></label>
-                <select asp-for="SelectedUserId" class="form-control" asp-items="@(Model.AllUsers)"></select>
-            </div>
-            <button type="submit" class="noLayout">Go to chat</button>
-        </form>
+    <vc:chat-list></vc:chat-list>
+    <div class="col-md-8">
+        <h1>Hey @(Model.User.Username). Start a new chat here</h1>
+        @{
+            if (Model.AllUsers.Count() == 0)
+            {
+                <p>You started a chat with all available users.</p>
+            }
+            else
+            {
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <select asp-for="SelectedUserId" class="form-control" asp-items="@(Model.AllUsers)"></select>
+                    </div>
+                    <button type="submit" class="noLayout">Go to chat</button>
+                </form>
+            }
+        }
     </div>
 </div>

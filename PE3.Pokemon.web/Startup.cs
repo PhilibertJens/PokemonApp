@@ -74,6 +74,12 @@ namespace PE3.Pokemon.web
                     );
 
                 routes.MapRoute(
+                    name: "chat",
+                    template: "chat/ChatWithName/{chatId?}",
+                    defaults: new { Controller = "Chat", action = "ChatWithName" }
+                );
+
+                routes.MapRoute(
                     name: "default",
                     template: "{controller=Account}/{action=Login}/{id?}");
             });

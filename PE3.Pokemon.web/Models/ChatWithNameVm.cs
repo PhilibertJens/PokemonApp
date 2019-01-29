@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace PE3.Pokemon.web.Models
 {
-    public class AllChatsForUserVm
+    public class ChatWithNameVm
     {
+        public Chat Chat { get; set; }
         public string Username { get; set; }
-        public ICollection<Chat> ListChats { get; set; }
+        public string Text { get; set; }
+        public User Me { get; set; }
     }
 }
