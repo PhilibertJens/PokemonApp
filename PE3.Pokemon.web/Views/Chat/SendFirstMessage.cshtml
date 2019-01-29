@@ -2,15 +2,24 @@
 @{
     ViewData["Title"] = "SendMessage";
 }
-
-<h2>Bericht aan @Model.Receiver.Username</h2>
-<vc:chat-list></vc:chat-list>
-<form method="post">
-    <div asp-validation-summary="ModelOnly"></div>
-    <div class="form-group">
-        @*<label asp-for="Text"></label>*@
-        <input asp-for="Text" class="form-control">
-        <span asp-validation-for="Text" class="text-danger"></span>
+<div class="row chat">
+    <vc:chat-list></vc:chat-list>
+    <div class="col-md-8">
+        <h2>Message @Model.Receiver.Username</h2>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                @*<label asp-for="Text"></label>*@
+                <input asp-for="Text" class="form-control">
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <button type="submit" class="noLayout">Verzenden</button>
+        </form>
     </div>
-    <button type="submit" class="noLayout">Verzenden</button>
-</form>
+</div>
+
+
+@section jqueryValidate {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

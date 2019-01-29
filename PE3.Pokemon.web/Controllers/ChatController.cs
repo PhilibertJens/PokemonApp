@@ -89,15 +89,15 @@ namespace PE3.Pokemon.web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendFirstMessage(ChatSendFirstMessageVm vm)
         {
+            var serializedReceiver = HttpContext.Session.GetString("ReceiverData");
+            User chatReceiver = JsonConvert.DeserializeObject<User>(serializedReceiver);
+
             if (ModelState.IsValid)
             {
                 string userName = HttpContext.Session.GetString("Username");
                 User user = await pokemonContext.Users
                     .Where(u => u.Username == userName)
                     .FirstOrDefaultAsync();
-
-                var serializedReceiver = HttpContext.Session.GetString("ReceiverData");
-                User chatReceiver = JsonConvert.DeserializeObject<User>(serializedReceiver);
 
                 var chatName = userName + ", " + chatReceiver.Username;
                 Chat chat = new Chat
@@ -137,6 +137,7 @@ namespace PE3.Pokemon.web.Controllers
                 await pokemonContext.SaveChangesAsync();
                 return new RedirectToActionResult("Index", "Chat", null);
             }
+            vm.Receiver = chatReceiver;
             return View(vm);
         }
 

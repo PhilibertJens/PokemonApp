@@ -15,7 +15,6 @@ namespace PE3.Pokemon.web.Models
         public ICollection<Chat> AllUserChatsForUser { get; set; }
 
         [Required]
-        [Display(Name = "Select a trainer")]
         public Guid SelectedUserId { get; set; }
         public SelectList AllUsers { get; set; }
     }
