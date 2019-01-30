@@ -362,16 +362,148 @@ header, .walkAround {
     src: url('/fonts/Pokemon_GB.ttf');
 }
 
+
+/*ChatWithName page*/
+.chat h2 {
+    text-align: center;
+    font-size: 3.5em;
+}
+
 .chat ul li {
     list-style-type: none;
     border-radius: 20px;
     padding: 0.5em;
+    margin-bottom: 0.5em;
 }
 
-.chat .me{
-    background-color: green;
+.chat ul li p{
+    margin-bottom: -15px;
 }
 
-.chat .other {
-    background-color: blue;
+.chat .bubble-other p{
+    display: inline-block;
+}
+
+#speech-bubbles {
+    display: inline-block;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+
+/*#speech-bubbles img {
+    height: 150px;
+    max-width: 100%;
+    padding-top: 10px;
+    display: block;
+}*/
+
+#speech-bubbles .time {
+    font-size: 10px;
+    font-style: italic;
+}
+
+#speech-bubbles .eersteLetter {
+    border: 1px solid black;
+    border-radius: 50%;
+    display: inline-block;
+    padding: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    width: 40px;
+    text-align: center;
+    background-color: #4CAF50;
+    font-size: 15px;
+}
+
+.bubble-me, .bubble-other {
+    position: relative;
+    border-radius: .4em;
+    padding-left: 3%;
+    padding-right: 3%;
+    word-wrap: break-word;
+    font-size: 25px;
+}
+
+.bubble-other {
+    background: yellowgreen;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+.bubble-me {
+    background: lightskyblue;
+    text-align: right;
+}
+
+.bubble-me:after, .bubble-other:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 0;
+    height: 0;
+    border: 34px solid transparent;
+    border-bottom: 0;
+    margin-top: -17px;
+}
+
+.bubble-other:after {
+    left: 0;
+    border-right-color: yellowgreen;
+    border-left: 0;
+    margin-left: -34px;
+}
+
+.bubble-me:after {
+    right: 0;
+    border-left-color: lightskyblue;
+    border-right: 0;
+    margin-right: -34px;
+}
+
+.speechForm {
+    margin-bottom: 20px;
+    margin-left: 12%;
+}
+
+.speechForm textarea {
+    border-radius: 20px;
+    resize: vertical;
+    display: inline-block;
+}
+
+.chat .relative {
+    position: relative;
+}
+
+.speechForm button, .imageSpeechForm button {
+    background-color: lightskyblue;
+    border: none;
+    border-radius: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}
+
+.speechForm button img {
+    width: 3em;
+}
+
+.chat .form-control {
+    width: 80%;
+}
+
+@media screen and (max-width: 650px) { /* voor gsm in breedte*/
+
+    .speechForm button {
+        right: 5%;
+    }
+}
+
+@media screen and (max-width: 360px) { /* voor gsm in breedte*/
+
+    .speechForm button {
+        right: 0;
+    }
 }

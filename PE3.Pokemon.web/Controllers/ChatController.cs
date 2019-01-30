@@ -150,14 +150,24 @@ namespace PE3.Pokemon.web.Controllers
                 };
                 pokemonContext.Messages.Add(message);
                 await pokemonContext.SaveChangesAsync();
-                return new RedirectToActionResult("Index", "Chat", null);
+
+                HttpContext.Session.SetString("ChatId", id.ToString());
+                return new RedirectToActionResult("ChatWithName", "Chat", id);
             }
             vm.Receiver = chatReceiver;
             return View(vm);
         }
 
-        public async Task<IActionResult> ChatWithName(Guid chatId)
+        public async Task<IActionResult> ChatWithName(Guid chatId)//is 000... na Redirect om de een of andere reden
         {
+            string chatIdFromSession;
+            if (chatId.ToString() == "00000000-0000-0000-0000-000000000000")
+            {
+                chatIdFromSession = HttpContext.Session.GetString("ChatId");
+                if (chatIdFromSession != null) chatId = new Guid(chatIdFromSession);
+            }
+            HttpContext.Session.Remove("ChatId");
+
             string userName = HttpContext.Session.GetString("Username");
             var currentChat = await pokemonContext.Chats
                     .Include(c => c.Messages).ThenInclude(m => m.Sender)
@@ -171,7 +181,6 @@ namespace PE3.Pokemon.web.Controllers
             };
 
             return View(vm);
-
         }
 
         [HttpPost]
@@ -196,6 +205,39 @@ namespace PE3.Pokemon.web.Controllers
                 return new RedirectToActionResult("ChatWithName", "Chat", userdata.Chat.Id);
             }
             return View(userdata);
+        }
+
+        [HttpGet]
+        public async Task<string> GetFromAjax(int currentMessages, string chatId)
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            Guid id = new Guid(chatId);
+            var currentChat = await pokemonContext.Chats
+                    .Include(c => c.Messages).ThenInclude(m => m.Sender)
+                    .Include(c => c.UserChats)
+                    .Where(c => c.Id == id).FirstOrDefaultAsync();
+            string tekst = "";
+            int aantalMessagesInDb = currentChat.Messages.Count();
+            if(aantalMessagesInDb > currentMessages)
+            {
+                int teller = 0;
+                foreach (var message in currentChat.Messages)
+                {
+                    if (teller == currentMessages)
+                    {
+                        if (message.Sender.Username == userName)
+                        {
+                            tekst += "<li class='bubble-me'>" + message.Text + "</li>";
+                        }
+                        else
+                        {
+                            tekst += "<li class='bubble-other'>" + message.Text + "</li>";
+                        }
+                    }
+                    teller++;
+                }
+            }
+            return tekst;
         }
     }
 }

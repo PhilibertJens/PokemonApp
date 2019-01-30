@@ -1,35 +1,44 @@
 ﻿@model ChatWithNameVm
 @{
-//ViewData["Title"] = "ChatWithUser";
+    //ViewData["Title"] = "ChatWithUser";
 }
 
 <div class="row chat">
     <vc:chat-list></vc:chat-list>
     <div class="col-md-8">
-        <h2>Message to @Model.Chat.Name</h2>
-        <ul>
+        <h2>@Model.Chat.Name</h2>
+        <ul id='speech-bubbles'>
             @{
                 foreach (var message in Model.Chat.Messages)
                 {
                     if (message.Sender.Username == Model.Username)
                     {
-                        <li class="me">@message.Text<br />@message.SendDate</li>
+                        <li class="bubble-me">
+                            <p>@message.Text</p>
+                            <span class="time">@message.SendDate</span>
+                        </li>
                     }
                     else
                     {
-                        <li class="other">@message.Text<br />@message.SendDate</li>
+                        <li class="bubble-other">
+                            <span class='eersteLetter'>@message.Sender.Username[0]</span>
+                            <p>@message.Text</p><br />
+                            <span class="time">@message.SendDate</span>
+                        </li>
                     }
                 }
             }
         </ul>
-        <form method="post">
+        <ul id='speech-bubbles' class="refreshWithAjax"></ul>
+        <form method="post" class="speechForm" id="speech">
             <div asp-validation-summary="ModelOnly"></div>
             <input asp-for="@(Model.Chat.Id)" type="hidden" />
-            <div class="form-group">
-                <input asp-for="Text" class="form-control">
+            <div class="form-group relative">
+                <textarea type="text" name="Text" id="Text" class="form-control" required></textarea>
+                <button type="submit" class="noLayout"><img src="~/images/send.png" /></button><br />
+                @*<input asp-for="Text" class="form-control" />*@
                 <span asp-validation-for="Text" class="text-danger"></span>
             </div>
-            <button type="submit" class="noLayout">Verzenden</button>
         </form>
     </div>
 </div>
@@ -38,4 +47,5 @@
 @section jqueryValidate {
     <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/AjaxRefresher.js"></script>
 }
