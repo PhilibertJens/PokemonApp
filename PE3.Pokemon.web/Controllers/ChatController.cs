@@ -150,14 +150,24 @@ namespace PE3.Pokemon.web.Controllers
                 };
                 pokemonContext.Messages.Add(message);
                 await pokemonContext.SaveChangesAsync();
-                return new RedirectToActionResult("Index", "Chat", null);
+
+                HttpContext.Session.SetString("ChatId", id.ToString());
+                return new RedirectToActionResult("ChatWithName", "Chat", id);
             }
             vm.Receiver = chatReceiver;
             return View(vm);
         }
 
-        public async Task<IActionResult> ChatWithName(Guid chatId)
+        public async Task<IActionResult> ChatWithName(Guid chatId)//is 000... na Redirect om de een of andere reden
         {
+            string chatIdFromSession;
+            if (chatId.ToString() == "00000000-0000-0000-0000-000000000000")
+            {
+                chatIdFromSession = HttpContext.Session.GetString("ChatId");
+                if (chatIdFromSession != null) chatId = new Guid(chatIdFromSession);
+            }
+            HttpContext.Session.Remove("ChatId");
+
             string userName = HttpContext.Session.GetString("Username");
             var currentChat = await pokemonContext.Chats
                     .Include(c => c.Messages).ThenInclude(m => m.Sender)
@@ -171,7 +181,6 @@ namespace PE3.Pokemon.web.Controllers
             };
 
             return View(vm);
-
         }
 
         [HttpPost]
