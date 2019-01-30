@@ -67,6 +67,13 @@ namespace PE3.Pokemon.web
                 routes.MapRoute(
                     name: "areas",
                     template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                   name: "askWithAjax",
+                   template: "chat/GetFromAjax/{currentMessages}/{chatId}",
+                   defaults: new { Controller = "Chat", action = "GetFromAjax" }
+                   );
+
                 routes.MapRoute(
                     name: "pokeDetail",
                     template: "Pokemon/{ndex}",

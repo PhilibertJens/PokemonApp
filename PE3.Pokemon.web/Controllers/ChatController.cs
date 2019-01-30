@@ -206,5 +206,38 @@ namespace PE3.Pokemon.web.Controllers
             }
             return View(userdata);
         }
+
+        [HttpGet]
+        public async Task<string> GetFromAjax(int currentMessages, string chatId)
+        {
+            string userName = HttpContext.Session.GetString("Username");
+            Guid id = new Guid(chatId);
+            var currentChat = await pokemonContext.Chats
+                    .Include(c => c.Messages).ThenInclude(m => m.Sender)
+                    .Include(c => c.UserChats)
+                    .Where(c => c.Id == id).FirstOrDefaultAsync();
+            string tekst = "";
+            int aantalMessagesInDb = currentChat.Messages.Count();
+            if(aantalMessagesInDb > currentMessages)
+            {
+                int teller = 0;
+                foreach (var message in currentChat.Messages)
+                {
+                    if (teller == currentMessages)
+                    {
+                        if (message.Sender.Username == userName)
+                        {
+                            tekst += "<li class='bubble-me'>" + message.Text + "</li>";
+                        }
+                        else
+                        {
+                            tekst += "<li class='bubble-other'>" + message.Text + "</li>";
+                        }
+                    }
+                    teller++;
+                }
+            }
+            return tekst;
+        }
     }
 }
