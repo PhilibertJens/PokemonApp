@@ -14,7 +14,8 @@
 
 function test() {
     var lengte = $('.chat li').length;
-    var url = "/chat/GetFromAjax/" + lengte + "/aa5d39c3-d7bf-41be-a993-08d685f15751";
+    var chatId = $('#chatId').val();
+    var url = "/chat/GetFromAjax/" + lengte + "/" + chatId;
 
     $.get(url,
         function (data) {
