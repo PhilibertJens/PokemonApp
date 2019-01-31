@@ -1,12 +1,12 @@
-# PE3 Team Rocket
+# PokemonApp
 ASP.NET Pokémon simulation app. Represents the initial 151 Pokémon in a Pokédex per user.
 Users can explore the world and try catching Pokémon in various locations.
 
 ## Getting started
-Clone [this](https://github.com/1819-B01-4/pe3-team-rocket.git) repo to your local drive:
+Clone [this](https://github.com/PhilibertJens/PokemonApp.git) repo to your local drive:
 
 ```
-$ git clone https://github.com/1819-B01-4/pe3-team-rocket.git
+$ git clone https://github.com/PhilibertJens/PokemonApp.git
 ```
 
 
